@@ -22,7 +22,7 @@ class PetFactory extends Factory
             'name' => $this->faker->name,
             'specie' => $this->faker->randomElement(['dog', 'cat']),
             'sex' => $this->faker->randomElement(['male', 'female']),
-            'age' => $this->faker->numberBetween(['infant', 'young', 'adult', 'senior']),
+            'age' => $this->faker->randomElement(['infant', 'young', 'adult', 'senior']),
             'size' => $this->faker->randomElement(['small', 'medium', 'large']),
             'state' => $this->faker->state,
             'city' => $this->faker->city,
