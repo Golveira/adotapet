@@ -2,8 +2,12 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Pet;
+use App\Models\Sociability;
+use App\Models\Temperament;
+use App\Models\VeterinaryCare;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class PetSeeder extends Seeder
 {
@@ -12,6 +16,14 @@ class PetSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $sociabilities = Sociability::all();
+        $temperaments = Temperament::all();
+        $veterinaryCares = VeterinaryCare::all();
+
+        Pet::factory(100)->create()->each(function ($pet) use ($sociabilities, $temperaments, $veterinaryCares) {
+            $pet->sociabilities()->attach($sociabilities->random(3));
+            $pet->temperaments()->attach($temperaments->random(5));
+            $pet->veterinaryCares()->attach($veterinaryCares->random(3));
+        });
     }
 }

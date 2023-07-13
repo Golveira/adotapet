@@ -3,7 +3,11 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Seeders\PetSeeder;
 use Illuminate\Database\Seeder;
+use Database\Seeders\SociabilitySeeder;
+use Database\Seeders\TemperamentSeeder;
+use Database\Seeders\VeterinaryCareSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,11 +16,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $this->call([
+            UserSeeder::class,
+            SociabilitySeeder::class,
+            TemperamentSeeder::class,
+            VeterinaryCareSeeder::class,
+            PetSeeder::class,
+        ]);
     }
 }
