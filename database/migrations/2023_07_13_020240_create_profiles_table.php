@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->string('state')->nullable();
             $table->string('city')->nullable();
             $table->string('avatar')->nullable();
-            $table->string('bio')->nullable();
+            $table->text('bio')->nullable();
             $table->timestamps();
         });
     }
