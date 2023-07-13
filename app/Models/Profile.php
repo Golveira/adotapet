@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Profile extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+        'website',
+        'whatsapp',
+        'state',
+        'city',
+        'avatar',
+        'bio'
+    ];
 }
