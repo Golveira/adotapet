@@ -4,8 +4,10 @@ namespace Database\Seeders;
 
 use App\Models\Pet;
 use App\Models\User;
+use App\Models\Sociability;
+use App\Models\Temperament;
+use App\Models\VeterinaryCare;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UserSeeder extends Seeder
 {
@@ -14,6 +16,17 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->count(10)->hasProfile()->create();
+        $sociabilities = Sociability::all();
+        $temperaments = Temperament::all();
+        $veterinaryCares = VeterinaryCare::all();
+
+        User::factory()->count(10)->hasProfile()->create()->each(function ($user) use ($sociabilities, $temperaments, $veterinaryCares) {
+            Pet::factory(4)->create(['user_id' => $user->id])
+                ->each(function ($pet) use ($sociabilities, $temperaments, $veterinaryCares) {
+                    $pet->sociabilities()->attach($sociabilities->random(3));
+                    $pet->temperaments()->attach($temperaments->random(5));
+                    $pet->veterinaryCares()->attach($veterinaryCares->random(3));
+                });
+        });
     }
 }
