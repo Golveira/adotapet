@@ -1,4 +1,4 @@
-<footer class="p-4 bg-white sm:p-6 dark:bg-gray-800">
+<footer class="p-4 bg-gray-100 sm:p-6 dark:bg-gray-800">
     <div class="mx-auto max-w-screen-xl">
         <div class="md:flex md:justify-between">
             <!-- Logo -->
