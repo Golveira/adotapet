@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Livewire\ShowPets;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\User\PetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', WelcomeController::class)->name('welcome');
+Route::get('/pets', ShowPets::class)->name('pets.index');
+Route::get('/pets/{pet}', [PetController::class, 'show'])->name('pets.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
