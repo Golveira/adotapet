@@ -58,7 +58,7 @@ class Pet extends Model
 
     public function getAdoptionStatusAttribute(): string
     {
-        return $this->is_adopted ? 'Adopted' : 'Available to adopt';
+        return $this->is_adopted ? 'Adopted' : 'Available';
     }
 
     public function getAdoptionStatusColorAttribute(): string
