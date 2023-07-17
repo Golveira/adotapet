@@ -11,14 +11,14 @@
                     {{ __('We believe that every pet deserves a loving home. Adopt and make the difference.') }}
                 </p>
 
-                <div class="flex lg:justify-start justify-center">
-                    <x-primary-link-button href="#" class="px-6 py-3.5 mr-5">
+                <div class="flex lg:justify-start justify-center items-center">
+                    <x-button color="blue" href="{{ route('pets.index') }}">
                         {{ __('Adopt a pet') }}
-                    </x-primary-link-button>
+                    </x-button>
 
-                    <x-secondary-link-button href="#" class="px-6 py-3.5">
+                    <x-button href="#">
                         {{ __('Promote a pet') }}
-                    </x-secondary-link-button>
+                    </x-button>
                 </div>
             </div>
 
@@ -41,16 +41,16 @@
                 </p>
             </div>
 
-            <div class="grid gap-8 lg:gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div class="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 @foreach ($pets as $pet)
                     <x-pet-card :pet="$pet" />
                 @endforeach
             </div>
 
             <div class="my-16 text-center">
-                <x-primary-button>
+                <x-button color="blue" href="{{ route('pets.index') }}">
                     {{ __('View more') }}
-                </x-primary-button>
+                </x-button>
             </div>
         </div>
     </section>
@@ -115,9 +115,9 @@
             </div>
 
             <div class="text-center mt-16">
-                <x-primary-button>
+                <x-button color="blue" href="{{ route('pets.index') }}">
                     {{ __('Find my new friend') }}
-                </x-primary-button>
+                </x-button>
             </div>
         </div>
     </section>
