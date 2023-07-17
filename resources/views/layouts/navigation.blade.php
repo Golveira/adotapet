@@ -65,18 +65,18 @@
 
             @guest
                 <div class="hidden lg:block">
-                    <x-primary-link-button href="{{ route('login') }}" class="me-3">
+                    <x-button color="blue" href="{{ route('login') }}" class="me-3">
                         {{ __('Login') }}
-                    </x-primary-link-button>
+                    </x-button>
 
-                    <x-secondary-link-button href="{{ route('register') }}">
+                    <x-button href="{{ route('register') }}">
                         {{ __('Register') }}
-                    </x-secondary-link-button>
+                    </x-button>
                 </div>
 
                 <div class="md:hidden me-5">
                     <a href="{{ route('login') }}">
-                        <x-icon-user />
+                        <x-icons.user />
                     </a>
                 </div>
             @endguest
@@ -98,7 +98,7 @@
             <ul
                 class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                 <li>
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('pets.index')" :active="request()->routeIs('dashboard')">
                         {{ __('Adopt') }}
                     </x-nav-link>
                 </li>
