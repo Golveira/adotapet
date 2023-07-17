@@ -31,19 +31,19 @@
 
                     <ul class="py-2" aria-labelledby="user-menu-button">
                         <li>
-                            <x-dropdown-link :href="route('logout')">
+                            <x-dropdown-link :href="route('profile.edit')">
                                 {{ __('My Profile') }}
                             </x-dropdown-link>
                         </li>
 
                         <li>
-                            <x-dropdown-link :href="route('logout')">
+                            <x-dropdown-link :href="route('profile.edit')">
                                 {{ __('Edit Profile') }}
                             </x-dropdown-link>
                         </li>
 
                         <li>
-                            <x-dropdown-link :href="route('logout')">
+                            <x-dropdown-link :href="route('profile.password.edit')">
                                 {{ __('Change Password') }}
                             </x-dropdown-link>
                         </li>
