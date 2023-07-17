@@ -55,4 +55,14 @@ class Pet extends Model
     {
         return "{$this->city} - {$this->state}";
     }
+
+    public function getAdoptionStatusAttribute(): string
+    {
+        return $this->is_adopted ? 'Adopted' : 'Available to adopt';
+    }
+
+    public function getAdoptionStatusColorAttribute(): string
+    {
+        return $this->is_adopted ? 'yellow' : 'green';
+    }
 }
