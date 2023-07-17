@@ -50,4 +50,9 @@ class Pet extends Model
     {
         return $this->belongsToMany(VeterinaryCare::class);
     }
+
+    public function getCityStateAttribute(): string
+    {
+        return "{$this->city} - {$this->state}";
+    }
 }
