@@ -6,12 +6,13 @@ use App\Models\User;
 use App\Models\Sociability;
 use App\Models\Temperament;
 use App\Models\VeterinaryCare;
+use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Pet extends Model implements HasMedia
 {
@@ -65,5 +66,10 @@ class Pet extends Model implements HasMedia
     public function getAdoptionStatusColorAttribute(): string
     {
         return $this->is_adopted ? 'yellow' : 'green';
+    }
+
+    public function getMainPhotoAttribute(): string
+    {
+        return $this->getFirstMediaUrl('pets');
     }
 }
