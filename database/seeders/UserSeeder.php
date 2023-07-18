@@ -8,6 +8,7 @@ use App\Models\Sociability;
 use App\Models\Temperament;
 use App\Models\VeterinaryCare;
 use Illuminate\Database\Seeder;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class UserSeeder extends Seeder
 {
@@ -35,9 +36,11 @@ class UserSeeder extends Seeder
             'is_admin' => true,
         ]);
 
-        User::factory()->count(100)->hasProfile()->create()->each(function ($user) use ($sociabilities, $temperaments, $veterinaryCares) {
+        User::factory()->count(10)->hasProfile()->create()->each(function ($user) use ($sociabilities, $temperaments, $veterinaryCares) {
             Pet::factory(4)->create(['user_id' => $user->id])
                 ->each(function ($pet) use ($sociabilities, $temperaments, $veterinaryCares) {
+                    $pet->addMediaFromUrl(fake()->imageUrl())->toMediaCollection('pets');
+
                     $pet->sociabilities()->attach($sociabilities->random(3));
                     $pet->temperaments()->attach($temperaments->random(5));
                     $pet->veterinaryCares()->attach($veterinaryCares->random(3));
