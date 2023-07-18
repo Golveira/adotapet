@@ -10,7 +10,7 @@ class WelcomeController extends Controller
     {
         $pets = Pet::latest()
             ->limit(8)
-            ->get(['id', 'name', 'state', 'city', 'main_photo']);
+            ->get(['id', 'name', 'state', 'city']);
 
         return view('welcome', compact('pets'));
     }
