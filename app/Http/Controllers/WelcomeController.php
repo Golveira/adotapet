@@ -9,6 +9,7 @@ class WelcomeController extends Controller
     public function __invoke()
     {
         $pets = Pet::latest()
+            ->with('media')
             ->limit(8)
             ->get(['id', 'name', 'state', 'city']);
 
