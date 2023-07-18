@@ -22,7 +22,6 @@ class ProfileFactory extends Factory
             'whatsapp' => $this->faker->phoneNumber,
             'state' => $this->faker->state,
             'city' => $this->faker->city,
-            'avatar' => $this->faker->imageUrl(),
             'bio' => $this->faker->paragraph,
         ];
     }
