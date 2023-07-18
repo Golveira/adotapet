@@ -20,7 +20,22 @@ class UserSeeder extends Seeder
         $temperaments = Temperament::all();
         $veterinaryCares = VeterinaryCare::all();
 
-        User::factory()->count(10)->hasProfile()->create()->each(function ($user) use ($sociabilities, $temperaments, $veterinaryCares) {
+        User::create([
+            'name' => 'User',
+            'username' => 'user',
+            'email' => 'user@user.com',
+            'password' => bcrypt('user'),
+        ]);
+
+        User::create([
+            'name' => 'Admin',
+            'username' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('admin'),
+            'is_admin' => true,
+        ]);
+
+        User::factory()->count(100)->hasProfile()->create()->each(function ($user) use ($sociabilities, $temperaments, $veterinaryCares) {
             Pet::factory(4)->create(['user_id' => $user->id])
                 ->each(function ($pet) use ($sociabilities, $temperaments, $veterinaryCares) {
                     $pet->sociabilities()->attach($sociabilities->random(3));
