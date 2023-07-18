@@ -26,7 +26,6 @@ class PetFactory extends Factory
             'size' => $this->faker->randomElement(['small', 'medium', 'large']),
             'state' => $this->faker->state,
             'city' => $this->faker->city,
-            'main_photo' => $this->faker->imageUrl(),
             'description' => $this->faker->paragraph,
             'is_adopted' => $this->faker->boolean,
             'is_visible' => $this->faker->boolean,

@@ -21,7 +21,6 @@ return new class extends Migration {
             $table->string('size');
             $table->string('state');
             $table->string('city');
-            $table->string('main_photo');
             $table->text('description');
             $table->boolean('is_adopted');
             $table->boolean('is_visible');
