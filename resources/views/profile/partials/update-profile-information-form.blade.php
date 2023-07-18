@@ -25,6 +25,13 @@
         </div>
 
         <div>
+            <x-input-label for="username" :value="__('Username')" />
+            <x-text-input id="username" name="username" type="text" class="mt-1 block w-full" :value="old('username', $user->username)"
+                required autofocus autocomplete="username" />
+            <x-input-error class="mt-2" :messages="$errors->get('username')" />
+        </div>
+
+        <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)"
                 required autocomplete="username" />
@@ -48,6 +55,42 @@
                     @endif
                 </div>
             @endif
+        </div>
+
+        <div>
+            <x-input-label for="whatsapp" :value="__('Whatsapp')" />
+            <x-text-input id="whatsapp" name="whatsapp" type="text" class="mt-1 block w-full" :value="old('whatsapp', $user->profile?->whatsapp)"
+                autofocus autocomplete="whatsapp" />
+            <x-input-error class="mt-2" :messages="$errors->get('whatsapp')" />
+        </div>
+
+        <div>
+            <x-input-label for="website" :value="__('Website')" />
+            <x-text-input id="website" name="website" type="text" class="mt-1 block w-full" :value="old('website', $user->profile?->website)"
+                autofocus autocomplete="website" />
+            <x-input-error class="mt-2" :messages="$errors->get('website')" />
+        </div>
+
+        <div>
+            <x-input-label for="city" :value="__('City')" />
+            <x-text-input id="city" name="city" type="text" class="mt-1 block w-full" :value="old('city', $user->profile?->city)"
+                autofocus autocomplete="city" />
+            <x-input-error class="mt-2" :messages="$errors->get('city')" />
+        </div>
+
+        <div>
+            <x-input-label for="state" :value="__('State')" />
+            <x-text-input id="state" name="state" type="text" class="mt-1 block w-full" :value="old('state', $user->profile?->state)"
+                autofocus autocomplete="state" />
+            <x-input-error class="mt-2" :messages="$errors->get('state')" />
+        </div>
+
+        <div>
+            <x-input-label for="bio" :value="__('About me')" />
+            <x-text-area id="bio" name="bio" class="mt-1">
+                {{ old('bio', $user->profile?->bio) }}
+            </x-text-area>
+            <x-input-error class="mt-2" :messages="$errors->get('bio')" />
         </div>
 
         <div class="flex items-center gap-4">
