@@ -9,9 +9,9 @@ class WelcomeController extends Controller
     public function __invoke()
     {
         $pets = Pet::latest()
-            ->with('media')
+            ->with(['media', 'city', 'state'])
             ->limit(8)
-            ->get(['id', 'name', 'state', 'city']);
+            ->get();
 
         return view('welcome', compact('pets'));
     }
