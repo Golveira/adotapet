@@ -72,4 +72,11 @@ class Pet extends Model implements HasMedia
     {
         return $this->getFirstMediaUrl('pets');
     }
+
+    public function getImagesAttribute()
+    {
+        return $this->getMedia('*')->map(function (Media $media) {
+            return $media->getFullUrl();
+        });
+    }
 }
