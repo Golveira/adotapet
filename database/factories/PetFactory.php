@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\User;
+use App\Models\State;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,6 +18,9 @@ class PetFactory extends Factory
      */
     public function definition(): array
     {
+        $state = State::inRandomOrder()->first();
+        $city = $state->cities()->inRandomOrder()->first();
+
         return [
             'user_id' => User::factory(),
             'name' => $this->faker->name,
@@ -24,8 +28,8 @@ class PetFactory extends Factory
             'sex' => $this->faker->randomElement(['male', 'female']),
             'age' => $this->faker->randomElement(['puppy', 'adult', 'senior']),
             'size' => $this->faker->randomElement(['small', 'medium', 'large']),
-            'state' => $this->faker->state,
-            'city' => $this->faker->city,
+            'state_id' => $state->id,
+            'city_id' => $city->id,
             'description' => $this->faker->paragraph,
             'is_adopted' => $this->faker->boolean,
             'is_visible' => $this->faker->boolean,
