@@ -67,7 +67,7 @@ class Pet extends Model implements HasMedia
 
     public function getAddressAttribute(): string
     {
-        return "{$this->city} - {$this->state}";
+        return "{$this->city->title} - {$this->state->letter}";
     }
 
     public function getAdoptionStatusAttribute(): string
