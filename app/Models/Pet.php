@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\City;
 use App\Models\User;
+use App\Models\State;
 use App\Models\Sociability;
 use App\Models\Temperament;
 use App\Models\VeterinaryCare;
@@ -25,8 +27,8 @@ class Pet extends Model implements HasMedia
         'sex',
         'age',
         'size',
-        'state',
-        'city',
+        'state_id',
+        'city_id',
         'description',
         'is_adopted',
         'is_visible',
@@ -36,6 +38,16 @@ class Pet extends Model implements HasMedia
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function state(): BelongsTo
+    {
+        return $this->belongsTo(State::class);
+    }
+
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(City::class);
     }
 
     public function sociabilities(): BelongsToMany
