@@ -13,14 +13,14 @@ return new class extends Migration {
         Schema::create('pets', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('state_id')->constrained()->onDelete('cascade');
+            $table->foreignId('city_id')->constrained()->onDelete('cascade');
 
             $table->string('name');
             $table->string('specie');
             $table->string('sex');
             $table->string('age');
             $table->string('size');
-            $table->string('state');
-            $table->string('city');
             $table->text('description');
             $table->boolean('is_adopted');
             $table->boolean('is_visible');
