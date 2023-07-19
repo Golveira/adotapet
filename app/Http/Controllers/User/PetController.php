@@ -27,7 +27,7 @@ class PetController extends Controller
 
     public function show(Pet $pet): View
     {
-        $pet->load('user.profile', 'sociabilities', 'temperaments', 'veterinaryCares');
+        $pet->load('user', 'city', 'state', 'sociabilities', 'temperaments', 'veterinaryCares');
 
         return view('pets.show', compact('pet'));
     }
