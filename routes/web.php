@@ -1,11 +1,11 @@
 <?php
 
+use App\Http\Controllers\Auth\PasswordController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\PetController;
+use App\Http\Controllers\WelcomeController;
 use App\Http\Livewire\ShowPets;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\WelcomeController;
-use App\Http\Controllers\User\PetController;
-use App\Http\Controllers\Auth\PasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,4 +33,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

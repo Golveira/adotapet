@@ -3,12 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\Pet;
-use App\Models\User;
 use App\Models\Sociability;
 use App\Models\Temperament;
+use App\Models\User;
 use App\Models\VeterinaryCare;
 use Illuminate\Database\Seeder;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class UserSeeder extends Seeder
 {

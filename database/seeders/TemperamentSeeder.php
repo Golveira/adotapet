@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Temperament;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class TemperamentSeeder extends Seeder
 {
@@ -23,7 +22,7 @@ class TemperamentSeeder extends Seeder
             'Sociable',
             'Unsociable',
             'Independent',
-            'Needy'
+            'Needy',
         ];
 
         foreach ($temperaments as $temperament) {

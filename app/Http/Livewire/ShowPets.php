@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Pet;
 use App\Models\City;
+use App\Models\Pet;
 use App\Models\State;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -13,13 +13,21 @@ class ShowPets extends Component
     use WithPagination;
 
     public $specie = '';
+
     public $sex = '';
+
     public $age = '';
+
     public $size = '';
+
     public $name = '';
+
     public $stateId;
+
     public $cityId;
+
     public $states;
+
     public $cities;
 
     public function mount()
@@ -42,10 +50,10 @@ class ShowPets extends Component
     public function render()
     {
         $pets = Pet::with(['media', 'city', 'state'])
-            ->where('name', 'like', '%' . $this->name . '%')
-            ->where('specie', 'like', '%' . $this->specie . '%')
-            ->where('age', 'like', '%' . $this->age . '%')
-            ->where('size', 'like', '%' . $this->size . '%')
+            ->where('name', 'like', '%'.$this->name.'%')
+            ->where('specie', 'like', '%'.$this->specie.'%')
+            ->where('age', 'like', '%'.$this->age.'%')
+            ->where('size', 'like', '%'.$this->size.'%')
             ->when($this->sex, function ($query, $sex) {
                 return $query->where('sex', $sex);
             })
