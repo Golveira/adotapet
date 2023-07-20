@@ -2,41 +2,68 @@
     <div class="max-w-screen-xl px-4 py-8 mx-auto">
         <div class="grid lg:grid-cols-10 md:grid-cols-10 sm:grid-cols-2 lg:gap-12 md:gap-6">
             <div class="lg:col-span-2 md:col-span-5 col-span-10">
-                <form wire:submit.prevent="filterPets">
-                    <div class="mb-5">
-                        <x-input-label class="mb-3 text-lg" for="specie" :value="__('Specie')" />
-                        <x-specie-select wire:model.defer="specie" />
-                    </div>
+                <div class="mb-5">
+                    <x-input-label class="mb-3 text-lg" for="specie" :value="__('Specie')" />
+                    <x-specie-select wire:model="specie" />
+                </div>
 
-                    <div class="mb-5">
-                        <x-input-label class="mb-3 text-lg" for="sex" :value="__('Sex')" />
-                        <x-sex-select wire:model.defer="sex" />
-                    </div>
+                <div class="mb-5">
+                    <x-input-label class="mb-3 text-lg" for="sex" :value="__('Sex')" />
+                    <x-sex-select wire:model="sex" />
+                </div>
 
-                    <div class="mb-5">
-                        <x-input-label class="mb-3 text-lg" for="size" :value="__('Size')" />
-                        <x-size-select wire:model.defer="size" />
-                    </div>
+                <div class="mb-5">
+                    <x-input-label class="mb-3 text-lg" for="size" :value="__('Size')" />
+                    <x-size-select wire:model="size" />
+                </div>
 
-                    <div class="mb-5">
-                        <x-input-label class="mb-3 text-lg" for="age" :value="__('Age')" />
-                        <x-age-select wire:model.defer="age" />
-                    </div>
+                <div class="mb-5">
+                    <x-input-label class="mb-3 text-lg" for="age" :value="__('Age')" />
+                    <x-age-select wire:model="age" />
+                </div>
 
-                    <div class="mb-5">
-                        <x-button type="submit" color="blue" class="w-full">
-                            {{ __('Search') }}
-                        </x-button>
-                    </div>
-                </form>
+                <div class="mb-5">
+                    <x-input-label class="mb-3 text-lg" for="state" :value="__('State')" />
+                    <x-select wire:model="stateId" id="state">
+                        <option value>{{ __('Any state') }}</option>
+
+                        @foreach ($states as $state)
+                            <option value="{{ $state->id }}">
+                                {{ $state->title }}
+                            </option>
+                        @endforeach
+                    </x-select>
+                </div>
+
+                <div class="mb-5">
+                    <x-input-label class="mb-3 text-lg" for="city" :value="__('City')" />
+                    <x-select wire:model="cityId" id="city">
+                        <option value>{{ __('Any city') }}</option>
+
+                        @foreach ($cities as $city)
+                            <option value="{{ $city->id }}">
+                                {{ $city->title }}
+                            </option>
+                        @endforeach
+                    </x-select>
+                </div>
+
+                <div class="mb-5">
+                    <x-input-label class="mb-3 text-lg" for="name" :value="__('Name')" />
+                    <x-text-input wire:model.lazy="name" id="name" placeholder="{{ __('Pet name') }}" />
+                </div>
             </div>
 
             <div class="lg:col-span-8 md:col-span-5 col-span-10" wire:loading.delay.class="opacity-50">
-                <div class="grid xl:grid-cols-4 lg:grid-cols-2 grid-cols-1 gap-6">
-                    @foreach ($pets as $pet)
+                <div class="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-6">
+                    @forelse ($pets as $pet)
                         <x-pet-card :pet="$pet" />
-                    @endforeach
 
+                    @empty
+                        <div class="col-span-4 text-center text-xl">
+                            {{ __('No pets found') }}
+                        </div>
+                    @endforelse
                 </div>
 
                 <div class="mt-5">
