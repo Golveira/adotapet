@@ -14,9 +14,7 @@ class Profile extends Model
         'user_id',
         'website',
         'whatsapp',
-        'state',
-        'city',
-        'avatar',
+        'location',
         'bio',
     ];
 
