@@ -25,7 +25,11 @@ class ProfileController extends Controller
 
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $this->profileService->update($request->validated(), $request->user());
+        $this->profileService->update(
+            $request->validated(),
+            $request->file('avatar'),
+            $request->user()
+        );
 
         toast(__('profile.updated'), 'success');
 
