@@ -22,9 +22,7 @@ class ProfileUpdateRequest extends FormRequest
             'whatsapp' => ['nullable', 'string', 'max:255'],
             'website' => ['nullable', 'string', 'max:255'],
             'bio' => ['nullable', 'string', 'max:500'],
-            'avatar' => ['nullable', 'image', 'max:1024'],
-            'city' => ['nullable', 'string', 'max:255'],
-            'state' => ['nullable', 'string', 'max:255'],
+            'location' => ['nullable', 'string', 'max:255'],
         ];
     }
 }
