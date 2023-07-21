@@ -21,8 +21,7 @@ class ProfileFactory extends Factory
             'user_id' => User::factory(),
             'website' => $this->faker->url,
             'whatsapp' => $this->faker->phoneNumber,
-            'state' => $this->faker->state,
-            'city' => $this->faker->city,
+            'location' => $this->faker->city() . ', ' . $this->faker->citySuffix(),
             'bio' => $this->faker->paragraph,
         ];
     }
