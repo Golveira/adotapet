@@ -50,10 +50,10 @@ class ShowPets extends Component
     public function render()
     {
         $pets = Pet::with(['media', 'city', 'state'])
-            ->where('name', 'like', '%'.$this->name.'%')
-            ->where('specie', 'like', '%'.$this->specie.'%')
-            ->where('age', 'like', '%'.$this->age.'%')
-            ->where('size', 'like', '%'.$this->size.'%')
+            ->where('name', 'like', '%' . $this->name . '%')
+            ->where('specie', 'like', '%' . $this->specie . '%')
+            ->where('age', 'like', '%' . $this->age . '%')
+            ->where('size', 'like', '%' . $this->size . '%')
             ->when($this->sex, function ($query, $sex) {
                 return $query->where('sex', $sex);
             })
