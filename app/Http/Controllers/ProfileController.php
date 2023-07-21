@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Services\ProfileService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,9 +12,10 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user's profile form.
-     */
+    public function __construct(private ProfileService $profileService)
+    {
+    }
+
     public function edit(Request $request): View
     {
         return view('profile.edit', [
@@ -21,39 +23,15 @@ class ProfileController extends Controller
         ]);
     }
 
-    /**
-     * Update the user's profile information.
-     */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill([
-            'name' => $request->name,
-            'username' => $request->username,
-            'email' => $request->email,
-        ]);
+        $this->profileService->update($request->validated(), $request->user());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
+        toast(__('profile.updated'), 'success');
 
-        $request->user()->save();
-
-        $request->user()->profile()->updateOrCreate([
-            'user_id' => $request->user()->id,
-        ], [
-            'whatsapp' => $request->whatsapp,
-            'website' => $request->website,
-            'bio' => $request->bio,
-            'city' => $request->city,
-            'state' => $request->state,
-        ]);
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::route('profile.edit');
     }
 
-    /**
-     * Delete the user's account.
-     */
     public function destroy(Request $request): RedirectResponse
     {
         $request->validateWithBag('userDeletion', [
