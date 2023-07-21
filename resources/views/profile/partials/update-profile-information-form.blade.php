@@ -1,12 +1,8 @@
 <section>
     <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Profile Information') }}
+        <h2 class="text-xl font-bold text-gray-900 text-center">
+            {{ __('Edit Profile') }}
         </h2>
-
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __("Update your account's profile information and email address.") }}
-        </p>
     </header>
 
     <form id="send-verification" method="post" action="{{ route('verification.send') }}">
@@ -72,17 +68,10 @@
         </div>
 
         <div>
-            <x-input-label for="city" :value="__('City')" />
-            <x-text-input id="city" name="city" type="text" class="mt-1 block w-full" :value="old('city', $user->profile?->city)"
-                autofocus autocomplete="city" />
-            <x-input-error class="mt-2" :messages="$errors->get('city')" />
-        </div>
-
-        <div>
-            <x-input-label for="state" :value="__('State')" />
-            <x-text-input id="state" name="state" type="text" class="mt-1 block w-full" :value="old('state', $user->profile?->state)"
-                autofocus autocomplete="state" />
-            <x-input-error class="mt-2" :messages="$errors->get('state')" />
+            <x-input-label for="location" :value="__('Location')" />
+            <x-text-input id="location" name="location" type="text" class="mt-1 block w-full" :value="old('location', $user->profile?->location)"
+                autofocus autocomplete="location" />
+            <x-input-error class="mt-2" :messages="$errors->get('location')" />
         </div>
 
         <div>
@@ -95,11 +84,6 @@
 
         <div class="flex items-center gap-4">
             <x-button color="blue" type="submit">{{ __('Save') }}</x-button>
-
-            @if (session('status') === 'profile-updated')
-                <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600">{{ __('Saved.') }}</p>
-            @endif
         </div>
     </form>
 </section>
