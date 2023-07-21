@@ -7,7 +7,7 @@ use Illuminate\Support\Arr;
 
 class ProfileService
 {
-    public function update(array $profileData, User $user)
+    public function update(array $profileData, $image, User $user)
     {
         $user->fill([
             'name' => $profileData['name'],
@@ -25,5 +25,10 @@ class ProfileService
             ['user_id' => $user->id],
             Arr::except($profileData, ['name', 'username', 'email'])
         );
+
+        if ($image) {
+            $user->clearMediaCollection('avatars');
+            $user->addMedia($image)->toMediaCollection('avatars');
+        }
     }
 }
