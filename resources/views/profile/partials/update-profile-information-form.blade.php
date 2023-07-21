@@ -9,7 +9,7 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
 
@@ -72,6 +72,16 @@
             <x-text-input id="location" name="location" type="text" class="mt-1 block w-full" :value="old('location', $user->profile?->location)"
                 autofocus autocomplete="location" />
             <x-input-error class="mt-2" :messages="$errors->get('location')" />
+        </div>
+
+        <div class="flex items-end">
+            <div class="grow mr-5">
+                <x-input-label for="avatar" :value="__('Avatar')" />
+                <x-file-input id="avatar" name="avatar" />
+                <x-input-error class="mt-2" :messages="$errors->get('avatar')" />
+            </div>
+
+            <x-avatar :avatar="$user->avatar" />
         </div>
 
         <div>
