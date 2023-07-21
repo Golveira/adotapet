@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\User;
+use Illuminate\Support\Arr;
 
 class ProfileService
 {
@@ -20,18 +21,9 @@ class ProfileService
 
         $user->save();
 
-        $user->profile()->updateOrCreate([
-            'user_id' => $user->id,
-        ], [
-            'whatsapp' => $profileData['whatsapp'],
-            'website' => $profileData['website'],
-            'bio' => $profileData['bio'],
-            'location' => $profileData['location'],
-        ]);
-    }
-
-    public function destroy()
-    {
-
+        $user->profile()->updateOrCreate(
+            ['user_id' => $user->id],
+            Arr::except($profileData, ['name', 'username', 'email'])
+        );
     }
 }
