@@ -70,7 +70,7 @@ class ShowPets extends Component
             ->when($this->cityId, function ($query, $cityId) {
                 return $query->where('city_id', $cityId);
             })
-            ->paginate(2);
+            ->paginate(18);
 
         return view('livewire.show-pets', compact('pets'));
     }
