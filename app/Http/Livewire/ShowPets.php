@@ -12,6 +12,8 @@ class ShowPets extends Component
 {
     use WithPagination;
 
+    private $userId;
+
     public $specie = '';
 
     public $sex = '';
@@ -30,8 +32,10 @@ class ShowPets extends Component
 
     public $cities;
 
-    public function mount()
+    public function mount($userId = null)
     {
+        $this->userId = $userId;
+
         $this->states = State::all();
 
         $this->cities = collect();
@@ -54,6 +58,9 @@ class ShowPets extends Component
             ->where('specie', 'like', '%' . $this->specie . '%')
             ->where('age', 'like', '%' . $this->age . '%')
             ->where('size', 'like', '%' . $this->size . '%')
+            ->when($this->userId, function ($query, $userId) {
+                return $query->where('user_id', $userId);
+            })
             ->when($this->sex, function ($query, $sex) {
                 return $query->where('sex', $sex);
             })
