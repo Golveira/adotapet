@@ -13,7 +13,7 @@
                     id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
                     data-dropdown-placement="bottom">
                     <span class="sr-only">Open user menu</span>
-                    <img class="w-8 h-8 rounded-full" src="{{ asset('assets/images/user.png') }}" alt="user photo">
+                    <x-avatar :avatar="Auth::user()->avatar" />
                 </button>
 
                 <!-- User menu dropdown -->
@@ -31,7 +31,7 @@
 
                     <ul class="py-2" aria-labelledby="user-menu-button">
                         <li>
-                            <x-dropdown-link :href="route('profile.edit')">
+                            <x-dropdown-link :href="route('profile.show', Auth::user()->username)">
                                 {{ __('My Profile') }}
                             </x-dropdown-link>
                         </li>
@@ -98,7 +98,7 @@
             <ul
                 class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                 <li>
-                    <x-nav-link :href="route('pets.index')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('pets.index')" :active="request()->routeIs('pets.index')">
                         {{ __('Adopt') }}
                     </x-nav-link>
                 </li>
