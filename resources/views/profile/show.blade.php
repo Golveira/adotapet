@@ -1,14 +1,14 @@
 <x-app-layout>
     <div class="mx-auto max-w-screen-xl px-4 py-8">
-        <x-card class="mb-10">
+        <x-card class="mb-10 p-10">
             <div class="grid lg:grid-cols-2 mb-3 gap-4">
                 <div class="flex items-center">
                     <x-avatar :avatar="$user->avatar" class="w-20 h-20 rounded-full" />
 
-                    <div>
-                        <h3 class="ms-5 text-2xl font-bold">{{ $user->name }}</h3>
+                    <div class="ms-8">
+                        <h3 class="text-2xl font-bold">{{ $user->name }}</h3>
 
-                        <div class="ms-5 text-sm text-gray-700">
+                        <div class="text-sm text-gray-700">
                             {{ $user->profile->location }}
                         </div>
                     </div>
