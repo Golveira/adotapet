@@ -84,7 +84,9 @@
                         <div class="flex mb-10">
                             <div class="w-1/2 font-bold text-gray-800">{{ __('Published by') }}</div>
                             <div class="w-1/2 text-gray-600">
-                                <x-link href="#">{{ $pet->user->name }}</x-link>
+                                <x-link href="{{ route('profile.show', $pet->user->username) }}">
+                                    {{ $pet->user->name }}
+                                </x-link>
                             </div>
                         </div>
 
