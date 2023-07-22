@@ -23,11 +23,7 @@ class ProfileController extends Controller
             ->with(['profile'])
             ->firstOrFail();
 
-        $pets = $user->pets()
-            ->with(['media', 'city:id,title', 'state:id,letter'])
-            ->paginate(2);
-
-        return view('profile.show', compact('user', 'pets'));
+        return view('profile.show', compact('user'));
     }
 
     public function edit(Request $request): View
