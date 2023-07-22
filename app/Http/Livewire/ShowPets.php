@@ -12,7 +12,7 @@ class ShowPets extends Component
 {
     use WithPagination;
 
-    private $userId;
+    public $userId;
 
     public $specie = '';
 
@@ -36,7 +36,7 @@ class ShowPets extends Component
     {
         $this->userId = $userId;
 
-        $this->states = State::all();
+        $this->states = State::get(['id', 'title']);
 
         $this->cities = collect();
     }
@@ -48,12 +48,12 @@ class ShowPets extends Component
 
     public function updatedStateId($stateId)
     {
-        $this->cities = City::where('state_id', $stateId)->get();
+        $this->cities = City::where('state_id', $stateId)->get(['id', 'title']);
     }
 
     public function render()
     {
-        $pets = Pet::with(['media', 'city', 'state'])
+        $pets = Pet::with(['media', 'city:id,title', 'state:id,letter'])
             ->where('name', 'like', '%' . $this->name . '%')
             ->where('specie', 'like', '%' . $this->specie . '%')
             ->where('age', 'like', '%' . $this->age . '%')
@@ -70,7 +70,7 @@ class ShowPets extends Component
             ->when($this->cityId, function ($query, $cityId) {
                 return $query->where('city_id', $cityId);
             })
-            ->paginate(18);
+            ->paginate(2);
 
         return view('livewire.show-pets', compact('pets'));
     }
