@@ -1,4 +1,4 @@
-<div class="grid lg:grid-cols-12 md:grid-cols-10 sm:grid-cols-2 lg:gap-12 md:gap-6">
+<div class="grid lg:grid-cols-12 md:grid-cols-10 sm:grid-cols-2 lg:gap-12 gap-8">
     <div class="lg:col-span-3 md:col-span-5 col-span-10">
         <x-card>
             <div class="mb-5">
