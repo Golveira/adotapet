@@ -15,7 +15,7 @@
         </a>
 
         <p class="font-light text-gray-300 text-base">
-            {{ $pet->city }} - {{ $pet->state }}
+            {{ $pet->city->title }} - {{ $pet->state->letter }}
         </p>
     </div>
 </div>
