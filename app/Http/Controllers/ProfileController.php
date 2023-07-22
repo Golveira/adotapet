@@ -2,18 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use App\Services\ProfileService;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
+use App\Models\User;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
+use App\Services\ProfileService;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\ProfileUpdateRequest;
 
 class ProfileController extends Controller
 {
     public function __construct(private ProfileService $profileService)
     {
+    }
+
+    public function show(string $username): View
+    {
+        $user = User::where('username', $username)
+            ->with(['profile'])
+            ->firstOrFail();
+
+        $pets = $user->pets()
+            ->with(['media', 'city:id,title', 'state:id,letter'])
+            ->paginate(2);
+
+        return view('profile.show', compact('user', 'pets'));
     }
 
     public function edit(Request $request): View
