@@ -37,7 +37,9 @@
 
         <!-- Page Content -->
         <main>
-            {{ $slot }}
+            <div class="max-w-screen-xl px-4 py-8 mx-auto">
+                {{ $slot }}
+            </div>
         </main>
 
         @include('layouts.footer')
