@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', WelcomeController::class)->name('welcome');
-Route::get('/pets', ShowPets::class)->name('pets.index');
+Route::get('/pets', [PetController::class, 'index'])->name('pets.index');
 Route::get('/pets/{pet}', [PetController::class, 'show'])->name('pets.show');
 
 Route::get('/dashboard', function () {
@@ -33,4 +33,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+Route::get('/profile/{username}', [ProfileController::class, 'show'])->name('profile.show');
+
+require __DIR__ . '/auth.php';
