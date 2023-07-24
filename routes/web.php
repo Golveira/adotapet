@@ -19,12 +19,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', WelcomeController::class)->name('welcome');
-Route::get('/pets', [PetController::class, 'index'])->name('pets.index');
-Route::get('/pets/{pet}', [PetController::class, 'show'])->name('pets.show');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::resource('pets', PetController::class);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
