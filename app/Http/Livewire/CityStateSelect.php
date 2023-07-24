@@ -16,11 +16,15 @@ class CityStateSelect extends Component
 
     public $cities;
 
-    public function mount()
+    public function mount($stateId = null, $cityId = null)
     {
+        $this->stateId = $stateId;
+
+        $this->cityId = $cityId;
+
         $this->states = State::all();
 
-        $this->cities = collect();
+        $this->cities = City::where('state_id', $stateId)->get();
     }
 
     public function updatedStateId($stateId)
