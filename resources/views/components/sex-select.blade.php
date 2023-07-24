@@ -1,7 +1,11 @@
-@props(['placeholder' => ''])
+@props(['selected' => null, 'placeholder' => ''])
 
 <x-select id="sex" :attributes="$attributes">
     <option value selected>{{ __($placeholder) }}</option>
-    <option value="male">{{ __('Male') }}</option>
-    <option value="female">{{ __('Female') }}</option>
+
+    @foreach ($sexOptions as $sex)
+        <option value="{{ $sex }}" @selected($selected == $sex)>
+            {{ __($sex) }}
+        </option>
+    @endforeach
 </x-select>
