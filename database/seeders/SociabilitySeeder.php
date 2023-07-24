@@ -13,9 +13,10 @@ class SociabilitySeeder extends Seeder
     public function run(): void
     {
         $sociabilities = [
-            'OK with cats',
-            'OK with dogs',
-            'OK with kids',
+            'cats',
+            'dogs',
+            'kids',
+            'strangers',
         ];
 
         foreach ($sociabilities as $sociability) {
