@@ -4,7 +4,6 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\PetController;
 use App\Http\Controllers\WelcomeController;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
