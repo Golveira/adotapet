@@ -2,26 +2,49 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
 use App\Models\Pet;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Models\Sociability;
+use App\Models\Temperament;
+use App\Services\PetService;
+use Illuminate\Http\Request;
+use App\Models\VeterinaryCare;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\User\StorePetRequest;
 
 class PetController extends Controller
 {
+    public function __construct(private PetService $petService)
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+
     public function index(): View
     {
         return view('pets.index');
     }
 
-    public function create()
+    public function create(): View
     {
-        //
+        $veterinaryCares = VeterinaryCare::get(['id', 'name']);
+        $sociabilities = Sociability::get(['id', 'name']);
+        $temperaments = Temperament::get(['id', 'name']);
+
+        return view('pets.create', compact('veterinaryCares', 'sociabilities', 'temperaments'));
     }
 
-    public function store(Request $request)
+    public function store(StorePetRequest $request)
     {
-        //
+        $this->petService->store(
+            $request->validated(),
+            $request->file('photo'),
+            Auth::user()->id
+        );
+
+        toast(__('pets.created'), 'success');
+
+        return redirect()->route('pets.index');
     }
 
     public function show(Pet $pet): View
