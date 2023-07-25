@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -22,10 +21,9 @@ return new class extends Migration
             $table->string('sex');
             $table->string('age');
             $table->string('size');
-            $table->text('description');
-            $table->boolean('is_adopted');
-            $table->boolean('is_visible');
-            $table->boolean('has_special_needs');
+            $table->text('description')->nullable();
+            $table->boolean('is_adopted')->nullable()->default(false);
+            $table->boolean('is_visible')->nullable()->default(true);
             $table->timestamps();
         });
     }
