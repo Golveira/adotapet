@@ -31,9 +31,8 @@ class PetFactory extends Factory
             'state_id' => $state->id,
             'city_id' => $city->id,
             'description' => $this->faker->paragraph,
-            'is_adopted' => $this->faker->boolean,
-            'is_visible' => $this->faker->boolean,
-            'has_special_needs' => $this->faker->boolean,
+            'is_adopted' => false,
+            'is_visible' => true,
         ];
     }
 }
