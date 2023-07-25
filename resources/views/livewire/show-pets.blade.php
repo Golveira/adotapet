@@ -3,22 +3,22 @@
         <x-card>
             <div class="mb-5">
                 <x-input-label class="mb-3 text-lg" for="specie" :value="__('Specie')" />
-                <x-specie-select wire:model="specie" />
+                <x-specie-select wire:model="specie" placeholder="{{ __('All species') }}" />
             </div>
 
             <div class="mb-5">
                 <x-input-label class="mb-3 text-lg" for="sex" :value="__('Sex')" />
-                <x-sex-select wire:model="sex" />
+                <x-sex-select wire:model="sex" placeholder="{{ __('All sex') }}" />
             </div>
 
             <div class="mb-5">
                 <x-input-label class="mb-3 text-lg" for="size" :value="__('Size')" />
-                <x-size-select wire:model="size" />
+                <x-size-select wire:model="size" placeholder="{{ __('All sizes') }}" />
             </div>
 
             <div class="mb-5">
                 <x-input-label class="mb-3 text-lg" for="age" :value="__('Age')" />
-                <x-age-select wire:model="age" />
+                <x-age-select wire:model="age" placeholder="{{ __('All ages') }}" />
             </div>
 
             <div class="mb-5">
