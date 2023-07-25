@@ -104,7 +104,7 @@
                 </li>
 
                 <li>
-                    <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                    <x-nav-link :href="route('pets.create')" :active="request()->routeIs('pets.create')">
                         {{ __('Foster') }}
                     </x-nav-link>
                 </li>
