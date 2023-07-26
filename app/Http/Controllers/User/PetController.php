@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Http\Requests\User\UpdatePetRequest;
 use App\Models\Pet;
 use Illuminate\View\View;
-use App\Models\Sociability;
-use App\Models\Temperament;
 use App\Services\PetService;
-use Illuminate\Http\Request;
-use App\Models\VeterinaryCare;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\User\StorePetRequest;
 
 class PetController extends Controller
@@ -27,14 +25,10 @@ class PetController extends Controller
 
     public function create(): View
     {
-        $veterinaryCares = VeterinaryCare::get(['id', 'name']);
-        $sociabilities = Sociability::get(['id', 'name']);
-        $temperaments = Temperament::get(['id', 'name']);
-
-        return view('pets.create', compact('veterinaryCares', 'sociabilities', 'temperaments'));
+        return view('pets.create');
     }
 
-    public function store(StorePetRequest $request)
+    public function store(StorePetRequest $request): RedirectResponse
     {
         $this->petService->store(
             $request->validated(),
@@ -44,7 +38,7 @@ class PetController extends Controller
 
         toast(__('pets.created'), 'success');
 
-        return redirect()->route('pets.index');
+        return redirect()->route('profile.show', Auth::user()->username);
     }
 
     public function show(Pet $pet): View
@@ -61,20 +55,34 @@ class PetController extends Controller
         return view('pets.show', compact('pet'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(Pet $pet)
     {
-        //
+        $veterinaryCares = $pet->veterinaryCares()
+            ->pluck('veterinary_care_id')
+            ->toArray();
+
+        $temperaments = $pet->temperaments()
+            ->pluck('temperament_id')
+            ->toArray();
+
+        $sociabilities = $pet->sociabilities()
+            ->pluck('sociability_id')
+            ->toArray();
+
+        return view('pets.edit', compact('pet', 'veterinaryCares', 'temperaments', 'sociabilities'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(UpdatePetRequest $request, Pet $pet)
     {
-        //
+        $this->petService->update(
+            $pet,
+            $request->validated(),
+            $request->file('photo')
+        );
+
+        toast(__('pets.updated'), 'success');
+
+        return redirect()->route('profile.show', Auth::user()->username);
     }
 
     /**
