@@ -5,9 +5,6 @@ namespace Tests\Feature;
 use App\Models\Pet;
 use Tests\TestCase;
 use App\Models\User;
-use App\Models\Sociability;
-use App\Models\Temperament;
-use App\Models\VeterinaryCare;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -20,16 +17,13 @@ class PetTest extends TestCase
         $user = User::factory()->create();
 
         $petData = Pet::factory()->make(['user_id' => $user->id])->toArray();
-        $temperaments = Temperament::pluck('id')->toArray();
-        $veterinaryCares = VeterinaryCare::pluck('id')->toArray();
-        $sociabilities = Sociability::pluck('id')->toArray();
         $photo = UploadedFile::fake()->image('photo.jpg');
 
         $formData = array_merge($petData, [
             'photo' => $photo,
-            'temperaments' => $temperaments,
-            'veterinary_cares' => $veterinaryCares,
-            'sociabilities' => $sociabilities,
+            'temperaments' => [1, 2],
+            'veterinary_cares' => [1],
+            'sociabilities' => [1],
         ]);
 
         $response = $this
@@ -39,31 +33,16 @@ class PetTest extends TestCase
         $response
             ->assertRedirect(route('profile.show', $user->username));
 
-        $this->assertDatabaseHas('pets', $petData);
-
         $pet = Pet::first();
 
-        foreach ($temperaments as $temperament) {
-            $this->assertDatabaseHas('pet_temperament', [
-                'pet_id' => $pet->id,
-                'temperament_id' => $temperament,
-            ]);
-        }
-
-        foreach ($veterinaryCares as $veterinaryCare) {
-            $this->assertDatabaseHas('pet_veterinary_care', [
-                'pet_id' => $pet->id,
-                'veterinary_care_id' => $veterinaryCare,
-            ]);
-        }
-
-        foreach ($sociabilities as $sociability) {
-            $this->assertDatabaseHas('pet_sociability', [
-                'pet_id' => $pet->id,
-                'sociability_id' => $sociability,
-            ]);
-        }
-
+        $this->assertDatabaseHas('pets', $petData);
+        $this->assertEquals(2, $pet->temperaments->count());
+        $this->assertEquals(1, $pet->veterinaryCares->count());
+        $this->assertEquals(1, $pet->sociabilities->count());
+        $this->assertTrue($pet->temperaments->contains(1));
+        $this->assertTrue($pet->temperaments->contains(2));
+        $this->assertTrue($pet->veterinaryCares->contains(1));
+        $this->assertTrue($pet->sociabilities->contains(1));
         $this->assertDatabaseHas('media', [
             'model_id' => $pet->id,
             'file_name' => $photo->name,
