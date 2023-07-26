@@ -31,7 +31,7 @@ class StorePetRequest extends FormRequest
             'state_id' => ['required', 'integer', 'exists:states,id'],
             'city_id' => ['required', 'integer', 'exists:cities,id'],
             'photo' => ['required', 'image', 'max:2048'],
-            'description' => ['nullable', 'string', 'max:500'],
+            'description' => ['nullable', 'string', 'max:1000'],
             'veterinary_cares' => ['nullable', 'array', 'exists:veterinary_cares,id'],
             'temperaments' => ['nullable', 'array', 'exists:temperaments,id'],
             'sociabilities' => ['nullable', 'array', 'exists:sociabilities,id'],
