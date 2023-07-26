@@ -19,5 +19,8 @@ abstract class TestCase extends BaseTestCase
 
         $this->seed(StateTableSeeder::class);
         $this->seed(CityTableSeeder::class);
+        $this->seed(SociabilitySeeder::class);
+        $this->seed(TemperamentSeeder::class);
+        $this->seed(VeterinaryCareSeeder::class);
     }
 }
