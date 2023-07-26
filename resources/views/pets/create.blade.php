@@ -66,7 +66,7 @@
                             {{ __('Veterinary Cares') }}
                         </h3>
 
-                        <x-veterinary-cares-checkboxes />
+                        <x-veterinary-cares-checkboxes :checkedValues="old('veterinary_cares')" />
                     </div>
 
                     <div>
@@ -74,7 +74,7 @@
                             {{ __('Temperament') }}
                         </h3>
 
-                        <x-temperaments-checkboxes />
+                        <x-temperaments-checkboxes :checkedValues="old('temperaments')" />
                     </div>
 
                     <div>
@@ -82,7 +82,7 @@
                             {{ __('Sociable with') }}
                         </h3>
 
-                        <x-sociabilities-checkboxes />
+                        <x-sociabilities-checkboxes :checkedValues="old('sociabilities')" />
                     </div>
 
                     <div class="flex items-center gap-4">
