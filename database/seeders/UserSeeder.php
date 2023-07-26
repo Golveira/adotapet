@@ -16,10 +16,6 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $sociabilities = Sociability::all();
-        $temperaments = Temperament::all();
-        $veterinaryCares = VeterinaryCare::all();
-
         User::create([
             'name' => 'User',
             'username' => 'user',
@@ -35,15 +31,16 @@ class UserSeeder extends Seeder
             'is_admin' => true,
         ]);
 
-        User::factory()->count(10)->hasProfile()->create()->each(function ($user) use ($sociabilities, $temperaments, $veterinaryCares) {
-            Pet::factory(4)->create(['user_id' => $user->id])
-                ->each(function ($pet) use ($sociabilities, $temperaments, $veterinaryCares) {
-                    $pet->addMediaFromUrl(fake()->imageUrl())->toMediaCollection('pets');
-
-                    $pet->sociabilities()->attach($sociabilities->random(3));
-                    $pet->temperaments()->attach($temperaments->random(5));
-                    $pet->veterinaryCares()->attach($veterinaryCares->random(3));
-                });
+        User::factory()->count(10)->hasProfile()->create()->each(function ($user) {
+            Pet::factory()
+                ->count(3)
+                ->withSociabilities()
+                ->withVeterinaryCares()
+                ->withTemperaments()
+                ->withMedia()
+                ->create([
+                    'user_id' => $user->id,
+                ]);
         });
     }
 }
