@@ -61,20 +61,12 @@
                         <x-input-error class="mt-2" :messages="$errors->get('description')" />
                     </div>
 
-
                     <div>
                         <h3 class="font-medium text-sm text-gray-700 mb-2">
                             {{ __('Veterinary Cares') }}
                         </h3>
 
-                        <div class="flex flex-wrap">
-                            @foreach ($veterinaryCares as $care)
-                                <div class="mb-3 mr-3">
-                                    <x-checkbox id="{{ $care->name }}" value="{{ $care->id }}" :label="$care->name"
-                                        name="veterinary_cares[]" />
-                                </div>
-                            @endforeach
-                        </div>
+                        <x-veterinary-cares-checkboxes />
                     </div>
 
                     <div>
@@ -82,14 +74,7 @@
                             {{ __('Temperament') }}
                         </h3>
 
-                        <div class="flex flex-wrap">
-                            @foreach ($temperaments as $temperament)
-                                <div class="mb-3 mr-3">
-                                    <x-checkbox id="{{ $temperament->name }}" value="{{ $temperament->id }}"
-                                        :label="$temperament->name" name="temperaments[]" />
-                                </div>
-                            @endforeach
-                        </div>
+                        <x-temperaments-checkboxes />
                     </div>
 
                     <div>
@@ -97,18 +82,13 @@
                             {{ __('Sociable with') }}
                         </h3>
 
-                        <div class="flex flex-wrap">
-                            @foreach ($sociabilities as $sociability)
-                                <div class="mb-3 mr-3">
-                                    <x-checkbox id="{{ $sociability->name }}" value="{{ $sociability->id }}"
-                                        :label="$sociability->name" name="sociabilities[]" />
-                                </div>
-                            @endforeach
-                        </div>
+                        <x-sociabilities-checkboxes />
                     </div>
 
                     <div class="flex items-center gap-4">
-                        <x-button color="blue" type="submit">{{ __('Save') }}</x-button>
+                        <x-button color="blue" type="submit">
+                            {{ __('Save') }}
+                        </x-button>
                     </div>
                 </form>
             </x-card>
