@@ -9,13 +9,13 @@
                         <h3 class="text-2xl font-bold">{{ $user->name }}</h3>
 
                         <div class="text-sm text-gray-700">
-                            {{ $user->profile->location }}
+                            {{ $user->profile?->location }}
                         </div>
                     </div>
                 </div>
 
                 <div>
-                    @if ($user->profile->website)
+                    @if ($user->profile?->website)
                         <div class="flex mb-2">
                             <span class="text-blue-700 mr-3">
                                 <x-icons.globe />
@@ -28,7 +28,7 @@
                         </div>
                     @endif
 
-                    @if ($user->profile->whatsapp)
+                    @if ($user->profile?->whatsapp)
                         <div class="flex mb-2">
                             <span class="text-blue-700 mr-3">
                                 <x-icons.whatsapp />
@@ -57,7 +57,7 @@
             </div>
 
             <div class="text-gray-700">
-                {{ $user->profile->bio }}
+                {{ $user->profile?->bio }}
             </div>
         </x-card>
 
