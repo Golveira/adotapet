@@ -2,7 +2,7 @@
     <section class="bg-white">
         <div class="mx-auto max-w-screen-xl px-4 py-8">
             <div class="grid lg:grid-cols-10 gap-8">
-                <!-- Pet images -->
+                <!-- Carousel -->
                 <div class="lg:col-span-6">
                     <x-pet-carousel :images="$pet->images" />
                 </div>
@@ -29,7 +29,9 @@
                     <x-card>
                         <div class="flex items-center mb-5">
                             <div class="w-1/2">
-                                <h3 class="text-xl font-bold">{{ $pet->name }}</h3>
+                                <h3 class="text-xl font-bold">
+                                    {{ $pet->name }}
+                                </h3>
                             </div>
 
                             <div class="w-1/2">
@@ -40,49 +42,70 @@
                         </div>
 
                         <div class="flex mb-3">
-                            <div class="w-1/2 font-bold text-gray-800">{{ __('Specie') }}</div>
+                            <h6 class="w-1/2 font-bold text-gray-800">
+                                {{ __('Specie') }}
+                            </h6>
+
                             <div class="w-1/2 text-gray-600">
                                 {{ __($pet->specie) }}
                             </div>
                         </div>
 
                         <div class="flex mb-3">
-                            <div class="w-1/2 font-bold text-gray-800">{{ __('Sex') }}</div>
+                            <h6 class="w-1/2 font-bold text-gray-800">
+                                {{ __('Sex') }}
+                            </h6>
+
                             <div class="w-1/2 text-gray-600">
                                 {{ __($pet->sex) }}
                             </div>
                         </div>
 
                         <div class="flex mb-3">
-                            <div class="w-1/2 font-bold text-gray-800">{{ __('Age') }}</div>
+                            <h6 class="w-1/2 font-bold text-gray-800">
+                                {{ __('Age') }}
+                            </h6>
+
                             <div class="w-1/2 text-gray-600">
                                 {{ __($pet->age) }}
                             </div>
                         </div>
 
                         <div class="flex mb-3">
-                            <div class="w-1/2 font-bold text-gray-800">{{ __('Size') }}</div>
+                            <h6 class="w-1/2 font-bold text-gray-800">
+                                {{ __('Size') }}
+                            </h6>
+
                             <div class="w-1/2 text-gray-600">
                                 {{ __($pet->size) }}
                             </div>
                         </div>
 
                         <div class="flex mb-5">
-                            <div class="w-1/2 font-bold text-gray-800">{{ __('Address') }}</div>
+                            <h6 class="w-1/2 font-bold text-gray-800">
+                                {{ __('Address') }}
+                            </h6>
+
                             <div class="w-1/2 text-gray-600">
                                 {{ $pet->address }}
                             </div>
                         </div>
 
                         <div class="flex mb-5">
-                            <div class="w-1/2 font-bold text-gray-800">{{ __('Created at') }}</div>
+                            <h6 class="w-1/2 font-bold text-gray-800">
+                                {{ __('Created at') }}
+                            </h6>
+
                             <div class="w-1/2 text-gray-600">
                                 {{ $pet->created_at->format('d/m/Y') }}
                             </div>
                         </div>
 
                         <div class="flex mb-10">
-                            <div class="w-1/2 font-bold text-gray-800">{{ __('Published by') }}</div>
+                            <h6 class="w-1/2 font-bold text-gray-800">
+                                {{ __('Published by') }}
+                            </h6>
+
                             <div class="w-1/2 text-gray-600">
                                 <x-link href="{{ route('profile.show', $pet->user->username) }}">
                                     {{ $pet->user->name }}
@@ -104,48 +127,72 @@
                     <x-card>
                         <!-- Pet description -->
                         <div class="mb-5">
-                            <h3 class="text-lg font-bold mb-3">{{ __('Description') }}</h3>
+                            <h6 class="text-lg font-bold mb-3">
+                                {{ __('Description') }}
+                            </h6>
 
-                            <div class="text-gray-800">
+                            <p class="text-gray-500">
                                 {{ $pet->description }}
-                            </div>
+                            </p>
                         </div>
+
+                        <hr class="h-px my-4 bg-gray-200 border-0">
 
                         <!-- Veterinary Cares -->
                         <div class="mb-5">
-                            <h3 class="text-lg font-bold mb-5">{{ __('Vet Info') }}</h3>
+                            <h6 class="font-bold mb-3">
+                                {{ __('Vet Info') }}
+                            </h6>
 
                             <div class="flex flex-wrap gap-2">
                                 @foreach ($pet->veterinaryCares as $vetCare)
-                                    <x-badge color="blue" class="flex items-center">
-                                        <x-icons.badge-check />
-                                        <span class="ml-2">{{ __($vetCare->name) }}</span>
-                                    </x-badge>
+                                    <div class="flex items-center me-2">
+                                        <span class="text-blue-700 me-2">
+                                            <x-icons.badge-check />
+                                        </span>
+
+                                        <span class="text-sm text-gray-600">
+                                            {{ __($vetCare->name) }}
+                                        </span>
+                                    </div>
                                 @endforeach
                             </div>
                         </div>
+
+                        <hr class="h-px my-4 bg-gray-200 border-0">
 
                         <!-- Sociabilities -->
                         <div class="mb-5">
-                            <h3 class="text-lg font-bold mb-5">{{ __('Sociabilities') }}</h3>
+                            <h6 class="font-bold mb-3">
+                                {{ __('Sociable with') }}
+                            </h6>
 
                             <div class="flex flex-wrap gap-2">
                                 @foreach ($pet->sociabilities as $sociability)
-                                    <x-badge color="blue" class="flex items-center">
-                                        <x-icons.badge-check />
-                                        <span class="ml-2">{{ __($sociability->name) }}</span>
-                                    </x-badge>
+                                    <div class="flex items-center me-2">
+                                        <span class="text-blue-700 me-2">
+                                            <x-icons.badge-check />
+                                        </span>
+
+                                        <span class="text-sm text-gray-600">
+                                            {{ __($sociability->name) }}
+                                        </span>
+                                    </div>
                                 @endforeach
                             </div>
                         </div>
 
+                        <hr class="h-px my-4 bg-gray-200 border-0">
+
                         <!-- Temperaments -->
                         <div class="mb-5">
-                            <h3 class="text-lg font-bold mb-5">{{ __('Temperaments') }}</h3>
+                            <h6 class="font-bold mb-3">
+                                {{ __('Temperaments') }}
+                            </h6>
 
                             <div class="flex flex-wrap gap-2">
                                 @foreach ($pet->temperaments as $temperament)
-                                    <x-badge color="blue">
+                                    <x-badge color="indigo" class="text-xs font-bold">
                                         {{ __($temperament->name) }}
                                     </x-badge>
                                 @endforeach
