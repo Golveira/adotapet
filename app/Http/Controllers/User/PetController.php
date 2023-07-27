@@ -57,6 +57,8 @@ class PetController extends Controller
 
     public function edit(Pet $pet)
     {
+        $this->authorize('update', $pet);
+
         $veterinaryCares = $pet->veterinaryCares()
             ->pluck('veterinary_care_id')
             ->toArray();
@@ -74,6 +76,8 @@ class PetController extends Controller
 
     public function update(UpdatePetRequest $request, Pet $pet)
     {
+        $this->authorize('update', $pet);
+
         $this->petService->update(
             $pet,
             $request->validated(),
