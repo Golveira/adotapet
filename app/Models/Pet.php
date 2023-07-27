@@ -85,4 +85,12 @@ class Pet extends Model implements HasMedia
             return $media->getFullUrl();
         });
     }
+
+    public function hasAdditionalInfo(): bool
+    {
+        return $this->description ||
+            $this->sociabilities->isNotEmpty() ||
+            $this->temperaments->isNotEmpty() ||
+            $this->veterinaryCares->isNotEmpty();
+    }
 }
