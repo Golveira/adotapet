@@ -10,20 +10,22 @@
                 <div class="lg:col-span-4">
                     <!-- Actions -->
                     @auth
-                        <div class="flex mb-2">
-                            <x-button href="{{ route('pets.edit', $pet->id) }}" class="me-3">
-                                <x-icons.edit />
-                            </x-button>
+                        @can('update', $pet)
+                            <div class="flex mb-2">
+                                <x-button href="{{ route('pets.edit', $pet->id) }}" class="me-3">
+                                    <x-icons.edit />
+                                </x-button>
 
-                            <x-button color="purple" href="#" class="me-3">
-                                <x-icons.image />
-                            </x-button>
+                                <x-button color="purple" href="#" class="me-3">
+                                    <x-icons.image />
+                                </x-button>
 
-                            <x-button color="red" href="#" data-modal-target="popup-modal"
-                                data-modal-toggle="popup-modal">
-                                <x-icons.trash />
-                            </x-button>
-                        </div>
+                                <x-button color="red" href="#" data-modal-target="popup-modal"
+                                    data-modal-toggle="popup-modal">
+                                    <x-icons.trash />
+                                </x-button>
+                            </div>
+                        @endcan
                     @endauth
 
                     <!-- Pet Info -->
