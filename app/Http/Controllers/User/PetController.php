@@ -89,11 +89,14 @@ class PetController extends Controller
         return redirect()->route('profile.show', Auth::user()->username);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Pet $pet)
     {
-        //
+        $this->authorize('delete', $pet);
+
+        $pet->delete();
+
+        toast(__('pets.deleted'), 'success');
+
+        return redirect()->route('profile.show', Auth::user()->username);
     }
 }
