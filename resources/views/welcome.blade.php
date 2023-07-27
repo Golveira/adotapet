@@ -12,11 +12,11 @@
                 </p>
 
                 <div class="flex lg:justify-start justify-center items-center">
-                    <x-button color="blue" href="{{ route('pets.index') }}">
+                    <x-button href="{{ route('pets.index') }}">
                         {{ __('Adopt a pet') }}
                     </x-button>
 
-                    <x-button href="#">
+                    <x-button color="alternative" href="#">
                         {{ __('Promote a pet') }}
                     </x-button>
                 </div>
@@ -48,7 +48,7 @@
             </div>
 
             <div class="my-16 text-center">
-                <x-button color="blue" href="{{ route('pets.index') }}">
+                <x-button href="{{ route('pets.index') }}">
                     {{ __('View more') }}
                 </x-button>
             </div>
@@ -115,7 +115,7 @@
             </div>
 
             <div class="text-center mt-16">
-                <x-button color="blue" href="{{ route('pets.index') }}">
+                <x-button href="{{ route('pets.index') }}">
                     {{ __('Find my new friend') }}
                 </x-button>
             </div>
