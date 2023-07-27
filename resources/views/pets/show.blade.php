@@ -11,15 +11,16 @@
                     <!-- Actions -->
                     @auth
                         <div class="flex mb-2">
-                            <x-button href="#">
+                            <x-button href="{{ route('pets.edit', $pet->id) }}" class="me-3">
                                 <x-icons.edit />
                             </x-button>
 
-                            <x-button href="#">
+                            <x-button color="purple" href="#" class="me-3">
                                 <x-icons.image />
                             </x-button>
 
-                            <x-button href="#">
+                            <x-button color="red" href="#" data-modal-target="popup-modal"
+                                data-modal-toggle="popup-modal">
                                 <x-icons.trash />
                             </x-button>
                         </div>
@@ -27,7 +28,8 @@
 
                     <!-- Pet Info -->
                     <x-card>
-                        <div class="flex items-center mb-5">
+                        <div class="flex
+                                items-center mb-5">
                             <div class="w-1/2">
                                 <h3 class="text-xl font-bold">
                                     {{ $pet->name }}
@@ -114,7 +116,7 @@
                         </div>
 
                         <div class="flex">
-                            <x-button color="blue" href="#" class="text-center w-full">
+                            <x-button href="#" class="text-center w-full">
                                 {{ __('Adopt') }}
                             </x-button>
                         </div>
@@ -203,4 +205,9 @@
             </div>
         </div>
     </section>
+
+    @push('modals')
+        <x-modal-delete title="{{ __('Are you sure you want to delete the pet?') }}"
+            route="{{ route('pets.destroy', $pet->id) }}" />
+    @endpush
 </x-app-layout>
