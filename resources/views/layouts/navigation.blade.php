@@ -65,11 +65,11 @@
 
             @guest
                 <div class="hidden lg:block">
-                    <x-button color="blue" href="{{ route('login') }}" class="me-3">
+                    <x-button href="{{ route('login') }}" class="me-3">
                         {{ __('Login') }}
                     </x-button>
 
-                    <x-button href="{{ route('register') }}">
+                    <x-button color="alternative" href="{{ route('register') }}">
                         {{ __('Register') }}
                     </x-button>
                 </div>
