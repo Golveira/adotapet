@@ -86,7 +86,7 @@
                     </div>
 
                     <div class="flex items-center gap-4">
-                        <x-button color="blue" type="submit">
+                        <x-button type="submit">
                             {{ __('Save') }}
                         </x-button>
                     </div>
