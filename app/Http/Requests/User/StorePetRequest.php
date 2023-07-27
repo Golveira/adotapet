@@ -37,4 +37,13 @@ class StorePetRequest extends FormRequest
             'sociabilities' => ['nullable', 'array', 'exists:sociabilities,id'],
         ];
     }
+
+    public function prepareForValidation(): void
+    {
+        $this->merge([
+            'veterinary_cares' => $this->veterinary_cares ?? [],
+            'temperaments' => $this->temperaments ?? [],
+            'sociabilities' => $this->sociabilities ?? [],
+        ]);
+    }
 }
