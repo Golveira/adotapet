@@ -93,7 +93,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <x-button color="blue" type="submit">{{ __('Save') }}</x-button>
+            <x-button type="submit" class="w-full">{{ __('Save') }}</x-button>
         </div>
     </form>
 </section>
