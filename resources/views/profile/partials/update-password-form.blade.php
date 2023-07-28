@@ -1,7 +1,7 @@
 <section>
     <header>
         <h2 class="text-xl font-bold text-gray-900 text-center">
-            {{ __('Update Password') }}
+            {{ __('Change Password') }}
         </h2>
     </header>
 
@@ -31,12 +31,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <x-button color="blue" type="submit">{{ __('Save') }}</x-button>
-
-            @if (session('status') === 'password-updated')
-                <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600">{{ __('Saved.') }}</p>
-            @endif
+            <x-button type="submit" class="w-full">{{ __('Save') }}</x-button>
         </div>
     </form>
 </section>
