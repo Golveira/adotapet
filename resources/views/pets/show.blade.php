@@ -16,7 +16,7 @@
                                     <x-icons.edit />
                                 </x-button>
 
-                                <x-button color="purple" href="#" class="me-3">
+                                <x-button href="{{ route('pets.images', $pet->id) }}" color="purple" class="me-3">
                                     <x-icons.image />
                                 </x-button>
 
