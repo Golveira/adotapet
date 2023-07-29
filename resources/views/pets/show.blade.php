@@ -128,81 +128,91 @@
 
             <div class="grid lg:grid-cols-10 gap-8 mt-8">
                 <div class="lg:col-span-6">
-                    <x-card>
-                        <!-- Pet description -->
-                        <div class="mb-5">
-                            <h6 class="text-lg font-bold mb-3">
-                                {{ __('Description') }}
-                            </h6>
+                    @if ($pet->hasAdditionalInfo())
+                        <x-card>
+                            @if ($pet->description)
+                                <!-- Pet description -->
+                                <div class="mb-5">
+                                    <h6 class="text-lg font-bold mb-3">
+                                        {{ __('Description') }}
+                                    </h6>
 
-                            <p class="text-gray-500">
-                                {{ $pet->description }}
-                            </p>
-                        </div>
+                                    <p class="text-gray-500">
+                                        {{ $pet->description }}
+                                    </p>
+                                </div>
 
-                        <hr class="h-px my-4 bg-gray-200 border-0">
+                                <hr class="h-px my-4 bg-gray-200 border-0">
+                            @endif
 
-                        <!-- Veterinary Cares -->
-                        <div class="mb-5">
-                            <h6 class="font-bold mb-3">
-                                {{ __('Vet Info') }}
-                            </h6>
+                            @if ($pet->veterinaryCares->count() > 0)
+                                <!-- Veterinary Cares -->
+                                <div class="mb-5">
+                                    <h6 class="font-bold mb-3">
+                                        {{ __('Vet Info') }}
+                                    </h6>
 
-                            <div class="flex flex-wrap gap-2">
-                                @foreach ($pet->veterinaryCares as $vetCare)
-                                    <div class="flex items-center me-2">
-                                        <span class="text-blue-700 me-2">
-                                            <x-icons.badge-check />
-                                        </span>
+                                    <div class="flex flex-wrap gap-2">
+                                        @foreach ($pet->veterinaryCares as $vetCare)
+                                            <div class="flex items-center me-2">
+                                                <span class="text-blue-700 me-2">
+                                                    <x-icons.badge-check />
+                                                </span>
 
-                                        <span class="text-sm text-gray-600">
-                                            {{ __($vetCare->name) }}
-                                        </span>
+                                                <span class="text-sm text-gray-600">
+                                                    {{ __($vetCare->name) }}
+                                                </span>
+                                            </div>
+                                        @endforeach
                                     </div>
-                                @endforeach
-                            </div>
-                        </div>
+                                </div>
 
-                        <hr class="h-px my-4 bg-gray-200 border-0">
+                                <hr class="h-px my-4 bg-gray-200 border-0">
+                            @endif
 
-                        <!-- Sociabilities -->
-                        <div class="mb-5">
-                            <h6 class="font-bold mb-3">
-                                {{ __('Sociable with') }}
-                            </h6>
+                            @if ($pet->sociabilities->count() > 0)
+                                <!-- Sociabilities -->
+                                <div class="mb-5">
+                                    <h6 class="font-bold mb-3">
+                                        {{ __('Sociable with') }}
+                                    </h6>
 
-                            <div class="flex flex-wrap gap-2">
-                                @foreach ($pet->sociabilities as $sociability)
-                                    <div class="flex items-center me-2">
-                                        <span class="text-blue-700 me-2">
-                                            <x-icons.badge-check />
-                                        </span>
+                                    <div class="flex flex-wrap gap-2">
+                                        @foreach ($pet->sociabilities as $sociability)
+                                            <div class="flex items-center me-2">
+                                                <span class="text-blue-700 me-2">
+                                                    <x-icons.badge-check />
+                                                </span>
 
-                                        <span class="text-sm text-gray-600">
-                                            {{ __($sociability->name) }}
-                                        </span>
+                                                <span class="text-sm text-gray-600">
+                                                    {{ __($sociability->name) }}
+                                                </span>
+                                            </div>
+                                        @endforeach
                                     </div>
-                                @endforeach
-                            </div>
-                        </div>
+                                </div>
 
-                        <hr class="h-px my-4 bg-gray-200 border-0">
+                                <hr class="h-px my-4 bg-gray-200 border-0">
+                            @endif
 
-                        <!-- Temperaments -->
-                        <div class="mb-5">
-                            <h6 class="font-bold mb-3">
-                                {{ __('Temperaments') }}
-                            </h6>
+                            @if ($pet->temperaments->count() > 0)
+                                <!-- Temperaments -->
+                                <div class="mb-5">
+                                    <h6 class="font-bold mb-3">
+                                        {{ __('Temperaments') }}
+                                    </h6>
 
-                            <div class="flex flex-wrap gap-2">
-                                @foreach ($pet->temperaments as $temperament)
-                                    <x-badge color="indigo" class="text-xs font-bold">
-                                        {{ __($temperament->name) }}
-                                    </x-badge>
-                                @endforeach
-                            </div>
-                        </div>
-                    </x-card>
+                                    <div class="flex flex-wrap gap-2">
+                                        @foreach ($pet->temperaments as $temperament)
+                                            <x-badge color="indigo" class="text-xs font-bold">
+                                                {{ __($temperament->name) }}
+                                            </x-badge>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endif
+                        </x-card>
+                    @endif
                 </div>
             </div>
         </div>
