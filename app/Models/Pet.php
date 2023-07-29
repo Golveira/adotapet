@@ -81,7 +81,7 @@ class Pet extends Model implements HasMedia
 
     public function getImagesAttribute()
     {
-        return $this->getMedia('pets-gallery');
+        return $this->getMedia('*');
     }
 
     public function hasAdditionalInfo(): bool
