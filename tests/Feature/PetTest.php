@@ -92,4 +92,20 @@ class PetTest extends TestCase
             'file_name' => $photo->name,
         ]);
     }
+
+    public function test_user_can_delete_pet()
+    {
+        $user = User::factory()->create();
+
+        $pet = Pet::factory()->create(['user_id' => $user->id]);
+
+        $response = $this
+            ->actingAs($user)
+            ->delete(route('pets.destroy', $pet->id));
+
+        $response
+            ->assertRedirect(route('profile.show', $user->username));
+
+        $this->assertDatabaseMissing('pets', ['id' => $pet->id]);
+    }
 }
