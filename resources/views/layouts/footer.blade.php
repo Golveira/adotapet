@@ -44,7 +44,7 @@
                     <ul class="text-gray-600 dark:text-gray-400">
                         <li class="mb-4">
                             @auth
-                                <a href="{{ route('profile.show', Auth::user()->id) }}" class="hover:underline ">
+                                <a href="{{ route('profile.show', Auth::user()->username) }}" class="hover:underline ">
                                     {{ __('My Profile') }}
                                 </a>
                             @endauth
