@@ -61,6 +61,8 @@ class ProfileController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
+        toast(__('profile.deleted'), 'success');
+
         return Redirect::to('/');
     }
 }
