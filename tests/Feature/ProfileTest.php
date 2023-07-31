@@ -26,7 +26,9 @@ class ProfileTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $profileData = Profile::factory()->make(['user_id' => $user->id])->toArray();
+        $profileData = Profile::factory()
+            ->make(['user_id' => $user->id])
+            ->toArray();
 
         $response = $this
             ->actingAs($user)
@@ -39,7 +41,7 @@ class ProfileTest extends TestCase
 
         $response
             ->assertSessionHasNoErrors()
-            ->assertRedirect('/profile');
+            ->assertRedirect(route('profile.show', $user->username));
 
         $user->refresh();
 
@@ -63,7 +65,7 @@ class ProfileTest extends TestCase
 
         $response
             ->assertSessionHasNoErrors()
-            ->assertRedirect('/profile');
+            ->assertRedirect(route('profile.show', $user->username));
 
         $this->assertNotNull($user->refresh()->email_verified_at);
     }
