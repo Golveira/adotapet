@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Pet extends Model implements HasMedia
 {
@@ -90,5 +89,16 @@ class Pet extends Model implements HasMedia
             $this->sociabilities->isNotEmpty() ||
             $this->temperaments->isNotEmpty() ||
             $this->veterinaryCares->isNotEmpty();
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this
+            ->addMediaCollection('pets')
+            ->singleFile();
+
+        $this
+            ->addMediaCollection('pets-gallery')
+            ->onlyKeepLatest(8);
     }
 }
