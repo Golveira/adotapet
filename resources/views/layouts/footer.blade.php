@@ -17,15 +17,17 @@
 
                     <ul class="text-gray-600 dark:text-gray-400">
                         <li class="mb-4">
-                            <a href="#" class="hover:underline">
+                            <a href="{{ route('pets.index') }}" class="hover:underline">
                                 {{ __('Adopt a pet') }}
                             </a>
                         </li>
+
                         <li class="mb-4">
-                            <a href="#" class="hover:underline">
+                            <a href="{{ route('pets.create') }}" class="hover:underline">
                                 {{ __('Promote a pet') }}
                             </a>
                         </li>
+
                         <li>
                             <a href="#" class="hover:underline">
                                 {{ __('Make a donation') }}
@@ -41,9 +43,11 @@
 
                     <ul class="text-gray-600 dark:text-gray-400">
                         <li class="mb-4">
-                            <a href="#" class="hover:underline ">
-                                {{ __('My Profile') }}
-                            </a>
+                            @auth
+                                <a href="{{ route('profile.show', Auth::user()->id) }}" class="hover:underline ">
+                                    {{ __('My Profile') }}
+                                </a>
+                            @endauth
                         </li>
                         <li class="mb-4">
                             <a href="{{ route('login') }}" class="hover:underline">
