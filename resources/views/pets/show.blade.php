@@ -1,5 +1,5 @@
 <x-app-layout>
-    <section class="bg-white">
+    <section>
         <div class="mx-auto max-w-screen-xl px-4 py-8">
             <div class="grid lg:grid-cols-10 gap-8">
                 <!-- Carousel -->
