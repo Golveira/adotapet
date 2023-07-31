@@ -27,7 +27,6 @@ class ProfileService
         );
 
         if ($image) {
-            $user->clearMediaCollection('avatars');
             $user->addMedia($image)->toMediaCollection('avatars');
         }
     }
