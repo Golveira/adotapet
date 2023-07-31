@@ -43,7 +43,7 @@ class ProfileController extends Controller
 
         toast(__('profile.updated'), 'success');
 
-        return Redirect::route('profile.edit');
+        return Redirect::route('profile.show', $request->user()->username);
     }
 
     public function destroy(Request $request): RedirectResponse
