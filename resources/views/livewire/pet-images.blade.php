@@ -1,4 +1,4 @@
-<section class="bg-white mb-10">
+<section class="mb-10">
     <div class="mx-auto max-w-screen-xl px-4 py-8">
         <h2 class="mb-10 text-3xl tracking-tight font-extrabold text-gray-900">
             {{ __('Photos of') }} {{ $pet->name }}
