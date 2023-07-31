@@ -62,4 +62,12 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->getFirstMediaUrl('avatars');
     }
+
+    public function registerMediaCollections(): void
+    {
+        $this
+            ->addMediaCollection('avatars')
+            ->useFallbackUrl(asset('assets/images/user.png'))
+            ->singleFile();
+    }
 }
