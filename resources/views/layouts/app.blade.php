@@ -23,7 +23,7 @@
 <body class="font-sans antialiased">
     @include('sweetalert::alert')
 
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen bg-gray-50">
         @include('layouts.navigation')
 
         <!-- Page Heading -->
