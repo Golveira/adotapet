@@ -7,7 +7,9 @@
     <a href="{{ route('pets.show', $pet->id) }}" class="absolute inset-0 bg-gradient-to-t from-black opacity-60">
     </a>
 
-    <livewire:bookmark :pet="$pet" />
+    @auth
+        <livewire:bookmark :pet="$pet" />
+    @endauth
 
     <div class="absolute bottom-0 inset-x-0 ml-5 mb-5">
         <a href="{{ route('pets.show', $pet->id) }}"
