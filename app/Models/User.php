@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable implements HasMedia
 {
@@ -56,6 +57,11 @@ class User extends Authenticatable implements HasMedia
     public function pets(): HasMany
     {
         return $this->hasMany(Pet::class);
+    }
+
+    public function bookmarks(): BelongsToMany
+    {
+        return $this->belongsToMany(Pet::class, 'bookmarks');
     }
 
     public function getAvatarAttribute(): string
