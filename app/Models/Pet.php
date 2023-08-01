@@ -58,6 +58,11 @@ class Pet extends Model implements HasMedia
         return $this->belongsToMany(VeterinaryCare::class);
     }
 
+    public function bookmarks(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'bookmarks');
+    }
+
     public function getAddressAttribute(): string
     {
         return "{$this->city->title} - {$this->state->letter}";
