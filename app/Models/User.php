@@ -64,6 +64,11 @@ class User extends Authenticatable implements HasMedia
         return $this->belongsToMany(Pet::class, 'bookmarks');
     }
 
+    public function isBookmarked(Pet $pet): bool
+    {
+        return $this->bookmarks->contains($pet);
+    }
+
     public function getAvatarAttribute(): string
     {
         return $this->getFirstMediaUrl('avatars');
