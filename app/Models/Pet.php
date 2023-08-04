@@ -63,6 +63,23 @@ class Pet extends Model implements HasMedia
         return $this->belongsToMany(User::class, 'bookmarks');
     }
 
+    public function scopeFilter($query, array $filters)
+    {
+        return $query->where('name', 'like', '%' . $filters['name'] . '%')
+            ->where('specie', 'like', '%' . $filters['specie'] . '%')
+            ->where('age', 'like', '%' . $filters['age'] . '%')
+            ->where('size', 'like', '%' . $filters['size'] . '%')
+            ->when($filters['sex'], function ($query, $sex) {
+                return $query->where('sex', $sex);
+            })
+            ->when($filters['stateId'], function ($query, $stateId) {
+                return $query->where('state_id', $stateId);
+            })
+            ->when($filters['cityId'], function ($query, $cityId) {
+                return $query->where('city_id', $cityId);
+            });
+    }
+
     public function getAddressAttribute(): string
     {
         return "{$this->city->title} - {$this->state->letter}";
