@@ -3,27 +3,27 @@
         <x-card>
             <div class="mb-5">
                 <x-input-label class="mb-3 text-lg" for="specie" :value="__('Specie')" />
-                <x-specie-select wire:model="specie" placeholder="{{ __('All species') }}" />
+                <x-specie-select wire:model="filters.specie" placeholder="{{ __('All species') }}" />
             </div>
 
             <div class="mb-5">
                 <x-input-label class="mb-3 text-lg" for="sex" :value="__('Sex')" />
-                <x-sex-select wire:model="sex" placeholder="{{ __('All sex') }}" />
+                <x-sex-select wire:model="filters.sex" placeholder="{{ __('All sex') }}" />
             </div>
 
             <div class="mb-5">
                 <x-input-label class="mb-3 text-lg" for="size" :value="__('Size')" />
-                <x-size-select wire:model="size" placeholder="{{ __('All sizes') }}" />
+                <x-size-select wire:model="filters.size" placeholder="{{ __('All sizes') }}" />
             </div>
 
             <div class="mb-5">
                 <x-input-label class="mb-3 text-lg" for="age" :value="__('Age')" />
-                <x-age-select wire:model="age" placeholder="{{ __('All ages') }}" />
+                <x-age-select wire:model="filters.age" placeholder="{{ __('All ages') }}" />
             </div>
 
             <div class="mb-5">
                 <x-input-label class="mb-3 text-lg" for="state" :value="__('State')" />
-                <x-select wire:model="stateId" id="state">
+                <x-select wire:model="filters.stateId" id="state">
                     <option value>{{ __('Any state') }}</option>
 
                     @foreach ($states as $state)
@@ -36,7 +36,7 @@
 
             <div class="mb-5">
                 <x-input-label class="mb-3 text-lg" for="city" :value="__('City')" />
-                <x-select wire:model="cityId" id="city">
+                <x-select wire:model="filters.cityId" id="city">
                     <option value>{{ __('Any city') }}</option>
 
                     @foreach ($cities as $city)
@@ -49,7 +49,7 @@
 
             <div class="mb-5">
                 <x-input-label class="mb-3 text-lg" for="name" :value="__('Name')" />
-                <x-text-input wire:model.lazy="name" id="name" placeholder="{{ __('Pet name') }}" />
+                <x-text-input wire:model.lazy="filters.name" id="name" placeholder="{{ __('Pet name') }}" />
             </div>
         </x-card>
     </div>
