@@ -57,8 +57,7 @@
     <div class="lg:col-span-9 md:col-span-5 col-span-10" wire:loading.delay.class="opacity-50">
         <div class="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-6">
             @forelse ($pets as $pet)
-                <x-pet-card :pet="$pet" />
-
+                <livewire:pet-card wire:key="item-{{ $pet->id }}" :pet="$pet" />
             @empty
                 <div class="col-span-4 text-center text-xl">
                     {{ __('No pets found') }}
