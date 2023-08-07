@@ -43,7 +43,7 @@
 
             <div class="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 @foreach ($pets as $pet)
-                    <x-pet-card :pet="$pet" />
+                    <livewire:pet-card wire:key="item-{{ $pet->id }}" :pet="$pet" />
                 @endforeach
             </div>
 
