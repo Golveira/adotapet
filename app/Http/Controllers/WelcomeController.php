@@ -9,13 +9,11 @@ class WelcomeController extends Controller
 {
     public function __invoke()
     {
-        $user = Auth::user();
-
         $pets = Pet::latest()
-            ->with(['media', 'city', 'state'])
+            ->with(['media', 'city:id,title', 'state:id,letter'])
             ->limit(8)
             ->get();
 
-        return view('welcome', compact('pets', 'user'));
+        return view('welcome', compact('pets'));
     }
 }
