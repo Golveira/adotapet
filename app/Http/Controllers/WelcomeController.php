@@ -9,19 +9,13 @@ class WelcomeController extends Controller
 {
     public function __invoke()
     {
-        $bookmarks = Auth::user()
-            ->bookmarks()
-            ->pluck('pets.id');
+        $user = Auth::user();
 
         $pets = Pet::latest()
             ->with(['media', 'city', 'state'])
             ->limit(8)
-            ->get()
-            ->map(function ($pet) use ($bookmarks) {
-                $pet->is_bookmarked = $bookmarks->contains($pet->id);
-                return $pet;
-            });
+            ->get();
 
-        return view('welcome', compact('pets'));
+        return view('welcome', compact('pets', 'user'));
     }
 }
