@@ -7,7 +7,6 @@ use App\Models\City;
 use App\Models\State;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Illuminate\Support\Facades\Auth;
 
 class ShowPets extends Component
 {
@@ -55,6 +54,7 @@ class ShowPets extends Component
         $filters = ['userId' => $this->userId, ...$this->filters];
 
         $pets = Pet::query()
+            ->latest()
             ->with(['media', 'city:id,title', 'state:id,letter'])
             ->filter($filters)
             ->paginate(18);
