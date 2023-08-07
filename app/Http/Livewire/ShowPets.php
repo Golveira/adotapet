@@ -2,31 +2,28 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\City;
 use App\Models\Pet;
+use App\Models\City;
 use App\Models\State;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
 
 class ShowPets extends Component
 {
     use WithPagination;
 
+    public $filters = [
+        'name' => '',
+        'specie' => '',
+        'sex' => '',
+        'age' => '',
+        'size' => '',
+        'stateId' => '',
+        'cityId' => '',
+    ];
+
     public $userId;
-
-    public $specie = '';
-
-    public $sex = '';
-
-    public $age = '';
-
-    public $size = '';
-
-    public $name = '';
-
-    public $stateId;
-
-    public $cityId;
 
     public $states;
 
@@ -46,30 +43,20 @@ class ShowPets extends Component
         $this->resetPage();
     }
 
-    public function updatedStateId($stateId)
+    public function updatedFiltersStateId($stateId)
     {
-        $this->cities = City::where('state_id', $stateId)->get(['id', 'title']);
+        $this->cities = City::query()
+            ->where('state_id', $stateId)
+            ->get(['id', 'title']);
     }
 
     public function render()
     {
-        $pets = Pet::with(['media', 'city:id,title', 'state:id,letter'])
-            ->where('name', 'like', '%' . $this->name . '%')
-            ->where('specie', 'like', '%' . $this->specie . '%')
-            ->where('age', 'like', '%' . $this->age . '%')
-            ->where('size', 'like', '%' . $this->size . '%')
-            ->when($this->userId, function ($query, $userId) {
-                return $query->where('user_id', $userId);
-            })
-            ->when($this->sex, function ($query, $sex) {
-                return $query->where('sex', $sex);
-            })
-            ->when($this->stateId, function ($query, $stateId) {
-                return $query->where('state_id', $stateId);
-            })
-            ->when($this->cityId, function ($query, $cityId) {
-                return $query->where('city_id', $cityId);
-            })
+        $filters = ['userId' => $this->userId, ...$this->filters];
+
+        $pets = Pet::query()
+            ->with(['media', 'city:id,title', 'state:id,letter'])
+            ->filter($filters)
             ->paginate(18);
 
         return view('livewire.show-pets', compact('pets'));
