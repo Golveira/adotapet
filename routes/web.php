@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\PetController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Livewire\Favorites;
 use App\Http\Livewire\PetImages;
 
 /*
@@ -22,6 +23,7 @@ Route::get('/', WelcomeController::class)->name('welcome');
 Route::resource('pets', PetController::class);
 
 Route::middleware('auth')->group(function () {
+    Route::get('/favorites', Favorites::class)->name('favorites.index');
     Route::get('pets/{pet}/images', PetImages::class)->name('pets.images');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
