@@ -22,6 +22,8 @@ class PetCard extends Component
         }
 
         Auth::user()->toggleBookmark($this->pet);
+
+        $this->emitUp('refresh');
     }
 
     public function render()
