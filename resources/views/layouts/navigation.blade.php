@@ -31,6 +31,12 @@
 
                     <ul class="py-2" aria-labelledby="user-menu-button">
                         <li>
+                            <x-dropdown-link :href="route('favorites.index')">
+                                {{ __('Favorites') }}
+                            </x-dropdown-link>
+                        </li>
+
+                        <li>
                             <x-dropdown-link :href="route('profile.show', Auth::user()->username)">
                                 {{ __('My Profile') }}
                             </x-dropdown-link>
