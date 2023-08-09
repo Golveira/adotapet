@@ -38,7 +38,8 @@ class PetController extends Controller
 
         toast(__('pets.created'), 'success');
 
-        return redirect()->route('profile.show', Auth::user()->username);
+        return redirect()
+            ->route('profile.show', Auth::user()->username);
     }
 
     public function show(Pet $pet): View
@@ -86,7 +87,8 @@ class PetController extends Controller
 
         toast(__('pets.updated'), 'success');
 
-        return redirect()->route('profile.show', Auth::user()->username);
+        return redirect()
+            ->route('profile.show', Auth::user()->username);
     }
 
     public function destroy(Pet $pet)
@@ -97,6 +99,7 @@ class PetController extends Controller
 
         toast(__('pets.deleted'), 'success');
 
-        return redirect()->route('profile.show', Auth::user()->username);
+        return redirect()
+            ->route('profile.show', Auth::user()->username);
     }
 }
