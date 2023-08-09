@@ -3,7 +3,7 @@
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <x-card class="px-10">
                 <h2 class="text-xl font-bold text-gray-900 text-center">
-                    {{ __('Create Pet') }}
+                    {{ __('Add Pet') }}
                 </h2>
 
                 <form method="post" action="{{ route('pets.store') }}" class="mt-6 space-y-6"
@@ -71,7 +71,7 @@
 
                     <div>
                         <h3 class="font-medium text-sm text-gray-700 mb-2">
-                            {{ __('Temperament') }}
+                            {{ __('Temperaments') }}
                         </h3>
 
                         <x-temperaments-checkboxes :checkedValues="old('temperaments')" />
