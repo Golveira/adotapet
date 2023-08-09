@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Pet;
 use App\Models\User;
+use Illuminate\Support\Arr;
 
 class PetService
 {
@@ -11,17 +12,34 @@ class PetService
     {
         $user = User::find($userId);
 
-        $pet = $user->pets()->create([
-            'name' => $petData['name'],
-            'specie' => $petData['specie'],
-            'sex' => $petData['sex'],
-            'age' => $petData['age'],
-            'size' => $petData['size'],
-            'description' => $petData['description'],
-            'state_id' => $petData['state_id'],
-            'city_id' => $petData['city_id'],
-        ]);
+        $pet = $user
+            ->pets()
+            ->create(Arr::except($petData, [
+                'veterinary_cares',
+                'temperaments',
+                'sociabilities'
+            ]));
 
+        $this->syncRelations($pet, $petData);
+
+        $this->syncMedia($pet, $image);
+    }
+
+    public function update(Pet $pet, array $petData, $image)
+    {
+        $pet->update(Arr::except($petData, [
+            'veterinary_cares',
+            'temperaments',
+            'sociabilities'
+        ]));
+
+        $this->syncRelations($pet, $petData);
+
+        $this->syncMedia($pet, $image);
+    }
+
+    private function syncRelations(Pet $pet, array $petData)
+    {
         $pet->veterinaryCares()
             ->sync($petData['veterinary_cares']);
 
@@ -30,7 +48,10 @@ class PetService
 
         $pet->sociabilities()
             ->sync($petData['sociabilities']);
+    }
 
+    private function syncMedia(Pet $pet, $image)
+    {
         if ($image) {
             $pet->addMedia($image)->toMediaCollection('pets');
         }
