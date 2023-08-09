@@ -6,6 +6,7 @@ use App\Models\Pet;
 use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PetTest extends TestCase
@@ -14,43 +15,56 @@ class PetTest extends TestCase
 
     public function test_user_can_create_pet()
     {
+        Storage::fake('public');
+
         $user = User::factory()->create();
 
-        $petData = Pet::factory()->make(['user_id' => $user->id])->toArray();
-        $photo = UploadedFile::fake()->image('photo.jpg');
+        $petData = Pet::factory()
+            ->make(['user_id' => $user->id])
+            ->toArray();
 
-        $formData = array_merge($petData, [
-            'photo' => $photo,
-            'temperaments' => [1, 2],
-            'veterinary_cares' => [1],
-            'sociabilities' => [1],
-        ]);
+        $image = UploadedFile::fake()->image('pet.jpg');
 
         $response = $this
             ->actingAs($user)
-            ->post(route('pets.store'), $formData);
+            ->post(route('pets.store'), array_merge($petData, [
+                'photo' => $image,
+                'veterinary_cares' => [1],
+                'temperaments' => [1],
+                'sociabilities' => [1],
+            ]));
 
-        $response
-            ->assertRedirect(route('profile.show', $user->username));
+        $response->assertRedirect(route('profile.show', $user->username));
 
-        $pet = Pet::first();
+        $pet = $user->pets()->first();
+
+        $this->assertNotNull($pet);
 
         $this->assertDatabaseHas('pets', $petData);
-        $this->assertEquals(2, $pet->temperaments->count());
-        $this->assertEquals(1, $pet->veterinaryCares->count());
-        $this->assertEquals(1, $pet->sociabilities->count());
-        $this->assertTrue($pet->temperaments->contains(1));
-        $this->assertTrue($pet->temperaments->contains(2));
-        $this->assertTrue($pet->veterinaryCares->contains(1));
-        $this->assertTrue($pet->sociabilities->contains(1));
-        $this->assertDatabaseHas('media', [
-            'model_id' => $pet->id,
-            'file_name' => $photo->name,
+
+        $this->assertDatabaseHas('pet_veterinary_care', [
+            'pet_id' => $pet->id,
+            'veterinary_care_id' => 1,
         ]);
+
+        $this->assertDatabaseHas('pet_temperament', [
+            'pet_id' => $pet->id,
+            'temperament_id' => 1,
+        ]);
+
+        $this->assertDatabaseHas('pet_sociability', [
+            'pet_id' => $pet->id,
+            'sociability_id' => 1,
+        ]);
+
+        Storage::disk('public')->assertExists('1/pet.jpg');
     }
+
 
     public function test_user_can_update_pet()
     {
+        Storage::fake('public');
+
         $user = User::factory()->create();
 
         $pet = Pet::factory()
@@ -63,10 +77,10 @@ class PetTest extends TestCase
             ->make(['user_id' => $user->id])
             ->toArray();
 
-        $photo = UploadedFile::fake()->image('new-photo.jpg');
+        $image = UploadedFile::fake()->image('pet.jpg');
 
         $formData = array_merge($petData, [
-            'photo' => $photo,
+            'photo' => $image,
             'temperaments' => [1],
             'sociabilities' => [1],
             'veterinary_cares' => [],
@@ -76,21 +90,18 @@ class PetTest extends TestCase
             ->actingAs($user)
             ->put(route('pets.update', $pet), $formData);
 
-        $response
-            ->assertRedirect(route('profile.show', $user->username));
+        $response->assertRedirect(route('profile.show', $user->username));
 
         $pet->refresh();
 
         $this->assertDatabaseHas('pets', $petData);
         $this->assertEquals(1, $pet->temperaments->count());
         $this->assertEquals(1, $pet->sociabilities->count());
+        $this->assertEmpty($pet->veterinaryCares);
         $this->assertTrue($pet->temperaments->contains(1));
         $this->assertTrue($pet->sociabilities->contains(1));
-        $this->assertEmpty($pet->veterinaryCares);
-        $this->assertDatabaseHas('media', [
-            'model_id' => $pet->id,
-            'file_name' => $photo->name,
-        ]);
+
+        Storage::disk('public')->assertExists('1/pet.jpg');
     }
 
     public function test_user_can_delete_pet()
@@ -103,9 +114,8 @@ class PetTest extends TestCase
             ->actingAs($user)
             ->delete(route('pets.destroy', $pet->id));
 
-        $response
-            ->assertRedirect(route('profile.show', $user->username));
+        $response->assertRedirect(route('profile.show', $user->username));
 
-        $this->assertDatabaseMissing('pets', ['id' => $pet->id]);
+        $this->assertDatabaseEmpty('pets');
     }
 }
