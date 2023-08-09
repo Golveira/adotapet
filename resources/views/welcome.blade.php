@@ -16,7 +16,7 @@
                         {{ __('Adopt a pet') }}
                     </x-button>
 
-                    <x-button color="alternative" href="#">
+                    <x-button color="alternative" href="{{ route('pets.create') }}">
                         {{ __('Promote a pet') }}
                     </x-button>
                 </div>
