@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->string('size');
             $table->text('description')->nullable();
             $table->boolean('is_adopted')->nullable()->default(false);
-            $table->boolean('is_visible')->nullable()->default(true);
+            $table->boolean('is_visible')->nullable()->default(false);
             $table->timestamps();
         });
     }
