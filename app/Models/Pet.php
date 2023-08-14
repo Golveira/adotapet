@@ -63,6 +63,11 @@ class Pet extends Model implements HasMedia
         return $this->belongsToMany(User::class, 'bookmarks');
     }
 
+    public function scopeApproved($query)
+    {
+        return $query->where('is_visible', true);
+    }
+
     public function scopeFilter($query, array $filters)
     {
         return $query->where('name', 'like', '%' . $filters['name'] . '%')
