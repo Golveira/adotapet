@@ -1,6 +1,13 @@
 <x-app-layout>
     <section>
         <div class="mx-auto max-w-screen-xl px-4 py-8">
+            <!-- Alert -->
+            @if (!$pet->is_visible)
+                <x-alert type="warning">
+                    {{ __('This pet is awaiting for aproval by the administrator and will be available soon for adoption.') }}
+                </x-alert>
+            @endif
+
             <div class="grid lg:grid-cols-10 gap-8">
                 <!-- Carousel -->
                 <div class="lg:col-span-6">
@@ -117,10 +124,33 @@
                             </div>
                         </div>
 
+                        <!-- Adoption actions -->
                         <div class="flex">
-                            <x-button href="#" class="text-center w-full">
-                                {{ __('Adopt') }}
-                            </x-button>
+                            @can('adopt', $pet)
+                                <x-button href="#" class="text-center w-full">
+                                    {{ __('Adopt') }}
+                                </x-button>
+                            @else
+                                <div class="w-full">
+                                    @if ($pet->is_adopted)
+                                        <form action="{{ route('pets.mark-as-available', $pet->id) }}" method="POST">
+                                            @csrf
+
+                                            <x-button type="submit" color="yellow" class="text-center w-full">
+                                                {{ __('Mark as available') }}
+                                            </x-button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('pets.mark-as-adopted', $pet->id) }}" method="POST">
+                                            @csrf
+
+                                            <x-button type="submit" color="green" class="text-center w-full">
+                                                {{ __('Mark as adopted') }}
+                                            </x-button>
+                                        </form>
+                                    @endif
+                                </div>
+                            @endcan
                         </div>
                     </x-card>
                 </div>
