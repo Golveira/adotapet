@@ -54,9 +54,12 @@ class ShowPets extends Component
         $filters = ['userId' => $this->userId, ...$this->filters];
 
         $pets = Pet::query()
-            ->latest()
+            ->when(!$this->userId, function ($query, $userId) {
+                $query->approved();
+            })
             ->with(['media', 'city:id,title', 'state:id,letter'])
             ->filter($filters)
+            ->latest()
             ->paginate(18);
 
         return view('livewire.show-pets', compact('pets'));
