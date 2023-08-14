@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\Auth\PasswordController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\User\PetController;
-use App\Http\Controllers\WelcomeController;
 use App\Http\Livewire\Favorites;
 use App\Http\Livewire\PetImages;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\User\PetController;
+use App\Http\Controllers\Auth\PasswordController;
+use App\Http\Controllers\User\PetAvailabilityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +25,14 @@ Route::resource('pets', PetController::class);
 
 Route::middleware('auth')->group(function () {
     Route::get('/favorites', Favorites::class)->name('favorites.index');
-    Route::get('pets/{pet}/images', PetImages::class)->name('pets.images');
+
+    Route::get('/pets/{pet}/images', PetImages::class)->name('pets.images');
+
+    Route::post('/pets/{pet}/mark-as-available', [PetAvailabilityController::class, 'markAsAvailable'])
+        ->name('pets.mark-as-available');
+
+    Route::post('/pets/{pet}/mark-as-adopted', [PetAvailabilityController::class, 'markAsAdopted'])
+        ->name('pets.mark-as-adopted');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('/profile/password', [PasswordController::class, 'edit'])->name('profile.password.edit');
