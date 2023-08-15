@@ -24,7 +24,7 @@
             <div class="mb-5">
                 <x-input-label class="mb-3 text-lg" for="state" :value="__('State')" />
                 <x-select wire:model="filters.stateId" id="state">
-                    <option value>{{ __('Any state') }}</option>
+                    <option value>{{ __('All states') }}</option>
 
                     @foreach ($states as $state)
                         <option value="{{ $state->id }}">
@@ -37,7 +37,7 @@
             <div class="mb-5">
                 <x-input-label class="mb-3 text-lg" for="city" :value="__('City')" />
                 <x-select wire:model="filters.cityId" id="city">
-                    <option value>{{ __('Any city') }}</option>
+                    <option value>{{ __('All cities') }}</option>
 
                     @foreach ($cities as $city)
                         <option value="{{ $city->id }}">
