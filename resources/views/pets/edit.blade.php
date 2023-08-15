@@ -11,8 +11,19 @@
                     @csrf
                     @method('PUT')
 
+                    <div class="flex items-center">
+                        <div class="mr-10">
+                            <x-avatar class="border h-20 w-20" :avatar="$pet->main_photo" />
+                        </div>
+
+                        <div class="flex flex-col grow">
+                            <x-file-input id="avatar" name="avatar" />
+                            <x-input-error class="mt-2" :messages="$errors->get('avatar')" />
+                        </div>
+                    </div>
+
                     <div>
-                        <x-input-label for="name" :value="__('Name')" />
+                        <x-input-label for="name" value="{{ __('Name') }}*" />
                         <x-text-input id="name" name="name" type="text" class="mt-1 block w-full"
                             value="{{ $pet->name }}" autofocus autocomplete="name" />
                         <x-input-error class="mt-2" :messages="$errors->get('name')" />
@@ -20,13 +31,13 @@
 
                     <div class="grid lg:grid-cols-2 gap-4">
                         <div>
-                            <x-input-label for="specie" :value="__('Specie')" />
+                            <x-input-label for="specie" value="{{ __('Specie') }}*" />
                             <x-specie-select name="specie" :selected="$pet->specie" />
                             <x-input-error class="mt-2" :messages="$errors->get('specie')" />
                         </div>
 
                         <div>
-                            <x-input-label for="sex" :value="__('Sex')" />
+                            <x-input-label for="sex" value="{{ __('Sex') }}*" />
                             <x-sex-select name="sex" :selected="$pet->sex" />
                             <x-input-error class="mt-2" :messages="$errors->get('sex')" />
                         </div>
@@ -34,29 +45,19 @@
 
                     <div class="grid lg:grid-cols-2 gap-4">
                         <div>
-                            <x-input-label for="age" :value="__('Age')" />
+                            <x-input-label for="age" value="{{ __('Age') }}*" />
                             <x-age-select name="age" :selected="$pet->age" />
                             <x-input-error class="mt-2" :messages="$errors->get('age')" />
                         </div>
 
                         <div>
-                            <x-input-label for="size" :value="__('Size')" />
+                            <x-input-label for="size" value="{{ __('Size') }}*" />
                             <x-size-select name="size" :selected="$pet->size" />
                             <x-input-error class="mt-2" :messages="$errors->get('size')" />
                         </div>
                     </div>
 
                     <livewire:city-state-select :stateId="$pet->state_id" :cityId="$pet->city_id" />
-
-                    <div class="flex items-end">
-                        <div class="grow mr-5">
-                            <x-input-label for="photo" :value="__('Main photo')" />
-                            <x-file-input id="photo" name="photo" />
-                            <x-input-error class="mt-2" :messages="$errors->get('photo')" />
-                        </div>
-
-                        <x-avatar :avatar="$pet->main_photo" />
-                    </div>
 
                     <div>
                         <x-input-label for="description" :value="__('About the pet')" />
