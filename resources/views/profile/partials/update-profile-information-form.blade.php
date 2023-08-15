@@ -13,8 +13,19 @@
         @csrf
         @method('patch')
 
+        <div class="flex items-end">
+            <div class="mr-10">
+                <x-avatar class="border w-20 h-20" :avatar="$user->avatar" />
+            </div>
+
+            <div class="flex flex-col grow">
+                <x-file-input id="avatar" name="avatar" />
+                <x-input-error class="mt-2" :messages="$errors->get('avatar')" />
+            </div>
+        </div>
+
         <div>
-            <x-input-label for="name" :value="__('Name')" />
+            <x-input-label for="name" value="{{ __('Name') }}*" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)"
                 required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
@@ -72,16 +83,6 @@
             <x-text-input id="location" name="location" type="text" class="mt-1 block w-full" :value="old('location', $user->profile?->location)"
                 autofocus autocomplete="location" />
             <x-input-error class="mt-2" :messages="$errors->get('location')" />
-        </div>
-
-        <div class="flex items-end">
-            <div class="grow mr-5">
-                <x-input-label for="avatar" :value="__('Avatar')" />
-                <x-file-input id="avatar" name="avatar" />
-                <x-input-error class="mt-2" :messages="$errors->get('avatar')" />
-            </div>
-
-            <x-avatar :avatar="$user->avatar" />
         </div>
 
         <div>
