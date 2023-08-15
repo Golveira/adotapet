@@ -3,6 +3,10 @@
         <h2 class="text-lg font-medium text-gray-900">
             {{ __('Delete Account') }}
         </h2>
+
+        <p class="mt-1 text-sm text-gray-600">
+            {{ __('All your pets and data will be permanently deleted from the site.') }}
+        </p>
     </header>
 
     <x-button color="red" x-data="" x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')">
@@ -19,7 +23,7 @@
             </h2>
 
             <p class="mt-1 text-sm text-gray-600">
-                {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
+                {{ __('All your pets and data will be permanently deleted from the site. Please enter your password to confirm you would like to permanently delete your account.') }}
             </p>
 
             <div class="mt-6">
