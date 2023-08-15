@@ -162,7 +162,7 @@
                         <x-card>
                             @if ($pet->description)
                                 <!-- Pet description -->
-                                <div class="mb-5">
+                                <div class="mb-5 border-b pb-5 last:border-b-0 last:pb-0">
                                     <h6 class="text-lg font-bold mb-3">
                                         {{ __('Description') }}
                                     </h6>
@@ -171,13 +171,11 @@
                                         {{ $pet->description }}
                                     </p>
                                 </div>
-
-                                <hr class="h-px my-4 bg-gray-200 border-0">
                             @endif
 
                             @if ($pet->veterinaryCares->count() > 0)
                                 <!-- Veterinary Cares -->
-                                <div class="mb-5">
+                                <div class="mb-5 border-b pb-5 last:border-b-0 last:pb-0">
                                     <h6 class="font-bold mb-3">
                                         {{ __('Vet Info') }}
                                     </h6>
@@ -197,12 +195,11 @@
                                     </div>
                                 </div>
 
-                                <hr class="h-px my-4 bg-gray-200 border-0">
                             @endif
 
                             @if ($pet->sociabilities->count() > 0)
                                 <!-- Sociabilities -->
-                                <div class="mb-5">
+                                <div class="mb-5 border-b pb-5 last:border-b-0 last:pb-0">
                                     <h6 class="font-bold mb-3">
                                         {{ __('Sociable with') }}
                                     </h6>
@@ -222,12 +219,11 @@
                                     </div>
                                 </div>
 
-                                <hr class="h-px my-4 bg-gray-200 border-0">
                             @endif
 
                             @if ($pet->temperaments->count() > 0)
                                 <!-- Temperaments -->
-                                <div class="mb-5">
+                                <div class="mb-5 border-b pb-5 last:border-b-0 last:pb-0">
                                     <h6 class="font-bold mb-3">
                                         {{ __('Temperaments') }}
                                     </h6>
