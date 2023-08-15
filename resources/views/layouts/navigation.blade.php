@@ -13,11 +13,11 @@
                     id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
                     data-dropdown-placement="bottom">
                     <span class="sr-only">Open user menu</span>
-                    <x-avatar :avatar="Auth::user()->avatar" />
+                    <x-avatar class="ring-2 ring-gray-300" :avatar="Auth::user()->avatar" />
                 </button>
 
                 <!-- User menu dropdown -->
-                <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+                <div class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
                     id="user-dropdown">
                     <div class="px-4 py-3">
                         <span class="block text-sm text-gray-900 dark:text-white">
@@ -29,7 +29,7 @@
                         </span>
                     </div>
 
-                    <ul class="py-2" aria-labelledby="user-menu-button">
+                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="user-menu-button">
                         <li>
                             <x-dropdown-link :href="route('favorites.index')">
                                 {{ __('Favorites') }}
@@ -43,29 +43,23 @@
                         </li>
 
                         <li>
-                            <x-dropdown-link :href="route('profile.edit')">
-                                {{ __('Edit Profile') }}
-                            </x-dropdown-link>
-                        </li>
-
-                        <li>
                             <x-dropdown-link :href="route('profile.password.edit')">
                                 {{ __('Change Password') }}
                             </x-dropdown-link>
                         </li>
-
-                        <li>
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-
-                                <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                            this.closest('form').submit();">
-                                    {{ __('Log Out') }}
-                                </x-dropdown-link>
-                            </form>
-                        </li>
                     </ul>
+
+                    <div class="py-2">
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+
+                            <x-dropdown-link :href="route('logout')"
+                                onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </x-dropdown-link>
+                        </form>
+                    </div>
                 </div>
             @endauth
 
