@@ -32,13 +32,19 @@
                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="user-menu-button">
                         <li>
                             <x-dropdown-link :href="route('favorites.index')">
-                                {{ __('Favorites') }}
+                                {{ __('My Favorites') }}
                             </x-dropdown-link>
                         </li>
 
                         <li>
                             <x-dropdown-link :href="route('profile.show', Auth::user()->username)">
-                                {{ __('My Profile') }}
+                                {{ __('My Profile') }} / Pets
+                            </x-dropdown-link>
+                        </li>
+
+                        <li>
+                            <x-dropdown-link :href="route('profile.edit')">
+                                {{ __('Edit Profile') }}
                             </x-dropdown-link>
                         </li>
 
