@@ -3,7 +3,7 @@
         <x-card class="mb-10 p-10">
             <div class="grid lg:grid-cols-2 mb-3 gap-4">
                 <div class="flex items-center">
-                    <x-avatar :avatar="$user->avatar" class="w-20 h-20 rounded-full" />
+                    <x-avatar :avatar="$user->avatar" class="w-20 h-20 rounded-full ring-2 ring-gray-300" />
 
                     <div class="ms-8">
                         <h3 class="text-2xl font-bold">{{ $user->name }}</h3>
