@@ -83,9 +83,15 @@ class Pet extends Model implements HasMedia
             ->when($filters['cityId'], function ($query, $cityId) {
                 return $query->where('city_id', $cityId);
             })
-            ->when($filters['userId'], function ($query, $userId) {
-                return $query->where('user_id', $userId);
-            });
+            ->when(
+                $filters['userId'],
+                function ($query, $userId) {
+                    return $query->where('user_id', $userId);
+                },
+                function ($query) {
+                    return $query->approved();
+                }
+            );
     }
 
     public function getAddressAttribute(): string
