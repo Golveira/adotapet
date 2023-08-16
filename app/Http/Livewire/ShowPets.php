@@ -49,6 +49,26 @@ class ShowPets extends Component
             ->get(['id', 'title']);
     }
 
+    public function getNotEmptyFilters()
+    {
+        return array_filter($this->filters, fn($filter) => $filter !== '');
+    }
+
+    public function filtersNotEmpty()
+    {
+        return !empty($this->getNotEmptyFilters());
+    }
+
+    public function clearFilter($filter)
+    {
+        $this->filters[$filter] = '';
+    }
+
+    public function clearAll()
+    {
+        $this->reset('filters');
+    }
+
     public function render()
     {
         $filters = ['userId' => $this->userId, ...$this->filters];
