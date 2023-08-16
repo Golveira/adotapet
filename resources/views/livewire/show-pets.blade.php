@@ -64,7 +64,7 @@
                 @endforeach
 
                 <x-chips wire:click="clearAllFilters">
-                    {{ __('Clear') }}
+                    {{ __('Clear filters') }}
                 </x-chips>
             </div>
         @endif
