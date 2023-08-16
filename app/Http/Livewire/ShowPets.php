@@ -49,6 +49,16 @@ class ShowPets extends Component
             ->get(['id', 'title']);
     }
 
+    public function getStateProperty()
+    {
+        return State::find($this->filters['stateId']);
+    }
+
+    public function getCityProperty()
+    {
+        return City::find($this->filters['cityId']);
+    }
+
     public function getNotEmptyFilters()
     {
         return array_filter($this->filters, fn($filter) => $filter !== '');
@@ -59,12 +69,13 @@ class ShowPets extends Component
         return !empty($this->getNotEmptyFilters());
     }
 
+
     public function clearFilter($filter)
     {
         $this->filters[$filter] = '';
     }
 
-    public function clearAll()
+    public function clearAllFilters()
     {
         $this->reset('filters');
     }
