@@ -55,15 +55,15 @@
     </div>
 
     <div class="lg:col-span-9 md:col-span-5 col-span-10" wire:loading.delay.class="opacity-50">
-        @if ($this->filtersNotEmpty())
+        @if (!empty($this->getNotEmptyFilters()))
             <div class="mb-4">
-                @foreach ($this->getNotEmptyFilters() as $key => $filter)
+                @foreach ($this->getNotEmptyFilters() as $key => $value)
                     <x-chips wire:click="clearFilter('{{ $key }}')">
-                        {{ __($filter) }}
+                        {{ $this->formatFilter($key, $value) }}
                     </x-chips>
                 @endforeach
 
-                <x-chips wire:click="clearAll">
+                <x-chips wire:click="clearAllFilters">
                     {{ __('Clear') }}
                 </x-chips>
             </div>
