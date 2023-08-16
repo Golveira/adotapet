@@ -59,7 +59,7 @@
             <div class="mb-4">
                 @foreach ($this->getNotEmptyFilters() as $key => $value)
                     <x-chips wire:click="clearFilter('{{ $key }}')">
-                        {{ $this->formatFilter($key, $value) }}
+                        {{ __($this->formatFilter($key, $value)) }}
                     </x-chips>
                 @endforeach
 
