@@ -55,6 +55,20 @@
     </div>
 
     <div class="lg:col-span-9 md:col-span-5 col-span-10" wire:loading.delay.class="opacity-50">
+        <div class="mb-5">
+            @if ($this->filtersNotEmpty())
+                @foreach ($this->getNotEmptyFilters() as $key => $filter)
+                    <x-chips wire:click="clearFilter('{{ $key }}')">
+                        {{ __($filter) }}
+                    </x-chips>
+                @endforeach
+
+                <x-chips wire:click="clearAll">
+                    {{ __('Clear') }}
+                </x-chips>
+            @endif
+        </div>
+
         <div class="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-6">
             @forelse ($pets as $pet)
                 <livewire:pet-card wire:key="item-{{ $pet->id }}" :pet="$pet" />
