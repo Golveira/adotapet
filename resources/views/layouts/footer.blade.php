@@ -2,11 +2,9 @@
     <div class="mx-auto max-w-screen-xl">
         <div class="md:flex md:justify-between">
             <!-- Logo -->
-            <div class="mb-6 md:mb-0">
-                <a href="#" class="flex items-center">
-                    <x-application-logo />
-                </a>
-            </div>
+            <a href="/">
+                <img src="{{ asset('assets/images/logo.png') }}" class="mr-3" alt="Adotapet Logo" />
+            </a>
 
             <!-- Links -->
             <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
