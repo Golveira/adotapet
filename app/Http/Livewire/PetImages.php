@@ -15,7 +15,7 @@ class PetImages extends Component
 
     public $photos = [];
 
-    protected $listeners = ['delete'];
+    protected $listeners = ['delete', 'refresh' => '$refresh'];
 
     protected $rules = [
         'photos' => 'array|max:8',
@@ -45,7 +45,7 @@ class PetImages extends Component
                 ->toMediaCollection('pets-gallery');
         }
 
-        return redirect(request()->header('Referer'));
+        $this->emit('refresh');
     }
 
     public function delete($id)
@@ -54,7 +54,7 @@ class PetImages extends Component
 
         $this->pet->deleteMedia($id);
 
-        return redirect(request()->header('Referer'));
+        $this->emit('refresh');
     }
 
     public function render()
