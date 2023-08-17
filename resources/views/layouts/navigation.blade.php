@@ -2,8 +2,7 @@
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <!-- Logo -->
         <a href="/" class="flex items-center">
-            <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="Flowbite Logo" />
-            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+            <img src="{{ asset('assets/images/logo.png') }}" class="h-8 mr-3" alt="Adotapet Logo" />
         </a>
 
         <div class="flex items-center md:order-2">
