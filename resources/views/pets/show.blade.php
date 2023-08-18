@@ -126,11 +126,7 @@
 
                         <!-- Adoption actions -->
                         <div class="flex">
-                            @can('adopt', $pet)
-                                <x-button href="#" class="text-center w-full">
-                                    {{ __('Adopt') }}
-                                </x-button>
-                            @else
+                            @can('update', $pet)
                                 <div class="w-full">
                                     @if ($pet->is_adopted)
                                         <form action="{{ route('pets.mark-as-available', $pet->id) }}" method="POST">
@@ -150,6 +146,10 @@
                                         </form>
                                     @endif
                                 </div>
+                            @else
+                                <x-button href="#" class="text-center w-full">
+                                    {{ __('Adopt') }}
+                                </x-button>
                             @endcan
                         </div>
                     </x-card>
