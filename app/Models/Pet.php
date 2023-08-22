@@ -68,6 +68,11 @@ class Pet extends Model implements HasMedia
         return $query->where('is_visible', true);
     }
 
+    public function scopeAdopted($query)
+    {
+        return $query->where('is_adopted', true);
+    }
+
     public function scopeFilter($query, array $filters)
     {
         return $query->where('name', 'like', '%' . $filters['name'] . '%')
