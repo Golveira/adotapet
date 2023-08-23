@@ -1,13 +1,12 @@
-<section class="space-y-6">
-    <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Delete Account') }}
-        </h2>
+<div class="p-4 mb-6 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800"
+    id="privacy-settings">
+    <h3 class="mb-2 text-xl font-semibold dark:text-white">
+        {{ __('Delete Account') }}
+    </h3>
 
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __('All your pets and data will be permanently deleted from the site.') }}
-        </p>
-    </header>
+    <p class="mb-4 text-sm text-gray-600">
+        {{ __('All your data will be permanently deleted from the site.') }}
+    </p>
 
     <x-button color="red" x-data="" x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')">
         {{ __('Delete Account') }}
@@ -46,4 +45,4 @@
             </div>
         </form>
     </x-modal>
-</section>
+</div>
