@@ -1,12 +1,15 @@
 <?php
 
+use App\Http\Controllers\Settings\AccountDeletionController;
+use App\Http\Controllers\Settings\EmailUpdateController;
 use App\Http\Livewire\Favorites;
 use App\Http\Livewire\PetImages;
+use App\Http\Controllers\PetController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
-use App\Http\Controllers\PetController;
-use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\PetAvailabilityController;
+use App\Http\Controllers\Settings\ProfileUpdateController;
+use App\Http\Controllers\Settings\PasswordUpdateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,10 +39,31 @@ Route::middleware('auth')->group(function () {
     Route::post('/pets/{pet}/mark-as-adopted', [PetAvailabilityController::class, 'markAsAdopted'])
         ->name('pets.mark-as-adopted');
 
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::get('/profile/password', [PasswordController::class, 'edit'])->name('profile.password.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::prefix('settings')->name('settings.')->group(function () {
+        Route::redirect('/', '/settings/profile');
+
+        Route::get('/profile', [ProfileUpdateController::class, 'edit'])
+            ->name('profile.edit');
+
+        Route::put('/profile', [ProfileUpdateController::class, 'update'])
+            ->name('profile.update');
+
+        Route::get('/email', [EmailUpdateController::class, 'edit'])
+            ->name('email.edit');
+
+        Route::put('/email', [EmailUpdateController::class, 'update'])
+            ->name('email.update');
+
+        Route::get('/password', [PasswordUpdateController::class, 'edit'])
+            ->name('password.edit');
+
+        Route::put('password', [PasswordUpdateController::class, 'update'])
+            ->name('password.update');
+
+        Route::delete('/remove-account', [AccountDeletionController::class, 'destroy'])
+            ->name('account.destroy');
+    });
 });
 
 Route::get('/profile/{username}', [ProfileController::class, 'show'])->name('profile.show');
