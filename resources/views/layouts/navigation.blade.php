@@ -37,19 +37,13 @@
 
                         <li>
                             <x-dropdown-link :href="route('profile.show', Auth::user()->username)">
-                                {{ __('My Profile') }} / Pets
+                                {{ __('My Profile') }}
                             </x-dropdown-link>
                         </li>
 
                         <li>
-                            <x-dropdown-link :href="route('profile.edit')">
-                                {{ __('Edit Profile') }}
-                            </x-dropdown-link>
-                        </li>
-
-                        <li>
-                            <x-dropdown-link :href="route('profile.password.edit')">
-                                {{ __('Change Password') }}
+                            <x-dropdown-link :href="route('settings.profile.edit')">
+                                {{ __('Settings') }}
                             </x-dropdown-link>
                         </li>
                     </ul>
