@@ -12,10 +12,10 @@ class AvatarUpload extends Component
 
     public $user;
 
-    public $avatar;
+    public $photo;
 
     protected $rules = [
-        'avatar' => 'image|max:1024',
+        'photo' => 'image|max:1024',
     ];
 
     protected $listeners = ['refresh' => '$refresh'];
@@ -25,12 +25,12 @@ class AvatarUpload extends Component
         $this->user = Auth::user();
     }
 
-    public function updatedAvatar($avatar)
+    public function updatedPhoto($photo)
     {
         $this->validate();
 
         $this->user
-            ->addMedia($avatar)
+            ->addMedia($photo)
             ->toMediaCollection('avatars');
 
         $this->emit('refresh');
