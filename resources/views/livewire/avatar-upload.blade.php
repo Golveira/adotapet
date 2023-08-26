@@ -12,14 +12,18 @@
                 JPG, JPEG or PNG. {{ __('Max size of') }} 2MB
             </div>
 
-            <div class="flex items-center space-x-4">
-                <label for="avatar"
+            @error('photo')
+                <span class="text-sm text-red-500">{{ $message }}</span>
+            @enderror
+
+            <div class="mt-4 flex items-center space-x-4">
+                <label for="photo"
                     class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 cursor-pointer">
                     <x-icons.upload />
                     {{ __('Upload Picture') }}
                 </label>
 
-                <input wire:model="avatar" type="file" class="hidden" name="avatar" id="avatar">
+                <input wire:model="photo" type="file" class="hidden" name="photo" id="photo">
 
                 <button wire:click="removeAvatar" type="button"
                     class="py-2 px-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
@@ -27,5 +31,6 @@
                 </button>
             </div>
         </div>
+
     </div>
 </div>
