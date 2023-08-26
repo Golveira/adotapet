@@ -15,7 +15,7 @@ class AvatarUpload extends Component
     public $photo;
 
     protected $rules = [
-        'photo' => 'image|max:1024',
+        'photo' => 'image|max:2048',
     ];
 
     protected $listeners = ['refresh' => '$refresh'];
