@@ -109,7 +109,7 @@ return [
         'numbers' => 'O campo :attribute deve conter pelo menos um número.',
         'symbols' => 'O campo :attribute deve conter pelo menos um símbolo.',
         'uncompromised' => 'A senha que você inseriu em :attribute está em um vazamento de dados.'
-            .' Por favor escolha uma senha diferente.',
+        . ' Por favor escolha uma senha diferente.',
     ],
     'present' => 'O campo :attribute deve estar presente.',
     'regex' => 'O campo :attribute tem um formato inválido.',
@@ -154,6 +154,15 @@ return [
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
+        ],
+        'state_id' => [
+            'required' => 'O campo estado é obrigatório.',
+        ],
+        'city_id' => [
+            'required' => 'O campo cidade é obrigatório.',
+        ],
+        'photo' => [
+            'max' => 'A foto não pode ser maior que 1 MB.',
         ],
     ],
 
@@ -204,7 +213,7 @@ return [
         'text' => 'texto',
         'time' => 'hora',
         'title' => 'título',
-        'username' => 'usuário',
+        'username' => 'apelido',
         'year' => 'ano',
         'description' => 'descrição',
         'password_confirmation' => 'confirmação da senha',
@@ -214,6 +223,8 @@ return [
         'category' => 'categoria',
         'blood_type' => 'tipo sanguíneo',
         'birth_date' => 'data de nascimento',
+        'specie' => 'espécie',
+        'size' => 'porte',
+        'photo' => 'foto',
     ],
-
 ];
