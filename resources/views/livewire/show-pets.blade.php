@@ -2,6 +2,11 @@
     <div class="lg:col-span-3 md:col-span-5 col-span-10">
         <x-card>
             <div class="mb-5">
+                <x-input-label class="mb-3 text-lg" for="name" :value="__('Name')" />
+                <x-text-input wire:model.lazy="filters.name" id="name" placeholder="{{ __('Pet name') }}" />
+            </div>
+
+            <div class="mb-5">
                 <x-input-label class="mb-3 text-lg" for="specie" :value="__('Specie')" />
                 <x-specie-select wire:model="filters.specie" placeholder="{{ __('All species') }}" />
             </div>
@@ -45,11 +50,6 @@
                         </option>
                     @endforeach
                 </x-select>
-            </div>
-
-            <div class="mb-5">
-                <x-input-label class="mb-3 text-lg" for="name" :value="__('Name')" />
-                <x-text-input wire:model.lazy="filters.name" id="name" placeholder="{{ __('Pet name') }}" />
             </div>
         </x-card>
     </div>
