@@ -1,7 +1,7 @@
 <nav class="bg-white border-b-2 border-gray-100 dark:bg-gray-900">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <!-- Logo -->
-        <a href="/" class="flex items-center">
+        <a href="{{ route('welcome') }}" class="flex items-center">
             <img src="{{ asset('assets/images/logo.png') }}" class="h-8 mr-3" alt="Adotapet Logo" />
         </a>
 
@@ -12,7 +12,7 @@
                     id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
                     data-dropdown-placement="bottom">
                     <span class="sr-only">Open user menu</span>
-                    <x-avatar class="ring-2 ring-gray-300" :avatar="Auth::user()->avatar" />
+                    <x-avatar class="rounded-full ring-2 ring-gray-300" :avatar="Auth::user()->avatar" />
                 </button>
 
                 <!-- User menu dropdown -->
