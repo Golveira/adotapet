@@ -1,5 +1,6 @@
 import defaultTheme from "tailwindcss/defaultTheme";
 import forms from "@tailwindcss/forms";
+import colors from "tailwindcss/colors";
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -9,10 +10,17 @@ export default {
         "./resources/views/**/*.blade.php",
     ],
 
+    presets: [
+        require("./vendor/power-components/livewire-powergrid/tailwind.config.js"),
+    ],
+
     theme: {
         extend: {
             fontFamily: {
                 sans: ["Figtree", ...defaultTheme.fontFamily.sans],
+            },
+            colors: {
+                "pg-primary": colors.gray,
             },
         },
     },
