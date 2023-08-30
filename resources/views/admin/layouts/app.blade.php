@@ -15,14 +15,13 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    @livewireStyles
-
     @stack('styles')
+
+    @livewireStyles
 </head>
 
 <body class="font-sans antialiased">
     @include('sweetalert::alert')
-
     @include('admin.layouts.header')
 
     <div class="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
@@ -36,10 +35,10 @@
         </div>
     </div>
 
-    @livewireScripts
-
     @stack('modals')
     @stack('scripts')
+
+    @livewireScripts
 </body>
 
 </html>
