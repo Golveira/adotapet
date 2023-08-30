@@ -4,14 +4,14 @@
     <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
         <ul class="space-y-2 font-medium">
             <li>
-                <x-sidebar-link href="{{ route('admin.home') }}">
+                <x-sidebar-link href="{{ route('admin.home') }}" :active="request()->routeIs('admin.home')">
                     <x-icons.chart-pie />
                     <span class="ml-3">Dashboard</span>
                 </x-sidebar-link>
             </li>
 
             <li>
-                <x-sidebar-link href="{{ route('admin.home') }}">
+                <x-sidebar-link href="{{ route('admin.users.index') }}" :active="request()->routeIs('admin.users.index')">
                     <x-icons.users />
                     <span class="ml-3">{{ __('Users') }}</span>
                 </x-sidebar-link>
