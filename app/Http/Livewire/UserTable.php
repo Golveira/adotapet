@@ -167,7 +167,7 @@ final class UserTable extends PowerGridComponent
     {
         return [
             Button::add('user-actions')
-                ->bladeComponent('user-actions', ['userId' => 'id']),
+                ->bladeComponent('users.actions', ['userId' => 'id']),
         ];
     }
 
