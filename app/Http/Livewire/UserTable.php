@@ -84,13 +84,8 @@ final class UserTable extends PowerGridComponent
         return PowerGrid::columns()
             ->addColumn('id')
             ->addColumn('name')
-
-            /** Example of custom column using a closure **/
-            ->addColumn('name_lower', fn(User $model) => strtolower(e($model->name)))
-
             ->addColumn('email')
             ->addColumn('username')
-
             ->addColumn(
                 'created_at_formatted',
                 fn(User $model) => Carbon::parse($model->created_at)->format('d/m/Y ')
@@ -142,10 +137,10 @@ final class UserTable extends PowerGridComponent
     public function filters(): array
     {
         return [
-            // Filter::inputText('name')->operators(['contains']),
-            // Filter::inputText('email')->operators(['contains']),
-            // Filter::inputText('username')->operators(['contains']),
-            // Filter::datetimepicker('created_at'),
+            Filter::inputText('name')->operators(['contains']),
+            Filter::inputText('email')->operators(['contains']),
+            Filter::inputText('username')->operators(['contains']),
+            Filter::datetimepicker('created_at'),
         ];
     }
 
@@ -166,35 +161,17 @@ final class UserTable extends PowerGridComponent
     public function actions(): array
     {
         return [
-            Button::add('user-actions')
-                ->bladeComponent('users.actions', ['userId' => 'id']),
+            Button::make('edit', __('Edit'))
+                ->class('text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2')
+                ->route('admin.users.edit', ['user' => 'id']),
+
+            Button::make('delete', __('Delete'))
+                ->class('text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2')
+                ->openModal('modal-delete', [
+                    'modelId' => 'id',
+                    'route' => 'admin.users.destroy',
+                    'confirmationTitle' => 'Are you sure you want to delete the user?',
+                ]),
         ];
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Actions Rules
-    |--------------------------------------------------------------------------
-    | Enable the method below to configure Rules for your Table and Action Buttons.
-    |
-    */
-
-    /**
-     * PowerGrid User Action Rules.
-     *
-     * @return array<int, RuleActions>
-     */
-
-    /*
-    public function actionRules(): array
-    {
-       return [
-
-           //Hide button edit for ID 1
-            Rule::button('edit')
-                ->when(fn($user) => $user->id === 1)
-                ->hide(),
-        ];
-    }
-    */
 }
