@@ -1,6 +1,6 @@
 @props(['selected' => null, 'placeholder' => ''])
 
-<x-select id="specie" :attributes="$attributes">
+<x-forms.select id="specie" :attributes="$attributes">
     <option value selected>{{ __($placeholder) }}</option>
 
     @foreach ($species as $specie)
@@ -8,4 +8,4 @@
             {{ __($specie) }}
         </option>
     @endforeach
-</x-select>
+</x-forms.select>
