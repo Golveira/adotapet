@@ -25,10 +25,10 @@
                 <div class="flex items-center ml-3">
                     <div>
                         <button type="button"
-                            class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-                            aria-expanded="false" data-dropdown-toggle="dropdown-user">
+                            class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                            id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown-user">
                             <span class="sr-only">Open user menu</span>
-                            <x-avatar class="ring-2 ring-gray-300" :avatar="Auth::user()->avatar" />
+                            <x-avatar :avatar="Auth::user()->avatar" class="rounded-full ring-2 ring-gray-300" />
                         </button>
                     </div>
 
@@ -48,12 +48,6 @@
                             <li>
                                 <x-dropdown-link :href="route('admin.home')">
                                     Dashboard
-                                </x-dropdown-link>
-                            </li>
-
-                            <li>
-                                <x-dropdown-link :href="route('admin.home')">
-                                    {{ __('Settings') }}
                                 </x-dropdown-link>
                             </li>
 
