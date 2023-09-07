@@ -4,7 +4,7 @@
     <div class="max-w-6xl mx-auto px-4 pt-6">
         <div class="flex items-center justify-between mb-4">
             <h1 class="text-2xl font-bold">
-                {{ __('Show User') }}
+                {{ __('User Details') }}
             </h1>
 
             <div class="flex gap-2">
