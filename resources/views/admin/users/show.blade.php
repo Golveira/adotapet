@@ -36,13 +36,13 @@
                 </div>
 
                 <div class="flex flex-col gap-2">
-                    <div class="font-bold">{{ __('Role') }}</div>
+                    <div class="font-bold">{{ __('Administrator') }}</div>
                     <div>
                         @if ($user->is_admin)
-                            <x-badge color="red">{{ __('Admin') }}</x-badge>
+                            <x-badge color="red">{{ __('yes') }}</x-badge>
                         @else
                             <x-badge>
-                                {{ __('User') }}
+                                {{ __('no') }}
                             </x-badge>
                         @endif
                     </div>
@@ -51,6 +51,11 @@
                 <div class="flex flex-col gap-2">
                     <span class="font-bold">{{ __('Created at') }}</span>
                     <span>{{ $user->created_at->format('d/m/Y') }}</span>
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <span class="font-bold">{{ __('Updated at') }}</span>
+                    <span>{{ $user->updated_at->format('d/m/Y') }}</span>
                 </div>
             </div>
         </x-card>
