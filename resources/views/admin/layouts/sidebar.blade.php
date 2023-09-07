@@ -18,7 +18,7 @@
             </li>
 
             <li>
-                <x-sidebar-link href="{{ route('admin.home') }}">
+                <x-sidebar-link href="{{ route('admin.pets.index') }}" :active="request()->routeIs('admin.pets.index')">
                     <x-icons.paw />
                     <span class="ml-3">Pets</span>
                 </x-sidebar-link>
