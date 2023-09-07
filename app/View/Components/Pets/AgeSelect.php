@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Pets;
 
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -12,6 +12,6 @@ class AgeSelect extends Component
     {
         $ages = ['puppy', 'adult', 'senior'];
 
-        return view('components.age-select', compact('ages'));
+        return view('components.pets.age-select', compact('ages'));
     }
 }

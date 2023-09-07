@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Pets;
 
 use Closure;
 use App\Models\Sociability;
@@ -13,6 +13,6 @@ class SociabilitiesCheckboxes extends Component
     {
         $sociabilities = Sociability::get(['id', 'name']);
 
-        return view('components.sociabilities-checkboxes', compact('sociabilities'));
+        return view('components.pets.sociabilities-checkboxes', compact('sociabilities'));
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Pets;
 
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -12,6 +12,6 @@ class SexSelect extends Component
     {
         $sexOptions = ['male', 'female'];
 
-        return view('components.sex-select', compact('sexOptions'));
+        return view('components.pets.sex-select', compact('sexOptions'));
     }
 }

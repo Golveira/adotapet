@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Pets;
 
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -12,6 +12,6 @@ class SizeSelect extends Component
     {
         $sizes = ['small', 'medium', 'large'];
 
-        return view('components.size-select', compact('sizes'));
+        return view('components.pets.size-select', compact('sizes'));
     }
 }

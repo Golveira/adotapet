@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Pets;
 
 use Closure;
 use App\Models\Temperament;
@@ -13,6 +13,6 @@ class TemperamentsCheckboxes extends Component
     {
         $temperaments = Temperament::get(['id', 'name']);
 
-        return view('components.temperaments-checkboxes', compact('temperaments'));
+        return view('components.pets.temperaments-checkboxes', compact('temperaments'));
     }
 }

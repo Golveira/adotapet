@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Pets;
 
 use Closure;
 use App\Models\VeterinaryCare;
@@ -13,6 +13,6 @@ class VeterinaryCaresCheckboxes extends Component
     {
         $veterinaryCares = VeterinaryCare::get(['id', 'name']);
 
-        return view('components.veterinary-cares-checkboxes', compact('veterinaryCares'));
+        return view('components.pets.veterinary-cares-checkboxes', compact('veterinaryCares'));
     }
 }

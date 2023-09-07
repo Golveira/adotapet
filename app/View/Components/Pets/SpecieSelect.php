@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Pets;
 
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -12,6 +12,6 @@ class SpecieSelect extends Component
     {
         $species = ['dog', 'cat'];
 
-        return view('components.specie-select', compact('species'));
+        return view('components.pets.specie-select', compact('species'));
     }
 }
