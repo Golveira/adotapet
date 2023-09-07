@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <x-card>
+        <x-card class="mb-12">
             <div class="grid grid-cols-2 gap-6">
                 <div class="flex flex-col gap-2">
                     <span class="font-bold">{{ __('Name') }}</span>
@@ -54,5 +54,14 @@
                 </div>
             </div>
         </x-card>
+
+
+        <div>
+            <h1 class="text-xl font-bold mb-4">
+                {{ __('Pets') }}
+            </h1>
+
+            <livewire:pet-table :userId="$user->id" />
+        </div>
     </div>
 @endsection
