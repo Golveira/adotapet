@@ -15,6 +15,8 @@ final class UserTable extends PowerGridComponent
     use ActionButton;
     use WithExport;
 
+    public bool $deferLoading = true;
+
     /*
     |--------------------------------------------------------------------------
     |  Features Setup
@@ -88,7 +90,7 @@ final class UserTable extends PowerGridComponent
             ->addColumn('username')
             ->addColumn(
                 'created_at_formatted',
-                fn(User $model) => Carbon::parse($model->created_at)->format('d/m/Y ')
+                fn (User $model) => Carbon::parse($model->created_at)->format('d/m/Y ')
             );
     }
 
@@ -161,17 +163,8 @@ final class UserTable extends PowerGridComponent
     public function actions(): array
     {
         return [
-            Button::make('edit', __('Edit'))
-                ->class('text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2')
-                ->route('admin.users.edit', ['user' => 'id']),
-
-            Button::make('delete', __('Delete'))
-                ->class('text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2')
-                ->openModal('modal-delete', [
-                    'modelId' => 'id',
-                    'route' => 'admin.users.destroy',
-                    'confirmationTitle' => 'Are you sure you want to delete the user?',
-                ]),
+            Button::add('actions')
+            ->bladeComponent('users.actions', ['userId' => 'id']),
         ];
     }
 }
