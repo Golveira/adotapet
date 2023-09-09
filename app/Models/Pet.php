@@ -11,7 +11,8 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Pet extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia;
+    use HasFactory;
+    use InteractsWithMedia;
 
     protected $fillable = [
         'user_id',
@@ -122,6 +123,13 @@ class Pet extends Model implements HasMedia
     public function getImagesAttribute()
     {
         return $this->getMedia('*');
+    }
+
+    public function getVeterinaryCaresIdAttribute()
+    {
+        return $this->veterinaryCares()
+            ->pluck('veterinary_care_id')
+            ->toArray();
     }
 
     public function hasAdditionalInfo(): bool
