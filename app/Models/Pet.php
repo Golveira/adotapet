@@ -64,42 +64,6 @@ class Pet extends Model implements HasMedia
         return $this->belongsToMany(User::class, 'bookmarks');
     }
 
-    public function scopeApproved($query)
-    {
-        return $query->where('is_visible', true);
-    }
-
-    public function scopeAdopted($query)
-    {
-        return $query->where('is_adopted', true);
-    }
-
-    public function scopeFilter($query, array $filters)
-    {
-        return $query->where('name', 'like', '%' . $filters['name'] . '%')
-            ->where('specie', 'like', '%' . $filters['specie'] . '%')
-            ->where('age', 'like', '%' . $filters['age'] . '%')
-            ->where('size', 'like', '%' . $filters['size'] . '%')
-            ->when($filters['sex'], function ($query, $sex) {
-                return $query->where('sex', $sex);
-            })
-            ->when($filters['stateId'], function ($query, $stateId) {
-                return $query->where('state_id', $stateId);
-            })
-            ->when($filters['cityId'], function ($query, $cityId) {
-                return $query->where('city_id', $cityId);
-            })
-            ->when(
-                $filters['userId'],
-                function ($query, $userId) {
-                    return $query->where('user_id', $userId);
-                },
-                function ($query) {
-                    return $query->approved();
-                }
-            );
-    }
-
     public function getAddressAttribute(): string
     {
         return "{$this->city->title} - {$this->state->letter}";
@@ -152,6 +116,42 @@ class Pet extends Model implements HasMedia
             $this->sociabilities->isNotEmpty() ||
             $this->temperaments->isNotEmpty() ||
             $this->veterinaryCares->isNotEmpty();
+    }
+
+    public function scopeApproved($query)
+    {
+        return $query->where('is_visible', true);
+    }
+
+    public function scopeAdopted($query)
+    {
+        return $query->where('is_adopted', true);
+    }
+
+    public function scopeFilter($query, array $filters)
+    {
+        return $query->where('name', 'like', '%' . $filters['name'] . '%')
+            ->where('specie', 'like', '%' . $filters['specie'] . '%')
+            ->where('age', 'like', '%' . $filters['age'] . '%')
+            ->where('size', 'like', '%' . $filters['size'] . '%')
+            ->when($filters['sex'], function ($query, $sex) {
+                return $query->where('sex', $sex);
+            })
+            ->when($filters['stateId'], function ($query, $stateId) {
+                return $query->where('state_id', $stateId);
+            })
+            ->when($filters['cityId'], function ($query, $cityId) {
+                return $query->where('city_id', $cityId);
+            })
+            ->when(
+                $filters['userId'],
+                function ($query, $userId) {
+                    return $query->where('user_id', $userId);
+                },
+                function ($query) {
+                    return $query->approved();
+                }
+            );
     }
 
     public function registerMediaCollections(): void
