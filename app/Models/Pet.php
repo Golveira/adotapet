@@ -132,6 +132,13 @@ class Pet extends Model implements HasMedia
             ->toArray();
     }
 
+    public function getSociabilitiesIdAttribute()
+    {
+        return $this->sociabilities()
+            ->pluck('sociability_id')
+            ->toArray();
+    }
+
     public function hasAdditionalInfo(): bool
     {
         return $this->description ||
