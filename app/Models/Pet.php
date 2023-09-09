@@ -139,6 +139,13 @@ class Pet extends Model implements HasMedia
             ->toArray();
     }
 
+    public function getTemperamentsIdAttribute()
+    {
+        return $this->temperaments()
+            ->pluck('temperament_id')
+            ->toArray();
+    }
+
     public function hasAdditionalInfo(): bool
     {
         return $this->description ||
