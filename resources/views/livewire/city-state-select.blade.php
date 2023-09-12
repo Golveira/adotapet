@@ -1,8 +1,8 @@
-<div class="grid lg:grid-cols-2 gap-4">
+<div class="grid gap-4 lg:grid-cols-2">
     <div>
-        <x-input-label class="mb-3 text-lg" for="state" :value="__('State')" />
+        <x-forms.label for="state" :value="__('State')" />
 
-        <x-forms.select wire:model="stateId" id="state" name="state_id">
+        <x-forms.select id="state" name="state_id" wire:model="stateId">
             <option value>{{ __('Select the state') }}</option>
 
             @foreach ($states as $state)
@@ -12,13 +12,13 @@
             @endforeach
         </x-forms.select>
 
-        <x-input-error class="mt-2" :messages="$errors->get('state_id')" />
+        <x-forms.errors :messages="$errors->get('state_id')" />
     </div>
 
     <div>
-        <x-input-label class="mb-3 text-lg" for="city" :value="__('City')" />
+        <x-forms.label for="city" :value="__('City')" />
 
-        <x-forms.select wire:model.defer="cityId" id="city" name="city_id">
+        <x-forms.select id="city" name="city_id" wire:model.defer="cityId">
             <option value>{{ __('Select the city') }}</option>
 
             @foreach ($cities as $city)
@@ -28,6 +28,6 @@
             @endforeach
         </x-forms.select>
 
-        <x-input-error class="mt-2" :messages="$errors->get('city_id')" />
+        <x-forms.errors :messages="$errors->get('city_id')" />
     </div>
 </div>
