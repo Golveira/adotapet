@@ -3,42 +3,51 @@
 namespace App\Services;
 
 use App\Models\Pet;
-use App\Models\User;
-use Illuminate\Support\Arr;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Auth;
 
 class PetService
 {
-    public function store(array $petData, $image, int $userId)
+    public function store(array $petData): void
     {
-        $user = User::find($userId);
+        $pet = Pet::create([
+            'user_id' => $petData['user_id'] ?? Auth::user()->id,
+            'name' => $petData['name'],
+            'specie' =>  $petData['specie'],
+            'sex'  =>  $petData['sex'],
+            'age' =>  $petData['age'],
+            'size' =>  $petData['size'],
+            'state_id' =>  $petData['state_id'],
+            'city_id' =>  $petData['city_id'],
+            'description' =>  $petData['description'],
+        ]);
 
-        $pet = $user
-            ->pets()
-            ->create(Arr::except($petData, [
-                'veterinary_cares',
-                'temperaments',
-                'sociabilities'
-            ]));
+        $this->syncData($pet, $petData);
 
-        $this->syncRelations($pet, $petData);
-
-        $this->syncMedia($pet, $image);
+        $this->uploadImage($pet, $petData['photo']);
     }
 
-    public function update(Pet $pet, array $petData, $image)
+    public function update(Pet $pet, array $petData): void
     {
-        $pet->update(Arr::except($petData, [
-            'veterinary_cares',
-            'temperaments',
-            'sociabilities'
-        ]));
+        $pet->update([
+            'name' => $petData['name'],
+            'specie' =>  $petData['specie'],
+            'sex'  =>  $petData['sex'],
+            'age' =>  $petData['age'],
+            'size' =>  $petData['size'],
+            'state_id' =>  $petData['state_id'],
+            'city_id' =>  $petData['city_id'],
+            'description' =>  $petData['description'],
+        ]);
 
-        $this->syncRelations($pet, $petData);
+        $this->syncData($pet, $petData);
 
-        $this->syncMedia($pet, $image);
+        if ($petData['photo'] ?? false) {
+            $this->uploadImage($pet, $petData['photo']);
+        }
     }
 
-    private function syncRelations(Pet $pet, array $petData)
+    private function syncData(Pet $pet, array $petData): void
     {
         $pet->veterinaryCares()
             ->sync($petData['veterinary_cares']);
@@ -50,10 +59,8 @@ class PetService
             ->sync($petData['sociabilities']);
     }
 
-    private function syncMedia(Pet $pet, $image)
+    private function uploadImage(Pet $pet, UploadedFile $image): void
     {
-        if ($image) {
-            $pet->addMedia($image)->toMediaCollection('pets');
-        }
+        $pet->addMedia($image)->toMediaCollection('pets');
     }
 }
