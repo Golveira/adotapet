@@ -34,8 +34,8 @@ class PetFactory extends Factory
             'state_id' => $state->id,
             'city_id' => $city->id,
             'description' => $this->faker->paragraph,
-            'is_adopted' => false,
-            'is_visible' => true,
+            'is_adopted' => 0,
+            'is_visible' => 1,
         ];
     }
 
