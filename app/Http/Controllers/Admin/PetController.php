@@ -35,6 +35,11 @@ class PetController extends Controller
         return redirect()->route('admin.pets.index');
     }
 
+    public function show(Pet $pet)
+    {
+        return view('admin.pets.show', compact('pet'));
+    }
+
     public function edit(Pet $pet): View
     {
         return view('admin.pets.edit', compact('pet'));
