@@ -76,7 +76,7 @@ class Pet extends Model implements HasMedia
 
     public function getAdoptionStatusColorAttribute(): string
     {
-        return $this->is_adopted ? 'yellow' : 'green';
+        return $this->is_adopted ? 'warning' : 'success';
     }
 
     public function getMainPhotoAttribute(): string
