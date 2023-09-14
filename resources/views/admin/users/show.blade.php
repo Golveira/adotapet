@@ -39,7 +39,7 @@
                     <div class="font-bold">{{ __('Role') }}</div>
                     <div>
                         <x-badge color="{{ $user->role_color }}">
-                            {{ $user->role }}
+                            {{ __($user->role) }}
                         </x-badge>
                     </div>
                 </div>
