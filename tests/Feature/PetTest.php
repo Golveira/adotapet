@@ -18,104 +18,122 @@ class PetTest extends TestCase
         Storage::fake('public');
 
         $user = User::factory()->create();
+        $petData = Pet::factory()->make(['user_id' => $user->id])->toArray();
+        $photo = UploadedFile::fake()->image('pet.jpg');
+        $veterinaryCares = [1, 2, 3];
+        $temperaments = [1, 2, 3];
+        $sociabilities = [1, 2, 3];
 
-        $petData = Pet::factory()
-            ->make(['user_id' => $user->id])
-            ->toArray();
+        $response = $this->actingAs($user)
+            ->post(route('pets.store'), [
+                ...$petData,
+                'photo' => $photo,
+                'veterinary_cares' => $veterinaryCares,
+                'temperaments' => $temperaments,
+                'sociabilities' => $sociabilities,
+            ]);
 
-        $image = UploadedFile::fake()->image('pet.jpg');
-
-        $response = $this
-            ->actingAs($user)
-            ->post(route('pets.store'), array_merge($petData, [
-                'photo' => $image,
-                'veterinary_cares' => [1],
-                'temperaments' => [1],
-                'sociabilities' => [1],
-            ]));
+        $pet = Pet::first();
 
         $response->assertRedirect(route('profile.show', $user->username));
 
-        $pet = $user->pets()->first();
-
-        $this->assertNotNull($pet);
-
         $this->assertDatabaseHas('pets', $petData);
 
-        $this->assertDatabaseHas('pet_veterinary_care', [
-            'pet_id' => $pet->id,
-            'veterinary_care_id' => 1,
-        ]);
-
-        $this->assertDatabaseHas('pet_temperament', [
-            'pet_id' => $pet->id,
-            'temperament_id' => 1,
-        ]);
-
-        $this->assertDatabaseHas('pet_sociability', [
-            'pet_id' => $pet->id,
-            'sociability_id' => 1,
-        ]);
+        $this->assertHasRelationships($pet, $veterinaryCares, $temperaments, $sociabilities);
 
         Storage::disk('public')->assertExists('1/pet.jpg');
     }
 
-
-    public function test_user_can_update_pet()
+    public function test_admin_can_create_pet()
     {
         Storage::fake('public');
 
         $user = User::factory()->create();
+        $petData = Pet::factory()->make(['user_id' => $user->id])->toArray();
+        $photo = UploadedFile::fake()->image('pet.jpg');
+        $veterinaryCares = [1, 2, 3];
+        $temperaments = [1, 2, 3];
+        $sociabilities = [1, 2, 3];
 
-        $pet = Pet::factory()
-            ->withTemperaments()
-            ->withVeterinaryCares()
-            ->withSociabilities()
-            ->create(['user_id' => $user->id]);
+        $response = $this->actingAs($user)
+            ->post(route('admin.pets.store'), [
+                ...$petData,
+                'photo' => $photo,
+                'veterinary_cares' => $veterinaryCares,
+                'temperaments' => $temperaments,
+                'sociabilities' => $sociabilities,
+            ]);
 
-        $petData = Pet::factory()
-            ->make(['user_id' => $user->id])
-            ->toArray();
+        $pet = Pet::first();
 
-        $image = UploadedFile::fake()->image('pet.jpg');
-
-        $formData = array_merge($petData, [
-            'photo' => $image,
-            'temperaments' => [1],
-            'sociabilities' => [1],
-            'veterinary_cares' => [],
-        ]);
-
-        $response = $this
-            ->actingAs($user)
-            ->put(route('pets.update', $pet), $formData);
-
-        $response->assertRedirect(route('profile.show', $user->username));
-
-        $pet->refresh();
+        $response->assertRedirect(route('admin.pets.index'));
 
         $this->assertDatabaseHas('pets', $petData);
-        $this->assertEquals(1, $pet->temperaments->count());
-        $this->assertEquals(1, $pet->sociabilities->count());
-        $this->assertEmpty($pet->veterinaryCares);
-        $this->assertTrue($pet->temperaments->contains(1));
-        $this->assertTrue($pet->sociabilities->contains(1));
+
+        $this->assertHasRelationships($pet, $veterinaryCares, $temperaments, $sociabilities);
 
         Storage::disk('public')->assertExists('1/pet.jpg');
     }
 
-    public function test_user_can_delete_pet()
+    public function test_admin_can_update_pet()
     {
-        $user = User::factory()->create();
+        Storage::fake('public');
 
+        $user = User::factory()->create();
+        $pet = Pet::factory()->create(['user_id' => $user->id]);
+        $petData = Pet::factory()->make(['user_id' => $user->id])->toArray();
+        $photo = UploadedFile::fake()->image('pet.jpg');
+        $veterinaryCares = [1];
+        $temperaments = [1];
+        $sociabilities = [1];
+
+        $response = $this->actingAs($user)
+            ->put(route('admin.pets.update', $pet), [
+                ...$petData,
+                'photo' => $photo,
+                'veterinary_cares' => $veterinaryCares,
+                'temperaments' => $temperaments,
+                'sociabilities' => $sociabilities,
+            ]);
+
+        $pet = $pet->fresh();
+
+        $response->assertRedirect(route('admin.pets.index'));
+
+        $this->assertDatabaseHas('pets', $petData);
+
+        $this->assertHasRelationships($pet, $veterinaryCares, $temperaments, $sociabilities);
+
+        Storage::disk('public')->assertExists('1/pet.jpg');
+    }
+
+    public function test_admin_can_delete_pet()
+    {
+        Storage::fake('public');
+
+        $user = User::factory()->create();
         $pet = Pet::factory()->create(['user_id' => $user->id]);
 
-        $response = $this
-            ->actingAs($user)
-            ->delete(route('pets.destroy', $pet->id));
+        $response = $this->actingAs($user)
+            ->delete(route('admin.pets.destroy', $pet));
 
-        $response->assertRedirect(route('profile.show', $user->username));
+        $response->assertRedirect(route('admin.pets.index'));
 
-        $this->assertDatabaseEmpty('pets');
+        $this->assertDatabaseMissing('pets', ['id' => $pet->id]);
+    }
+
+    private function assertHasRelationships(Pet $pet, array $veterinaryCares, array $temperaments, array $sociabilities): void
+    {
+        foreach ($veterinaryCares as $veterinaryCare) {
+            $this->assertTrue($pet->veterinaryCares->contains($veterinaryCare));
+        }
+
+        foreach ($temperaments as $temperament) {
+            $this->assertTrue($pet->temperaments->contains($temperament));
+        }
+
+        foreach ($sociabilities as $sociability) {
+            $this->assertTrue($pet->sociabilities->contains($sociability));
+        }
     }
 }
