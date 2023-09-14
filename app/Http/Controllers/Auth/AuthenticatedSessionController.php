@@ -31,7 +31,7 @@ class AuthenticatedSessionController extends Controller
 
         toast(__('auth.success'), 'success');
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        return redirect()->intended(route(Auth::user()->getRedirectRoute()));
     }
 
     /**
