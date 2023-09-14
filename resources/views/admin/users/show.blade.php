@@ -1,8 +1,8 @@
 @extends('admin.layouts.app')
 
 @section('content')
-    <div class="max-w-6xl mx-auto px-4 pt-6">
-        <div class="flex items-center justify-between mb-4">
+    <div class="mx-auto max-w-6xl px-4 pt-6">
+        <div class="mb-4 flex items-center justify-between">
             <h1 class="text-2xl font-bold">
                 {{ __('User Details') }}
             </h1>
@@ -36,15 +36,11 @@
                 </div>
 
                 <div class="flex flex-col gap-2">
-                    <div class="font-bold">{{ __('Administrator') }}</div>
+                    <div class="font-bold">{{ __('Role') }}</div>
                     <div>
-                        @if ($user->is_admin)
-                            <x-badge color="red">{{ __('yes') }}</x-badge>
-                        @else
-                            <x-badge>
-                                {{ __('no') }}
-                            </x-badge>
-                        @endif
+                        <x-badge color="{{ $user->role_color }}">
+                            {{ $user->role }}
+                        </x-badge>
                     </div>
                 </div>
 
@@ -62,7 +58,7 @@
 
 
         <div>
-            <h1 class="text-xl font-bold mb-4">
+            <h1 class="mb-4 text-xl font-bold">
                 {{ __('Pets') }}
             </h1>
 
