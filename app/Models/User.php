@@ -100,6 +100,11 @@ class User extends Authenticatable implements HasMedia
         return $this->getFirstMediaUrl('avatars');
     }
 
+    public function getRedirectRoute()
+    {
+        return $this->is_admin ? 'admin.home' : 'welcome';
+    }
+
     public function registerMediaCollections(): void
     {
         $this
