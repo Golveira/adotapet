@@ -79,6 +79,11 @@ class Pet extends Model implements HasMedia
         return $this->is_adopted ? 'warning' : 'success';
     }
 
+    public function getVisibilityStatusAttribute(): string
+    {
+        return $this->is_visible ? 'Yes' : 'No';
+    }
+
     public function getMainPhotoAttribute(): string
     {
         return $this->getFirstMediaUrl('pets');
