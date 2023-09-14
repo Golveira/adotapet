@@ -90,6 +90,11 @@ class User extends Authenticatable implements HasMedia
         return $this->is_admin ? 'Admin' : 'User';
     }
 
+    public function getRoleColorAttribute(): string
+    {
+        return $this->is_admin ? 'danger' : 'primary';
+    }
+
     public function getAvatarAttribute(): string
     {
         return $this->getFirstMediaUrl('avatars');
