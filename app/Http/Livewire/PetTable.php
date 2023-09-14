@@ -109,15 +109,15 @@ final class PetTable extends PowerGridComponent
         return PowerGrid::columns()
             ->addColumn('id')
             ->addColumn('name')
-            ->addColumn('specie', fn(Pet $model) => __($model->specie))
-            ->addColumn('sex', fn(Pet $model) => __($model->sex))
-            ->addColumn('age', fn(Pet $model) => __($model->age))
-            ->addColumn('size', fn(Pet $model) => __($model->size))
+            ->addColumn('specie', fn (Pet $model) => __($model->specie))
+            ->addColumn('sex', fn (Pet $model) => __($model->sex))
+            ->addColumn('age', fn (Pet $model) => __($model->age))
+            ->addColumn('size', fn (Pet $model) => __($model->size))
             ->addColumn('state_letter')
             ->addColumn('city_title')
             ->addColumn('is_adopted')
             ->addColumn('is_visible')
-            ->addColumn('created_at_formatted', fn(Pet $model) => Carbon::parse($model->created_at)->format('d/m/Y'));
+            ->addColumn('created_at_formatted', fn (Pet $model) => Carbon::parse($model->created_at)->format('d/m/Y'));
     }
 
     /*
@@ -239,9 +239,7 @@ final class PetTable extends PowerGridComponent
 
     public function header(): array
     {
-        return [
-
-        ];
+        return [];
     }
 
 
@@ -295,4 +293,19 @@ final class PetTable extends PowerGridComponent
         ];
     }
     */
+
+    public function onUpdatedToggleable(string $id, string $field, string $value): void
+    {
+        if ($field === 'is_adopted') {
+            Pet::find($id)->update(['is_adopted' => $value]);
+
+            return;
+        }
+
+        if ($field === 'is_visible') {
+            Pet::find($id)->update(['is_visible' => $value]);
+
+            return;
+        }
+    }
 }
