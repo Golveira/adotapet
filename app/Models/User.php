@@ -85,6 +85,11 @@ class User extends Authenticatable implements HasMedia
         $this->bookmarks()->toggle($pet);
     }
 
+    public function getRoleAttribute(): string
+    {
+        return $this->is_admin ? 'Admin' : 'User';
+    }
+
     public function getAvatarAttribute(): string
     {
         return $this->getFirstMediaUrl('avatars');
