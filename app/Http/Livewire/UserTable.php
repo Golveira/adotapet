@@ -88,6 +88,7 @@ final class UserTable extends PowerGridComponent
             ->addColumn('name')
             ->addColumn('email')
             ->addColumn('username')
+            ->addColumn('role_name', fn (User $model) => __($model->role))
             ->addColumn(
                 'created_at_formatted',
                 fn (User $model) => Carbon::parse($model->created_at)->format('d/m/Y ')
@@ -125,6 +126,8 @@ final class UserTable extends PowerGridComponent
             Column::make(__('Username'), 'username')
                 ->sortable()
                 ->searchable(),
+
+            Column::make(__('Role'), 'role_name'),
 
             Column::make(__('Created at'), 'created_at_formatted', 'created_at')
                 ->sortable(),
@@ -164,7 +167,7 @@ final class UserTable extends PowerGridComponent
     {
         return [
             Button::add('actions')
-            ->bladeComponent('users.actions', ['userId' => 'id']),
+                ->bladeComponent('users.actions', ['userId' => 'id']),
         ];
     }
 }
