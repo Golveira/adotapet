@@ -123,7 +123,7 @@ class Pet extends Model implements HasMedia
             $this->veterinaryCares->isNotEmpty();
     }
 
-    public function scopeApproved($query)
+    public function scopeVisible($query)
     {
         return $query->where('is_visible', true);
     }
