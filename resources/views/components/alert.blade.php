@@ -9,6 +9,6 @@
     ][$type];
 @endphp
 
-<div {{ $attributes->merge(['class' => "p-4 mb-4 text-sm rounded-lg $color"]) }} role="alert">
+<div role="alert" {{ $attributes->merge(['class' => "p-4 mb-4 text-sm rounded-lg $color"]) }}>
     {{ $slot }}
 </div>
