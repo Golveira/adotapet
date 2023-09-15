@@ -44,15 +44,6 @@ class PetController extends Controller
 
     public function show(Pet $pet): View
     {
-        $pet->load(
-            'user:id,name,username',
-            'city:id,title',
-            'state:id,letter',
-            'sociabilities:id,name',
-            'temperaments:id,name',
-            'veterinaryCares:id,name'
-        );
-
         return view('pets.show', compact('pet'));
     }
 
