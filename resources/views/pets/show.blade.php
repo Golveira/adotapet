@@ -4,41 +4,43 @@
             <!-- Alert -->
             @if (!$pet->is_visible)
                 <x-alert type="warning">
-                    {{ __('This pet is awaiting for aproval by the administrator and will be available soon for adoption.') }}
+                    {{ __('This pet is awaiting for aproval and will be available for adoption soon.') }}
                 </x-alert>
             @endif
 
-            <div class="grid lg:grid-cols-10 gap-8">
+            <div class="grid gap-8 lg:grid-cols-10">
                 <!-- Carousel -->
                 <div class="lg:col-span-6">
-                    <x-pet-carousel :images="$pet->images" />
+                    @if (count($pet->images) > 1)
+                        <x-pet-carousel :images="$pet->images" />
+                    @else
+                        <img class="block h-56 w-full rounded-lg object-cover md:h-[32rem]" src="{{ $pet->main_photo }}">
+                    @endif
                 </div>
 
                 <div class="lg:col-span-4">
                     <!-- Actions -->
-                    @auth
-                        @can('update', $pet)
-                            <div class="flex mb-2">
-                                <x-button href="{{ route('pets.edit', $pet->id) }}" class="me-3">
-                                    <x-icons.edit />
-                                </x-button>
+                    @can('update', $pet)
+                        <div class="mb-2 flex">
+                            <x-buttons.primary-button href="{{ route('pets.edit', $pet->id) }}">
+                                <x-icons.edit />
+                            </x-buttons.primary-button>
 
-                                <x-button href="{{ route('pets.images', $pet->id) }}" color="purple" class="me-3">
-                                    <x-icons.image />
-                                </x-button>
+                            <x-buttons.secondary-button href="{{ route('pets.images', $pet->id) }}">
+                                <x-icons.image />
+                            </x-buttons.secondary-button>
 
-                                <x-button color="red" href="#" data-modal-target="popup-modal"
-                                    data-modal-toggle="popup-modal">
+                            <x-modal-delete title="Are you sure you want to delete the pet?" :action="route('pets.destroy', $pet->id)">
+                                <x-buttons.danger-button x-on:click="open = true">
                                     <x-icons.trash />
-                                </x-button>
-                            </div>
-                        @endcan
-                    @endauth
+                                </x-buttons.danger-button>
+                            </x-modal-delete>
+                        </div>
+                    @endcan
 
                     <!-- Pet Info -->
                     <x-card>
-                        <div class="flex
-                                items-center mb-5">
+                        <div class="mb-5 flex items-center">
                             <div class="w-1/2">
                                 <h3 class="text-xl font-bold">
                                     {{ $pet->name }}
@@ -52,7 +54,7 @@
                             </div>
                         </div>
 
-                        <div class="flex mb-3">
+                        <div class="mb-3 flex">
                             <h6 class="w-1/2 font-bold text-gray-800">
                                 {{ __('Specie') }}
                             </h6>
@@ -62,7 +64,7 @@
                             </div>
                         </div>
 
-                        <div class="flex mb-3">
+                        <div class="mb-3 flex">
                             <h6 class="w-1/2 font-bold text-gray-800">
                                 {{ __('Sex') }}
                             </h6>
@@ -72,7 +74,7 @@
                             </div>
                         </div>
 
-                        <div class="flex mb-3">
+                        <div class="mb-3 flex">
                             <h6 class="w-1/2 font-bold text-gray-800">
                                 {{ __('Age') }}
                             </h6>
@@ -82,7 +84,7 @@
                             </div>
                         </div>
 
-                        <div class="flex mb-3">
+                        <div class="mb-3 flex">
                             <h6 class="w-1/2 font-bold text-gray-800">
                                 {{ __('Size') }}
                             </h6>
@@ -92,7 +94,7 @@
                             </div>
                         </div>
 
-                        <div class="flex mb-5">
+                        <div class="mb-5 flex">
                             <h6 class="w-1/2 font-bold text-gray-800">
                                 {{ __('Address') }}
                             </h6>
@@ -102,7 +104,7 @@
                             </div>
                         </div>
 
-                        <div class="flex mb-5">
+                        <div class="mb-5 flex">
                             <h6 class="w-1/2 font-bold text-gray-800">
                                 {{ __('Created at') }}
                             </h6>
@@ -112,7 +114,7 @@
                             </div>
                         </div>
 
-                        <div class="flex mb-10">
+                        <div class="mb-10 flex last:mb-0">
                             <h6 class="w-1/2 font-bold text-gray-800">
                                 {{ __('Published by') }}
                             </h6>
@@ -125,45 +127,47 @@
                         </div>
 
                         <!-- Adoption actions -->
-                        <div class="flex">
-                            @can('update', $pet)
-                                <div class="w-full">
-                                    @if ($pet->is_adopted)
-                                        <form action="{{ route('pets.mark-as-available', $pet->id) }}" method="POST">
-                                            @csrf
+                        @can('update', $pet)
+                            <div class="w-full">
+                                @if ($pet->is_adopted)
+                                    <form action="{{ route('pets.mark-as-available', $pet->id) }}" method="POST">
+                                        @csrf
 
-                                            <x-button type="submit" color="yellow" class="text-center w-full">
-                                                {{ __('Mark as available') }}
-                                            </x-button>
-                                        </form>
-                                    @else
-                                        <form action="{{ route('pets.mark-as-adopted', $pet->id) }}" method="POST">
-                                            @csrf
+                                        <x-buttons.warning-button class="w-full text-center" type="submit">
+                                            {{ __('Mark as available') }}
+                                        </x-buttons.warning-button>
+                                    </form>
+                                @else
+                                    <form action="{{ route('pets.mark-as-adopted', $pet->id) }}" method="POST">
+                                        @csrf
 
-                                            <x-button type="submit" color="green" class="text-center w-full">
-                                                {{ __('Mark as adopted') }}
-                                            </x-button>
-                                        </form>
-                                    @endif
+                                        <x-buttons.success-button class="w-full text-center" type="submit">
+                                            {{ __('Mark as adopted') }}
+                                        </x-buttons.success-button>
+                                    </form>
+                                @endif
+                            </div>
+                        @else
+                            @if (!$pet->is_adopted)
+                                <div class="flex">
+                                    <x-buttons.primary-button class="w-full text-center" href="#">
+                                        {{ __('Adopt') }}
+                                    </x-buttons.primary-button>
                                 </div>
-                            @else
-                                <x-button href="#" class="text-center w-full">
-                                    {{ __('Adopt') }}
-                                </x-button>
-                            @endcan
-                        </div>
+                            @endif
+                        @endcan
                     </x-card>
                 </div>
             </div>
 
-            <div class="grid lg:grid-cols-10 gap-8 mt-8">
+            <div class="mt-8 grid gap-8 lg:grid-cols-10">
                 <div class="lg:col-span-6">
                     @if ($pet->hasAdditionalInfo())
                         <x-card>
                             @if ($pet->description)
                                 <!-- Pet description -->
                                 <div class="mb-5 border-b pb-5 last:border-b-0 last:pb-0">
-                                    <h6 class="text-lg font-bold mb-3">
+                                    <h6 class="mb-3 text-lg font-bold">
                                         {{ __('Description') }}
                                     </h6>
 
@@ -176,14 +180,14 @@
                             @if ($pet->veterinaryCares->count() > 0)
                                 <!-- Veterinary Cares -->
                                 <div class="mb-5 border-b pb-5 last:border-b-0 last:pb-0">
-                                    <h6 class="font-bold mb-3">
+                                    <h6 class="mb-3 font-bold">
                                         {{ __('Vet Info') }}
                                     </h6>
 
                                     <div class="flex flex-wrap gap-2">
                                         @foreach ($pet->veterinaryCares as $vetCare)
-                                            <div class="flex items-center me-2">
-                                                <span class="text-blue-700 me-2">
+                                            <div class="me-2 flex items-center">
+                                                <span class="me-2 text-blue-700">
                                                     <x-icons.badge-check />
                                                 </span>
 
@@ -200,14 +204,14 @@
                             @if ($pet->sociabilities->count() > 0)
                                 <!-- Sociabilities -->
                                 <div class="mb-5 border-b pb-5 last:border-b-0 last:pb-0">
-                                    <h6 class="font-bold mb-3">
+                                    <h6 class="mb-3 font-bold">
                                         {{ __('Sociable with') }}
                                     </h6>
 
                                     <div class="flex flex-wrap gap-2">
                                         @foreach ($pet->sociabilities as $sociability)
-                                            <div class="flex items-center me-2">
-                                                <span class="text-blue-700 me-2">
+                                            <div class="me-2 flex items-center">
+                                                <span class="me-2 text-blue-700">
                                                     <x-icons.badge-check />
                                                 </span>
 
@@ -224,13 +228,13 @@
                             @if ($pet->temperaments->count() > 0)
                                 <!-- Temperaments -->
                                 <div class="mb-5 border-b pb-5 last:border-b-0 last:pb-0">
-                                    <h6 class="font-bold mb-3">
+                                    <h6 class="mb-3 font-bold">
                                         {{ __('Temperaments') }}
                                     </h6>
 
                                     <div class="flex flex-wrap gap-2">
                                         @foreach ($pet->temperaments as $temperament)
-                                            <x-badge color="indigo" class="text-xs font-bold">
+                                            <x-badge class="text-xs font-bold" color="info">
                                                 {{ __($temperament->name) }}
                                             </x-badge>
                                         @endforeach
@@ -243,9 +247,4 @@
             </div>
         </div>
     </section>
-
-    @push('modals')
-        <x-modal-delete title="{{ __('Are you sure you want to delete the pet?') }}"
-            route="{{ route('pets.destroy', $pet->id) }}" />
-    @endpush
 </x-app-layout>
