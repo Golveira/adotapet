@@ -154,7 +154,7 @@ class Pet extends Model implements HasMedia
                     return $query->where('user_id', $userId);
                 },
                 function ($query) {
-                    return $query->approved();
+                    return $query->visible();
                 }
             );
     }
