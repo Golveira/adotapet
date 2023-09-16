@@ -116,7 +116,7 @@
                 {{ __('Save') }}
             </x-buttons.primary-button>
 
-            <x-buttons.secondary-button href="{{ route('admin.pets.index') }}">
+            <x-buttons.secondary-button href="{{ url()->previous() }}">
                 {{ __('Cancel') }}
             </x-buttons.secondary-button>
         </div>
