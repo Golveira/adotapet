@@ -30,16 +30,11 @@ class PetController extends Controller
 
     public function store(StorePetRequest $request): RedirectResponse
     {
-        $this->petService->store(
-            $request->validated(),
-            $request->file('photo'),
-            Auth::user()->id
-        );
+        $this->petService->store($request->validated());
 
         toast(__('pets.created'), 'success');
 
-        return redirect()
-            ->route('profile.show', Auth::user()->username);
+        return redirect()->route('profile.show', Auth::user()->username);
     }
 
     public function show(Pet $pet): View
@@ -51,35 +46,18 @@ class PetController extends Controller
     {
         $this->authorize('update', $pet);
 
-        $veterinaryCares = $pet->veterinaryCares()
-            ->pluck('veterinary_care_id')
-            ->toArray();
-
-        $temperaments = $pet->temperaments()
-            ->pluck('temperament_id')
-            ->toArray();
-
-        $sociabilities = $pet->sociabilities()
-            ->pluck('sociability_id')
-            ->toArray();
-
-        return view('pets.edit', compact('pet', 'veterinaryCares', 'temperaments', 'sociabilities'));
+        return view('pets.edit', compact('pet'));
     }
 
     public function update(UpdatePetRequest $request, Pet $pet)
     {
         $this->authorize('update', $pet);
 
-        $this->petService->update(
-            $pet,
-            $request->validated(),
-            $request->file('photo')
-        );
+        $this->petService->update($pet, $request->validated());
 
         toast(__('pets.updated'), 'success');
 
-        return redirect()
-            ->route('profile.show', Auth::user()->username);
+        return redirect()->route('profile.show', Auth::user()->username);
     }
 
     public function destroy(Pet $pet)
@@ -90,7 +68,6 @@ class PetController extends Controller
 
         toast(__('pets.deleted'), 'success');
 
-        return redirect()
-            ->route('profile.show', Auth::user()->username);
+        return redirect()->route('profile.show', Auth::user()->username);
     }
 }
