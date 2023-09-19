@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::factory()
-            ->count(50)
+            ->count(10)
             ->has(Pet::factory()
                 ->count(3)
                 ->withSociabilities()
