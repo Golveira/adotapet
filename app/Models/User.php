@@ -31,7 +31,6 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
         'city',
         'website',
         'whatsapp',
-        'location',
         'bio',
     ];
 
