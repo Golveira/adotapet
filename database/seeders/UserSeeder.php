@@ -31,16 +31,14 @@ class UserSeeder extends Seeder
             'is_admin' => true,
         ]);
 
-        User::factory()->count(10)->hasProfile()->create()->each(function ($user) {
-            Pet::factory()
+        User::factory()
+            ->count(50)
+            ->has(Pet::factory()
                 ->count(3)
                 ->withSociabilities()
                 ->withVeterinaryCares()
                 ->withTemperaments()
-                ->withMedia()
-                ->create([
-                    'user_id' => $user->id,
-                ]);
-        });
+                ->withMedia())
+            ->create();
     }
 }
