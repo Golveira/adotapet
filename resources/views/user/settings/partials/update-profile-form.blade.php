@@ -27,26 +27,22 @@
 
         <div>
             <x-forms.label for="whatsapp" :value="__('Whatsapp')" />
-            <x-forms.input id="whatsapp" name="whatsapp" type="text" :value="old('whatsapp', $user->profile?->whatsapp)" />
+            <x-forms.input id="whatsapp" name="whatsapp" type="text" :value="old('whatsapp', $user->whatsapp)" />
             <x-forms.errors :messages="$errors->get('whatsapp')" />
         </div>
 
         <div>
             <x-forms.label for="website" :value="__('Website')" />
-            <x-forms.input id="website" name="website" type="text" :value="old('website', $user->profile?->website)" />
+            <x-forms.input id="website" name="website" type="text" :value="old('website', $user->website)" />
             <x-forms.errors :messages="$errors->get('website')" />
         </div>
 
-        <div>
-            <x-forms.label for="location" :value="__('Location')" />
-            <x-forms.input id="location" name="location" type="text" :value="old('location', $user->profile?->location)" />
-            <x-forms.errors :messages="$errors->get('location')" />
-        </div>
+        <livewire:city-state-select :stateId="$user->state_id" :cityId="$user->city_id" />
 
         <div>
             <x-forms.label for="bio" :value="__('About me')" />
             <x-forms.text-area id="bio" name="bio">
-                {{ old('bio', $user->profile?->bio) }}
+                {{ old('bio', $user->bio) }}
             </x-forms.text-area>
             <x-forms.errors :messages="$errors->get('bio')" />
         </div>
