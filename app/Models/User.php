@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use App\Models\City;
+use App\Models\State;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -27,11 +30,11 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
         'username',
         'password',
         'is_admin',
-        'state',
-        'city',
         'website',
         'whatsapp',
         'bio',
+        'state_id',
+        'city_id',
     ];
 
     /**
@@ -53,6 +56,16 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function state(): BelongsTo
+    {
+        return $this->belongsTo(State::class);
+    }
+
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(City::class);
+    }
 
     public function pets(): HasMany
     {
