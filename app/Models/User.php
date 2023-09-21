@@ -82,16 +82,6 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
         return $this->bookmarks->contains($pet);
     }
 
-    public function bookmark(Pet $pet)
-    {
-        $this->bookmarks()->attach($pet);
-    }
-
-    public function unbookmark(Pet $pet)
-    {
-        $this->bookmarks()->detach($pet);
-    }
-
     public function toggleBookmark(Pet $pet)
     {
         $this->bookmarks()->toggle($pet);
