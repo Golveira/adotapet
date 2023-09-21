@@ -112,6 +112,11 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
         return $this->getFirstMediaUrl('avatars');
     }
 
+    public function getAddressAttribute(): string
+    {
+        return "{$this->city->title}, {$this->state->letter}";
+    }
+
     public function getRedirectRoute()
     {
         return $this->is_admin ? 'admin.home' : 'welcome';
