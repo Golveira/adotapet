@@ -59,7 +59,7 @@ class ShowPets extends Component
         return City::find($this->filters['cityId']);
     }
 
-    public function formatFilter($key, $value)
+    public function displayFilter($key, $value)
     {
         if ($key === 'stateId') {
             return $this->state->letter;
@@ -72,14 +72,14 @@ class ShowPets extends Component
         return $value;
     }
 
-    public function getNotEmptyFilters()
+    public function hasFilters()
     {
-        return array_filter($this->filters, fn($filter) => $filter !== '');
+        return !empty($this->getFilters());
     }
 
-    public function filtersNotEmpty()
+    public function getFilters()
     {
-        return !empty($this->getNotEmptyFilters());
+        return array_filter($this->filters, fn ($filter) => $filter !== '');
     }
 
     public function clearFilter($filter)
