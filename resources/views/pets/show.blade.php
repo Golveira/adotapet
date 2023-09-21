@@ -22,17 +22,21 @@
                     <!-- Actions -->
                     @can('update', $pet)
                         <div class="mb-2 flex">
-                            <x-buttons.primary-button href="{{ route('pets.edit', $pet->id) }}">
+                            <x-buttons.primary-button class="flex items-center" href="{{ route('pets.edit', $pet->id) }}">
                                 <x-icons.edit />
+                                <span class="ml-2">{{ __('Edit') }}</span>
                             </x-buttons.primary-button>
 
-                            <x-buttons.secondary-button href="{{ route('pets.images', $pet->id) }}">
+                            <x-buttons.secondary-button class="flex items-center"
+                                href="{{ route('pets.images', $pet->id) }}">
                                 <x-icons.image />
+                                <span class="ml-2">{{ __('Images') }}</span>
                             </x-buttons.secondary-button>
 
                             <x-modal-delete title="Are you sure you want to delete the pet?" :action="route('pets.destroy', $pet->id)">
-                                <x-buttons.danger-button x-on:click="open = true">
+                                <x-buttons.danger-button class="flex items-center" x-on:click="open = true">
                                     <x-icons.trash />
+                                    <span class="ml-2">{{ __('Delete') }}</span>
                                 </x-buttons.danger-button>
                             </x-modal-delete>
                         </div>
