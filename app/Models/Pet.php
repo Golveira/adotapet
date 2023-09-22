@@ -59,9 +59,9 @@ class Pet extends Model implements HasMedia
         return $this->belongsToMany(VeterinaryCare::class);
     }
 
-    public function bookmarks(): BelongsToMany
+    public function favorites(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'bookmarks');
+        return $this->belongsToMany(User::class, 'favorites');
     }
 
     public function getAddressAttribute(): string
@@ -131,6 +131,11 @@ class Pet extends Model implements HasMedia
     public function scopeAdopted($query)
     {
         return $query->where('is_adopted', true);
+    }
+
+    public function scopeFavoritedBy($query, $userId)
+    {
+        return $query->whereRelation('favorites', 'user_id', $userId);
     }
 
     public function scopeFilter($query, array $filters)
