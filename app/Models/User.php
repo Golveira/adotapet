@@ -72,19 +72,19 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
         return $this->hasMany(Pet::class);
     }
 
-    public function bookmarks(): BelongsToMany
+    public function favorites(): BelongsToMany
     {
         return $this->belongsToMany(Pet::class, 'bookmarks');
     }
 
-    public function hasBookmarked(Pet $pet): bool
+    public function hasFavorited(Pet $pet): bool
     {
-        return $this->bookmarks->contains($pet);
+        return $this->favorites->contains($pet);
     }
 
-    public function toggleBookmark(Pet $pet)
+    public function toggleFavorite(Pet $pet)
     {
-        $this->bookmarks()->toggle($pet);
+        $this->favorites()->toggle($pet);
     }
 
     public function getRoleAttribute(): string
