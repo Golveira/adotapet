@@ -43,7 +43,11 @@
                     @endcan
 
                     <!-- Pet Info -->
-                    <x-card>
+                    <x-card class="relative">
+                        <div class="absolute right-6 top-6">
+                            <livewire:favorite-button :pet="$pet" />
+                        </div>
+
                         <div class="mb-5 flex items-center">
                             <div class="w-1/2">
                                 <h3 class="text-xl font-bold">
