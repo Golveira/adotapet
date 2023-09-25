@@ -36,6 +36,8 @@ class FavoriteButton extends Component
         Auth::user()->toggleFavorite($this->pet);
 
         $this->isFavorite = !$this->isFavorite;;
+
+        $this->emitUp('refresh');
     }
 
     public function render()
