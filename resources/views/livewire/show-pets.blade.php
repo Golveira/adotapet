@@ -73,7 +73,7 @@
 
         <div class="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3">
             @forelse ($pets as $pet)
-                <livewire:pet-card wire:key="item-{{ $pet->id }}" :pet="$pet" />
+                <livewire:pet-card :pet="$pet" :wire:key="$pet->id" />
             @empty
                 <div class="col-span-4 text-center text-xl">
                     {{ __('No pets found') }}
