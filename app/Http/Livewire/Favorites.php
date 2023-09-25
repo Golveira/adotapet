@@ -11,9 +11,7 @@ class Favorites extends Component
 {
     use WithPagination;
 
-    protected $listeners = [
-        'refresh',
-    ];
+    protected $listeners = ['refresh'];
 
     public function refresh()
     {
@@ -24,7 +22,7 @@ class Favorites extends Component
     {
         $pets = Pet::query()
             ->with(['media', 'city:id,title', 'state:id,letter'])
-            ->whereHas('bookmarks', fn($query) => $query->where('user_id', Auth::id()))
+            ->favoritedBy(Auth::user()->id)
             ->latest()
             ->paginate(8);
 
