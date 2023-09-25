@@ -12,11 +12,19 @@ class FavoriteButton extends Component
 
     public bool $isFavorite;
 
-    public function mount(Pet $pet)
+    public string $classes;
+
+    public bool $withOverlay;
+
+    public function mount(Pet $pet, bool $withOverlay = false, string $classes = '')
     {
         $this->pet = $pet;
 
-        $this->isFavorite = Auth::user()->hasFavorited($this->pet);
+        $this->isFavorite = Auth::user()?->hasFavorited($this->pet) ?? false;
+
+        $this->classes = $classes;
+
+        $this->withOverlay = $withOverlay;
     }
 
     public function toggleFavorite()
