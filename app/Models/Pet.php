@@ -26,7 +26,6 @@ class Pet extends Model implements HasMedia
         'description',
         'is_adopted',
         'is_visible',
-        'has_special_needs',
     ];
 
     public function user(): BelongsTo
