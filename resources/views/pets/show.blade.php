@@ -44,8 +44,8 @@
 
                     <!-- Pet Info -->
                     <x-card class="relative">
-                        <div class="absolute right-6 top-6">
-                            <livewire:favorite-button :pet="$pet" />
+                        <div class="absolute right-3 top-3">
+                            <livewire:favorite-button classes="h-6 w-6" :pet="$pet" />
                         </div>
 
                         <div class="mb-5 flex items-center">
