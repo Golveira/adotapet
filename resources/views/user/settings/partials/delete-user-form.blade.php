@@ -7,9 +7,10 @@
         {{ __('All your data will be permanently deleted from the site.') }}
     </p>
 
-    <x-button color="red" x-data="" x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')">
+    <x-buttons.danger-button x-data=""
+        x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')">
         {{ __('Delete Account') }}
-    </x-button>
+    </x-buttons.danger-button>
 
     <x-modal name="confirm-user-deletion" focusable>
         <form class="p-6" method="post" action="{{ route('settings.profile.destroy') }}">
