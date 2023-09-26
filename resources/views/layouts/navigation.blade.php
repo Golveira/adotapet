@@ -1,4 +1,4 @@
-<nav class="border-b-2 border-gray-100 bg-white dark:bg-gray-900">
+<nav class="border-b-2 border-gray-100 bg-white">
     <div class="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
         <!-- Logo -->
         <a class="flex items-center" href="{{ route('welcome') }}">
@@ -7,44 +7,43 @@
 
         <div class="flex items-center md:order-2">
             @auth
-                <button
-                    class="mr-3 flex rounded-full bg-gray-800 text-sm focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 md:mr-0"
-                    id="user-menu-button" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom" type="button"
+                <!-- User menu button -->
+                <button class="mr-3 flex rounded-full text-sm focus:ring-4 focus:ring-gray-300 md:mr-0" id="user-menu-button"
+                    data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom" type="button"
                     aria-expanded="false">
                     <span class="sr-only">Open user menu</span>
-                    <x-avatar class="rounded-full ring-2" :avatar="Auth::user()->avatar" />
+                    <x-avatar class="rounded-full" :avatar="Auth::user()->avatar" />
                 </button>
 
                 <!-- User menu dropdown -->
-                <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:divide-gray-600 dark:bg-gray-700"
-                    id="user-dropdown">
+                <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow" id="user-dropdown">
                     <div class="px-4 py-3">
-                        <span class="block text-sm text-gray-900 dark:text-white">
+                        <span class="block text-sm text-gray-900">
                             {{ Auth::user()->name }}
                         </span>
 
-                        <span class="block truncate text-sm text-gray-500 dark:text-gray-400">
+                        <span class="block truncate text-sm text-gray-500">
                             {{ Auth::user()->email }}
                         </span>
                     </div>
 
-                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="user-menu-button">
+                    <ul class="py-2 text-sm text-gray-700" aria-labelledby="user-menu-button">
                         <li>
-                            <x-dropdown-link :href="route('favorites.index')">
+                            <x-links.dropdown-link :href="route('favorites.index')">
                                 {{ __('My Favorites') }}
-                            </x-dropdown-link>
+                            </x-links.dropdown-link>
                         </li>
 
                         <li>
-                            <x-dropdown-link :href="route('profile.show', Auth::user()->username)">
+                            <x-links.dropdown-link :href="route('profile.show', Auth::user()->username)">
                                 {{ __('My Profile') }}
-                            </x-dropdown-link>
+                            </x-links.dropdown-link>
                         </li>
 
                         <li>
-                            <x-dropdown-link :href="route('settings.index')">
+                            <x-links.dropdown-link :href="route('settings.index')">
                                 {{ __('Settings') }}
-                            </x-dropdown-link>
+                            </x-links.dropdown-link>
                         </li>
                     </ul>
 
@@ -52,11 +51,11 @@
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
-                            <x-dropdown-link :href="route('logout')"
+                            <x-links.dropdown-link :href="route('logout')"
                                 onclick="event.preventDefault();
                                         this.closest('form').submit();">
                                 {{ __('Log Out') }}
-                            </x-dropdown-link>
+                            </x-links.dropdown-link>
                         </form>
                     </div>
                 </div>
@@ -64,13 +63,13 @@
 
             @guest
                 <div class="hidden lg:block">
-                    <x-button class="me-3" href="{{ route('login') }}">
+                    <x-buttons.primary-button class="me-3" href="{{ route('login') }}">
                         {{ __('Login') }}
-                    </x-button>
+                    </x-buttons.primary-button>
 
-                    <x-button href="{{ route('register') }}" color="alternative">
+                    <x-buttons.secondary-button href="{{ route('register') }}">
                         {{ __('Register') }}
-                    </x-button>
+                    </x-buttons.secondary-button>
                 </div>
 
                 <div class="me-5 md:hidden">
@@ -97,21 +96,21 @@
             <ul
                 class="mt-4 flex flex-col rounded-lg border border-gray-100 bg-gray-50 p-4 font-medium dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 md:dark:bg-gray-900">
                 <li>
-                    <x-nav-link :href="route('pets.index')" :active="request()->routeIs('pets.index')">
+                    <x-links.nav-link :href="route('pets.index')" :active="request()->routeIs('pets.index')">
                         {{ __('Adopt') }}
-                    </x-nav-link>
+                    </x-links.nav-link>
                 </li>
 
                 <li>
-                    <x-nav-link :href="route('pets.create')" :active="request()->routeIs('pets.create')">
+                    <x-links.nav-link :href="route('pets.create')" :active="request()->routeIs('pets.create')">
                         {{ __('Foster') }}
-                    </x-nav-link>
+                    </x-links.nav-link>
                 </li>
 
                 <li>
-                    <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                    <x-links.nav-link :href="route('login')" :active="request()->routeIs('login')">
                         {{ __('About us') }}
-                    </x-nav-link>
+                    </x-links.nav-link>
                 </li>
             </ul>
         </div>
