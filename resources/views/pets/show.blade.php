@@ -128,9 +128,9 @@
                             </h6>
 
                             <div class="w-1/2 text-gray-600">
-                                <x-link href="{{ route('profile.show', $pet->user->username) }}">
+                                <x-links.primary-link href="{{ route('profile.show', $pet->user->username) }}">
                                     {{ $pet->user->name }}
-                                </x-link>
+                                </x-links.primary-link>
                             </div>
                         </div>
 
