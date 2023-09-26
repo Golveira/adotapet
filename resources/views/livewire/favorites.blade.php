@@ -15,9 +15,9 @@
                         {{ __('You can search for pets and add them to your favorites') }}
                     </p>
 
-                    <x-button href="{{ route('pets.index') }}">
+                    <x-buttons.primary-button href="{{ route('pets.index') }}">
                         {{ __('Search pets') }}
-                    </x-button>
+                    </x-buttons.primary-button>
                 </div>
             @endforelse
         </div>
