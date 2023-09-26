@@ -12,7 +12,7 @@
                 <!-- Carousel -->
                 <div class="lg:col-span-6">
                     @if (count($pet->images) > 1)
-                        <x-pet-carousel :images="$pet->images" />
+                        <x-pets.pet-carousel :images="$pet->images" />
                     @else
                         <img class="block h-56 w-full rounded-lg object-cover md:h-[32rem]" src="{{ $pet->main_photo }}">
                     @endif
