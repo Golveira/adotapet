@@ -114,7 +114,7 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
 
     public function getAddressAttribute(): string
     {
-        return "{$this->city->title}, {$this->state->letter}";
+        return $this->state && $this->city ? "{$this->city->title}, {$this->state->letter}" : '';
     }
 
     public function getRedirectRoute()
