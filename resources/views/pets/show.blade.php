@@ -27,11 +27,10 @@
                                 <span class="ml-2">{{ __('Edit') }}</span>
                             </x-buttons.primary-button>
 
-                            <x-buttons.secondary-button class="flex items-center"
-                                href="{{ route('pets.images', $pet->id) }}">
+                            <x-buttons.purple-button class="flex items-center" href="{{ route('pets.images', $pet->id) }}">
                                 <x-icons.image />
                                 <span class="ml-2">{{ __('Images') }}</span>
-                            </x-buttons.secondary-button>
+                            </x-buttons.purple-button>
 
                             <x-modal-delete title="Are you sure you want to delete the pet?" :action="route('pets.destroy', $pet->id)">
                                 <x-buttons.danger-button class="flex items-center" x-on:click="open = true">
