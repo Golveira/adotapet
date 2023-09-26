@@ -32,9 +32,9 @@
         </div>
 
         <div class="mt-4 flex items-center justify-between">
-            <x-button class="mr-0 w-full" type="submit">
+            <x-buttons.primary-button class="mr-0 w-full" type="submit">
                 {{ __('Log in') }}
-            </x-button>
+            </x-buttons.primary-button>
         </div>
 
         <p class="mt-4 text-sm font-light text-gray-500">
