@@ -1,29 +1,29 @@
-<nav class="bg-white border-b-2 border-gray-100 dark:bg-gray-900">
-    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+<nav class="border-b-2 border-gray-100 bg-white dark:bg-gray-900">
+    <div class="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
         <!-- Logo -->
-        <a href="{{ route('welcome') }}" class="flex items-center">
-            <img src="{{ asset('assets/images/logo.png') }}" class="h-8 mr-3" alt="Adotapet Logo" />
+        <a class="flex items-center" href="{{ route('welcome') }}">
+            <x-application-logo class="mr-3 h-8" />
         </a>
 
         <div class="flex items-center md:order-2">
             @auth
-                <button type="button"
-                    class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-                    id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
-                    data-dropdown-placement="bottom">
+                <button
+                    class="mr-3 flex rounded-full bg-gray-800 text-sm focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 md:mr-0"
+                    id="user-menu-button" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom" type="button"
+                    aria-expanded="false">
                     <span class="sr-only">Open user menu</span>
-                    <x-avatar class="rounded-full ring-2 ring-gray-300" :avatar="Auth::user()->avatar" />
+                    <x-avatar class="rounded-full ring-2" :avatar="Auth::user()->avatar" />
                 </button>
 
                 <!-- User menu dropdown -->
-                <div class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
+                <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:divide-gray-600 dark:bg-gray-700"
                     id="user-dropdown">
                     <div class="px-4 py-3">
                         <span class="block text-sm text-gray-900 dark:text-white">
                             {{ Auth::user()->name }}
                         </span>
 
-                        <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">
+                        <span class="block truncate text-sm text-gray-500 dark:text-gray-400">
                             {{ Auth::user()->email }}
                         </span>
                     </div>
@@ -42,7 +42,7 @@
                         </li>
 
                         <li>
-                            <x-dropdown-link :href="route('settings.profile.edit')">
+                            <x-dropdown-link :href="route('settings.index')">
                                 {{ __('Settings') }}
                             </x-dropdown-link>
                         </li>
@@ -64,27 +64,27 @@
 
             @guest
                 <div class="hidden lg:block">
-                    <x-button href="{{ route('login') }}" class="me-3">
+                    <x-button class="me-3" href="{{ route('login') }}">
                         {{ __('Login') }}
                     </x-button>
 
-                    <x-button color="alternative" href="{{ route('register') }}">
+                    <x-button href="{{ route('register') }}" color="alternative">
                         {{ __('Register') }}
                     </x-button>
                 </div>
 
-                <div class="md:hidden me-5">
+                <div class="me-5 md:hidden">
                     <a href="{{ route('login') }}">
                         <x-icons.user />
                     </a>
                 </div>
             @endguest
 
-            <button data-collapse-toggle="navbar-user" type="button"
-                class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                aria-controls="navbar-user" aria-expanded="false">
+            <button
+                class="inline-flex h-10 w-10 items-center justify-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden"
+                data-collapse-toggle="navbar-user" type="button" aria-controls="navbar-user" aria-expanded="false">
                 <span class="sr-only">Open main menu</span>
-                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 17 14">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M1 1h15M1 7h15M1 13h15" />
@@ -93,9 +93,9 @@
         </div>
 
         <!-- Nav links -->
-        <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
+        <div class="hidden w-full items-center justify-between md:order-1 md:flex md:w-auto" id="navbar-user">
             <ul
-                class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                class="mt-4 flex flex-col rounded-lg border border-gray-100 bg-gray-50 p-4 font-medium dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 md:dark:bg-gray-900">
                 <li>
                     <x-nav-link :href="route('pets.index')" :active="request()->routeIs('pets.index')">
                         {{ __('Adopt') }}
