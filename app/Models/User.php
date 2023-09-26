@@ -82,6 +82,16 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
         return $this->favorites->contains($pet);
     }
 
+    public function favorite(Pet $pet)
+    {
+        $this->favorites()->attach($pet);
+    }
+
+    public function unfavorite(Pet $pet)
+    {
+        $this->favorites()->detach($pet);
+    }
+
     public function toggleFavorite(Pet $pet)
     {
         $this->favorites()->toggle($pet);
