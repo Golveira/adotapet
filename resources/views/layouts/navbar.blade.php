@@ -96,21 +96,21 @@
             <ul
                 class="mt-4 flex flex-col rounded-lg border border-gray-100 bg-gray-50 p-4 font-medium dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 md:dark:bg-gray-900">
                 <li>
-                    <x-links.nav-link :href="route('pets.index')" :active="request()->routeIs('pets.index')">
+                    <x-links.dark-link :href="route('pets.index')" :active="request()->routeIs('pets.index')">
                         {{ __('Adopt') }}
-                    </x-links.nav-link>
+                    </x-links.dark-link>
                 </li>
 
                 <li>
-                    <x-links.nav-link :href="route('pets.create')" :active="request()->routeIs('pets.create')">
+                    <x-links.dark-link :href="route('pets.create')" :active="request()->routeIs('pets.create')">
                         {{ __('Foster') }}
-                    </x-links.nav-link>
+                    </x-links.dark-link>
                 </li>
 
                 <li>
-                    <x-links.nav-link :href="route('login')" :active="request()->routeIs('login')">
+                    <x-links.dark-link :href="route('login')" :active="request()->routeIs('login')">
                         {{ __('About us') }}
-                    </x-links.nav-link>
+                    </x-links.dark-link>
                 </li>
             </ul>
         </div>
