@@ -30,10 +30,9 @@
                                     <x-icons.globe />
                                 </span>
 
-                                <x-link class="text-sm text-gray-700 hover:text-blue-700 hover:no-underline"
-                                    href="{{ $user->website }}" target="_blank">
+                                <x-links.dark-link class="text-sm" href="{{ $user->website }}" target="_blank">
                                     {{ $user->website }}
-                                </x-link>
+                                </x-links.dark-link>
                             </div>
                         @endif
 
@@ -43,10 +42,9 @@
                                     <x-icons.phone />
                                 </span>
 
-                                <x-link class="text-sm text-gray-700 hover:text-blue-700 hover:no-underline"
-                                    href="https://wa.me/{{ $user->whatsapp }}">
+                                <x-links.dark-link class="text-sm" href="https://wa.me/{{ $user->whatsapp }}">
                                     {{ $user->whatsapp }}
-                                </x-link>
+                                </x-links.dark-link>
                             </div>
                         @endif
 
@@ -56,10 +54,9 @@
                                     <x-icons.envelope />
                                 </span>
 
-                                <x-link class="text-sm text-gray-700 hover:text-blue-700 hover:no-underline"
-                                    href="mailto:{{ $user->email }}">
+                                <x-links.dark-link class="text-sm" href="mailto:{{ $user->email }}">
                                     {{ $user->email }}
-                                </x-link>
+                                </x-links.dark-link>
                             </div>
                         @endif
                     </div>
