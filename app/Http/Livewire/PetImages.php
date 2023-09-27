@@ -19,23 +19,18 @@ class PetImages extends Component
 
     protected $rules = [
         'photos' => 'array|max:8',
-        'photos.*' => 'image|max:1024',
-    ];
-
-    protected $messages = [
-        'photos.*.max' => 'The photo may not be greater than 1 MB.',
-        'photos.*.image' => 'The file must be an image.',
+        'photos.*' => 'image|max:2048',
     ];
 
     public function mount($pet)
     {
+        $this->authorize('update', $this->pet);
+
         $this->pet = $pet;
     }
 
     public function updatedPhotos()
     {
-        $this->authorize('update', $this->pet);
-
         $this->validate();
 
         foreach ($this->photos as $photo) {
@@ -50,8 +45,6 @@ class PetImages extends Component
 
     public function delete($id)
     {
-        $this->authorize('delete', $this->pet);
-
         $this->pet->deleteMedia($id);
 
         $this->emit('refresh');
