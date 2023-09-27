@@ -12,7 +12,7 @@
             </p>
 
             <p class="text-xs text-gray-500 md:text-sm">
-                PNG, JPG, JPEG (MAX. 1MB)
+                PNG, JPG, JPEG (MAX. 2MB)
             </p>
         </div>
 
