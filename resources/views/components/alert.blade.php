@@ -1,4 +1,4 @@
-@props(['type' => 'success'])
+@props(['type' => 'success', 'message'])
 
 @php
     $color = [
@@ -10,5 +10,5 @@
 @endphp
 
 <div role="alert" {{ $attributes->merge(['class' => "p-4 mb-4 text-sm rounded-lg $color"]) }}>
-    {{ $slot }}
+    {{ $message ?? $slot }}
 </div>
