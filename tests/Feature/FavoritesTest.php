@@ -2,8 +2,10 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Livewire\Livewire;
+use App\Http\Livewire\FavoriteButton;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class FavoritesTest extends TestCase
 {
@@ -26,5 +28,53 @@ class FavoritesTest extends TestCase
     {
         $this->get('/favorites')
             ->assertRedirect('/login');
+    }
+
+    public function test_guests_cannot_favorite_a_pet()
+    {
+        $pet = $this->createPet();
+
+        Livewire::test(FavoriteButton::class, ['pet' => $pet])
+            ->assertSet('pet', $pet)
+            ->call('toggleFavorite')
+            ->assertRedirect('/login');
+
+        $this->assertGuest();
+    }
+
+    public function test_user_can_favorite_a_pet()
+    {
+        $user = $this->createUser();
+        $pet = $this->createPet();
+
+        Livewire::actingAs($user)
+            ->test(FavoriteButton::class, ['pet' => $pet])
+            ->assertSet('pet', $pet)
+            ->call('toggleFavorite')
+            ->assertEmitted('refresh');
+
+        $this->assertDatabaseHas('favorites', [
+            'user_id' => $user->id,
+            'pet_id' => $pet->id,
+        ]);
+    }
+
+    public function test_user_can_unfavorite_a_pet()
+    {
+        $user = $this->createUser();
+        $pet = $this->createPet();
+
+        $user->toggleFavorite($pet);
+
+        Livewire::actingAs($user)
+            ->test(FavoriteButton::class, ['pet' => $pet])
+            ->assertSet('pet', $pet)
+            ->call('toggleFavorite')
+            ->assertEmitted('refresh');
+
+        $this->assertDatabaseMissing('favorites', [
+            'user_id' => $user->id,
+            'pet_id' => $pet->id,
+        ]);
     }
 }
