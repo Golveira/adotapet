@@ -1,29 +1,28 @@
 <section class="mb-10">
     <div class="mx-auto max-w-screen-xl px-4 py-8">
-        <h2 class="mb-10 text-2xl tracking-tight font-extrabold text-gray-900">
-            {{ __('Photos of') }} {{ $pet->name }}
-        </h2>
+        <div class="mb-10">
+            <h2 class="mb-6 text-2xl font-extrabold tracking-tight text-gray-900">
+                {{ __('Photos of') }} {{ $pet->name }}
+            </h2>
+
+            <x-buttons.primary-button href="{{ route('pets.show', $pet->id) }}">
+                {{ __('Back') }}
+            </x-buttons.primary-button>
+        </div>
 
         @error('photos')
-            <x-alert :message="$message" />
+            <x-alert type="error" :message="$message" />
         @enderror
 
         @error('photos.*')
-            <x-alert :message="$message" />
+            <x-alert type="error" :message="$message" />
         @enderror
 
-        <x-dropzone wire:model="photos" />
+        <x-dropzone />
 
-        <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-8">
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
             @forelse ($images as $image)
-                <div class="relative max-w-sm">
-                    <img class="rounded-lg object-cover	h-72 w-96" src="{{ $image->getUrl() }}">
-
-                    <button wire:click="$emit('delete', {{ $image->id }})"
-                        class="absolute bg-red-700 bottom-0 inset-x-0 py-2 rounded-b-lg text-white text-center font-bold">
-                        {{ __('Remove') }}
-                    </button>
-                </div>
+                <x-pets.image-card :image="$image" />
             @empty
                 <div class="col-span-4 text-center text-xl">
                     {{ __('No images found') }}
