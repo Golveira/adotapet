@@ -35,8 +35,7 @@ class PetImages extends Component
 
         foreach ($this->photos as $photo) {
             $this->pet
-                ->addMedia($photo->getRealPath())
-                ->usingName($photo->getClientOriginalName())
+                ->addMedia($photo)
                 ->toMediaCollection('pets-gallery');
         }
 
