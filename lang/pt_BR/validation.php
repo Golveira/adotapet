@@ -109,7 +109,7 @@ return [
         'numbers' => 'O campo :attribute deve conter pelo menos um número.',
         'symbols' => 'O campo :attribute deve conter pelo menos um símbolo.',
         'uncompromised' => 'A senha que você inseriu em :attribute está em um vazamento de dados.'
-        . ' Por favor escolha uma senha diferente.',
+            . ' Por favor escolha uma senha diferente.',
     ],
     'present' => 'O campo :attribute deve estar presente.',
     'regex' => 'O campo :attribute tem um formato inválido.',
@@ -162,7 +162,14 @@ return [
             'required' => 'O campo cidade é obrigatório.',
         ],
         'photo' => [
-            'max' => 'A foto não pode ser maior que 1 MB.',
+            'max' => 'A foto não pode ser maior que 2 MB.',
+        ],
+        'photos' => [
+            'max' => 'Máximo de 8 fotos permitidas',
+        ],
+        'photos.*' => [
+            'max' => 'A foto não pode ser maior que 2 MB.',
+            'image' => 'O formato da foto é inválido.',
         ],
     ],
 
