@@ -220,7 +220,7 @@ return [
         'text' => 'texto',
         'time' => 'hora',
         'title' => 'título',
-        'username' => 'apelido',
+        'username' => 'nome de usuário',
         'year' => 'ano',
         'description' => 'descrição',
         'password_confirmation' => 'confirmação da senha',
