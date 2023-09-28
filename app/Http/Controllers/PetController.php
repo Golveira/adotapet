@@ -15,7 +15,7 @@ class PetController extends Controller
 {
     public function __construct(private PetService $petService)
     {
-        $this->middleware('auth')->except(['index', 'show']);
+        $this->middleware(['auth', 'verified'])->except(['index', 'show']);
     }
 
     public function index(): View
