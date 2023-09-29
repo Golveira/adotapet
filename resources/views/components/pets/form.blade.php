@@ -97,7 +97,7 @@
 
         <div>
             <h3 class="mb-2 text-sm font-medium text-gray-700">
-                {{ __('Temperament') }}
+                {{ __('Temperaments') }}
             </h3>
 
             <x-pets.temperaments-checkboxes :checkedValues="old('temperaments', $pet?->temperamentsId)" />
