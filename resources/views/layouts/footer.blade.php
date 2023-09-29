@@ -3,7 +3,7 @@
         <div class="md:flex md:justify-between">
             <!-- Logo -->
             <a class="mb-10 block" href="{{ route('welcome') }}">
-                <x-application-logo />
+                <x-application-logo class="mr-3 h-8" />
             </a>
 
             <!-- Links -->
