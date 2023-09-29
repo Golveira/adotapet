@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div class="mb-4 text-sm text-gray-600">
-        {{ __("Before getting started, you must verify your email address by clicking on the verification link sent tou your email. If you didn't receive verification link, check your spam folder or request a new link.") }}
+        {{ __("Before proceeding, please verify your email address. To do so, simply click the button below, and we'll send a verification link to your email.") }}
     </div>
 
     @if (session('status') == 'verification-link-sent')
@@ -20,12 +20,8 @@
             </div>
         </form>
 
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-
-            <x-buttons.dark-button type="submit">
-                {{ __('Log Out') }}
-            </x-buttons.dark-button>
-        </form>
+        <x-links.dark-link class="text-sm" href="{{ url()->previous() }}">
+            {{ __('Back') }}
+        </x-links.dark-link>
     </div>
 </x-guest-layout>
