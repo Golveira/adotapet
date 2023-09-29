@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Http\Livewire\FavoriteButton;
 use App\Http\Livewire\ShowPets;
 use App\Models\Pet;
 use Tests\TestCase;
@@ -154,6 +153,15 @@ class PetTest extends TestCase
         $this->assertTrue($pet->sociabilities->contains(1));
 
         Storage::disk('public')->assertExists('1/pet.jpg');
+    }
+
+    public function test_user_cannot_create_pet_if_email_is_not_verified()
+    {
+        $user = $this->createUser(['email_verified_at' => null]);
+
+        $this->actingAs($user)
+            ->post('/pets', $this->validParams())
+            ->assertRedirect('/verify-email');
     }
 
     public function test_user_can_update_a_pet()
