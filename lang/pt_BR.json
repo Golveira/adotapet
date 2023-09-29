@@ -39,7 +39,7 @@
     "Ensure your account is using a long, random password to stay secure.": "Certifique-se de que sua conta esteja usando uma senha longa e aleatória para permanecer segura.",
     "Forgot Your Password?": "Esqueceu sua senha?",
     "Forgot your password?": "Esqueceu sua senha?",
-    "Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.": "Esqueceu sua senha? Sem problemas. Apenas informe seu endereço de e-mail que enviaremos um link que permitirá definir uma nova senha.",
+    "Please enter your email, and we will send you instructions to create your new password.": "Por favor, digite seu e-mail e enviaremos as instruções para criar uma nova senha.",
     "Hello!": "Olá!",
     "Home": "Principal",
     "I agree to the :terms_of_service and :privacy_policy": "Eu concordo com os :terms_of_service e com a :privacy_policy",
@@ -83,7 +83,7 @@
     "Remember me": "Manter conectado",
     "Remove Photo": "Remover imagem",
     "Resend Verification Email": "Reenviar o e-mail de verificação",
-    "Reset Password": "Modificar Senha",
+    "Reset Password": "Alterar Senha",
     "Reset Password Notification": "Notificação de redefinição de senha",
     "Save": "Salvar",
     "Saved.": "Salvou",
@@ -300,5 +300,9 @@
     "Sign up": "Cadastre-se",
     "Already have an account?": "Já tem uma conta?",
     "By signing up, you agree to our": "Ao se cadastrar, você concorda com os nossos",
-   "Terms of Use and Privacy Policy": "Termos de Uso e Políticas de Privacidade"
+    "Before proceeding, please verify your email address. To do so, simply click the button below, and we'll send a verification link to your email.": "Antes de prosseguir, por favor, verifique seu endereço de e-mail. Para fazer isso, basta clicar no botão abaixo, e enviaremos um link de verificação para o seu e-mail.",
+   "Terms of Use and Privacy Policy": "Termos de Uso e Políticas de Privacidade",
+   "A new verification link has been sent to the email address you provided during registration.": "Um novo link de verificação foi enviado para o endereço de e-mail fornecido durante o registro.",
+   "Send": "Enviar"
+
 }
