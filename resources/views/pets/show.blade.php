@@ -7,16 +7,18 @@
                     {{ __('This pet is awaiting for aproval and will be available for adoption soon.') }}
                 </x-alert>
             @endif
+            <!-- Alert -->
 
             <div class="grid gap-8 lg:grid-cols-10">
                 <!-- Carousel -->
                 <div class="lg:col-span-6">
-                    @if (count($pet->images) > 1)
+                    @if (!$pet->is_adopted && count($pet->images) > 1)
                         <x-pets.pet-carousel :images="$pet->images" />
                     @else
-                        <img class="block h-56 w-full rounded-lg object-cover md:h-[32rem]" src="{{ $pet->main_photo }}">
+                        <x-pets.photo :pet="$pet" />
                     @endif
                 </div>
+                <!-- Carousel -->
 
                 <div class="lg:col-span-4">
                     <!-- Actions -->
@@ -27,7 +29,8 @@
                                 <span class="ml-2">{{ __('Edit') }}</span>
                             </x-buttons.primary-button>
 
-                            <x-buttons.purple-button class="flex items-center" href="{{ route('pets.images', $pet->id) }}">
+                            <x-buttons.purple-button class="flex items-center"
+                                href="{{ route('pets.images.index', $pet->id) }}">
                                 <x-icons.image />
                                 <span class="ml-2">{{ __('Images') }}</span>
                             </x-buttons.purple-button>
@@ -40,6 +43,7 @@
                             </x-modal-delete>
                         </div>
                     @endcan
+                    <!-- Actions -->
 
                     <!-- Pet Info -->
                     <x-card class="relative">
@@ -133,8 +137,8 @@
                             </div>
                         </div>
 
-                        <!-- Adoption actions -->
                         @can('update', $pet)
+                            <!-- Adoption Status Actions -->
                             <div class="w-full">
                                 @if ($pet->is_adopted)
                                     <form action="{{ route('pets.mark-as-available', $pet->id) }}" method="POST">
@@ -154,6 +158,7 @@
                                     </form>
                                 @endif
                             </div>
+                            <!-- Adoption Status Actions -->
                         @else
                             @if (!$pet->is_adopted)
                                 <div class="flex">
@@ -164,6 +169,7 @@
                             @endif
                         @endcan
                     </x-card>
+                    <!-- Pet Info -->
                 </div>
             </div>
 
@@ -171,8 +177,8 @@
                 <div class="lg:col-span-6">
                     @if ($pet->hasAdditionalInfo())
                         <x-card>
+                            <!-- Pet description -->
                             @if ($pet->description)
-                                <!-- Pet description -->
                                 <div class="mb-5 border-b pb-5 last:border-b-0 last:pb-0">
                                     <h6 class="mb-3 text-lg font-bold">
                                         {{ __('Description') }}
@@ -183,9 +189,10 @@
                                     </p>
                                 </div>
                             @endif
+                            <!-- Pet description -->
 
+                            <!-- Veterinary Cares -->
                             @if ($pet->veterinaryCares->count() > 0)
-                                <!-- Veterinary Cares -->
                                 <div class="mb-5 border-b pb-5 last:border-b-0 last:pb-0">
                                     <h6 class="mb-3 font-bold">
                                         {{ __('Vet Info') }}
@@ -205,11 +212,11 @@
                                         @endforeach
                                     </div>
                                 </div>
-
                             @endif
+                            <!-- Veterinary Cares -->
 
+                            <!-- Sociabilities -->
                             @if ($pet->sociabilities->count() > 0)
-                                <!-- Sociabilities -->
                                 <div class="mb-5 border-b pb-5 last:border-b-0 last:pb-0">
                                     <h6 class="mb-3 font-bold">
                                         {{ __('Sociable with') }}
@@ -229,11 +236,11 @@
                                         @endforeach
                                     </div>
                                 </div>
-
                             @endif
+                            <!-- Sociabilities -->
 
+                            <!-- Temperaments -->
                             @if ($pet->temperaments->count() > 0)
-                                <!-- Temperaments -->
                                 <div class="mb-5 border-b pb-5 last:border-b-0 last:pb-0">
                                     <h6 class="mb-3 font-bold">
                                         {{ __('Temperaments') }}
@@ -248,6 +255,7 @@
                                     </div>
                                 </div>
                             @endif
+                            <!-- Temperaments -->
                         </x-card>
                     @endif
                 </div>
