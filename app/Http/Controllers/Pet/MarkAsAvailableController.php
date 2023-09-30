@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Pet;
 
 use App\Models\Pet;
+use App\Http\Controllers\Controller;
 
 class MarkAsAvailableController extends Controller
 {

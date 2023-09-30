@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Pet;
 
 use App\Http\Requests\User\UpdatePetRequest;
 use App\Models\Pet;

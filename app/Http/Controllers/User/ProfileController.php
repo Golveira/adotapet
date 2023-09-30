@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use App\Models\User;
 use Illuminate\View\View;
+use App\Http\Controllers\Controller;
 
 class ProfileController extends Controller
 {
