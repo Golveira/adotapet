@@ -15,4 +15,10 @@
             {{ $pet->address }}
         </p>
     </div>
+
+    @if ($pet->is_adopted)
+        <div class="absolute bottom-0 w-full bg-yellow-400 text-center font-extrabold uppercase text-white">
+            {{ __('Adopted') }}
+        </div>
+    @endif
 </div>
