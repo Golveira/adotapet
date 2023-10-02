@@ -52,6 +52,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_admin'])->gro
     Route::resource('media', MediaController::class, ['parameters' => ['media' => 'media']])->only(['destroy']);
 });
 
-Route::get('/profile/{username}', [ProfileController::class, 'show'])->name('profile.show');
+Route::get('@{username}', [ProfileController::class, 'show'])->name('profile.show');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
