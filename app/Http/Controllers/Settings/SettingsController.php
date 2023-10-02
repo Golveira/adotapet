@@ -9,7 +9,7 @@ class SettingsController extends Controller
 {
     public function __invoke()
     {
-        return view('user.settings.settings', [
+        return view('user.settings.index', [
             'user' => Auth::user(),
         ]);
     }
