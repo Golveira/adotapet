@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use Livewire\Livewire;
 use App\Http\Livewire\FavoriteButton;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\Livewire;
+use Tests\TestCase;
 
 class FavoritesTest extends TestCase
 {

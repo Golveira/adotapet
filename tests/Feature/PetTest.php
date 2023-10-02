@@ -4,11 +4,11 @@ namespace Tests\Feature;
 
 use App\Http\Livewire\ShowPets;
 use App\Models\Pet;
-use Tests\TestCase;
-use Livewire\Livewire;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\Livewire;
+use Tests\TestCase;
 
 class PetTest extends TestCase
 {
@@ -89,7 +89,7 @@ class PetTest extends TestCase
 
         $pet = $this->createPet([
             'user_id' => $user->id,
-            'is_adopted' => 0
+            'is_adopted' => 0,
         ]);
 
         $this->actingAs($user)
@@ -241,7 +241,7 @@ class PetTest extends TestCase
 
         $this->assertDatabaseHas('pets', [
             'id' => $pet->id,
-            'is_adopted' => true
+            'is_adopted' => true,
         ]);
     }
 
@@ -271,7 +271,7 @@ class PetTest extends TestCase
 
         $this->assertDatabaseHas('pets', [
             'id' => $pet->id,
-            'is_adopted' => false
+            'is_adopted' => false,
         ]);
     }
 

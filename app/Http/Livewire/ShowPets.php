@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Pet;
 use App\Models\City;
+use App\Models\Pet;
 use App\Models\State;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -74,7 +74,7 @@ class ShowPets extends Component
 
     public function hasFilters()
     {
-        return !empty($this->getFilters());
+        return ! empty($this->getFilters());
     }
 
     public function getFilters()

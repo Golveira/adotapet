@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Pet;
 use App\Models\User;
-use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
@@ -13,7 +13,7 @@ class HomeController extends Controller
         return view('admin.home', [
             'totalUsers' => User::count(),
             'totalPets' => Pet::count(),
-            'totalAdoptions' => Pet::adopted()->count()
+            'totalAdoptions' => Pet::adopted()->count(),
         ]);
     }
 }

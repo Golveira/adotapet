@@ -2,10 +2,10 @@
 
 namespace App\View\Components\Pets;
 
-use Closure;
 use App\Models\Temperament;
-use Illuminate\View\Component;
+use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
 
 class TemperamentsCheckboxes extends Component
 {

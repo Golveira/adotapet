@@ -2,10 +2,10 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
-use App\Models\State;
 use App\Models\Sociability;
+use App\Models\State;
 use App\Models\Temperament;
+use App\Models\User;
 use App\Models\VeterinaryCare;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -83,7 +83,7 @@ class PetFactory extends Factory
                         'assets/images/cat2.jpg',
                         'assets/images/cat3.jpg',
                     ],
-                ]
+                ],
             ];
 
             $pet->addMediaFromUrl(asset($images[$pet->specie]['main']))

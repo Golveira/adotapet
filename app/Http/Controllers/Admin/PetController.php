@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Pet;
-use Illuminate\View\View;
-use App\Services\PetService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePetRequest;
 use App\Http\Requests\UpdatePetRequest;
+use App\Models\Pet;
+use App\Services\PetService;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class PetController extends Controller
 {

@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class UserTest extends TestCase
 {
@@ -14,7 +14,7 @@ class UserTest extends TestCase
     {
         $admin = User::factory()->create(['is_admin' => true]);
 
-        $response = $this->actingAs($admin,)
+        $response = $this->actingAs($admin)
             ->post(route('admin.users.store', [
                 'name' => 'Test User',
                 'username' => 'testuser',
@@ -28,7 +28,7 @@ class UserTest extends TestCase
         $this->assertDatabaseHas('users', [
             'name' => 'Test User',
             'username' => 'testuser',
-            'email' => 'test@example.com'
+            'email' => 'test@example.com',
         ]);
     }
 
@@ -41,7 +41,7 @@ class UserTest extends TestCase
             ->put(route('admin.users.update', $user), [
                 'name' => 'Test User',
                 'username' => 'testuser',
-                'email' => 'test@example.com'
+                'email' => 'test@example.com',
             ]);
 
         $response->assertRedirect(route('admin.users.index'));
@@ -49,7 +49,7 @@ class UserTest extends TestCase
         $this->assertDatabaseHas('users', [
             'name' => 'Test User',
             'username' => 'testuser',
-            'email' => 'test@example.com'
+            'email' => 'test@example.com',
         ]);
     }
 
@@ -64,7 +64,7 @@ class UserTest extends TestCase
         $response->assertRedirect(route('admin.users.index'));
 
         $this->assertDatabaseMissing('users', [
-            'id' => $user->id
+            'id' => $user->id,
         ]);
     }
 }

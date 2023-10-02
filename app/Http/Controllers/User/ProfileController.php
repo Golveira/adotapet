@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\View\View;
-use App\Http\Controllers\Controller;
 
 class ProfileController extends Controller
 {

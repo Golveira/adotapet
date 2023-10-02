@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\State;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -27,7 +27,7 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => bcrypt('password'),
-            'website' => "www." . fake()->domainName(),
+            'website' => 'www.'.fake()->domainName(),
             'whatsapp' => fake()->tollFreePhoneNumber(),
             'bio' => fake()->paragraph(),
             'state_id' => $state->id,

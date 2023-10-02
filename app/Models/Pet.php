@@ -139,10 +139,10 @@ class Pet extends Model implements HasMedia
 
     public function scopeFilter($query, array $filters)
     {
-        return $query->where('name', 'like', '%' . $filters['name'] . '%')
-            ->where('specie', 'like', '%' . $filters['specie'] . '%')
-            ->where('age', 'like', '%' . $filters['age'] . '%')
-            ->where('size', 'like', '%' . $filters['size'] . '%')
+        return $query->where('name', 'like', '%'.$filters['name'].'%')
+            ->where('specie', 'like', '%'.$filters['specie'].'%')
+            ->where('age', 'like', '%'.$filters['age'].'%')
+            ->where('size', 'like', '%'.$filters['size'].'%')
             ->when($filters['sex'], function ($query, $sex) {
                 return $query->where('sex', $sex);
             })

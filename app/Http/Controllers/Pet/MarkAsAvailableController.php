@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Pet;
 
-use App\Models\Pet;
 use App\Http\Controllers\Controller;
+use App\Models\Pet;
 
 class MarkAsAvailableController extends Controller
 {

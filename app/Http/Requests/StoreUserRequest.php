@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreUserRequest extends FormRequest
 {
@@ -19,7 +19,7 @@ class StoreUserRequest extends FormRequest
             'email' => ['required', 'email', 'max:255', Rule::unique('users')],
             'username' => ['required', 'string', 'max:255', Rule::unique('users')],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'is_admin' => ['nullable', 'boolean']
+            'is_admin' => ['nullable', 'boolean'],
         ];
     }
 }

@@ -3,8 +3,8 @@
 namespace App\Http\Livewire;
 
 use App\Models\Pet;
-use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
 
 class FavoriteButton extends Component
 {
@@ -29,13 +29,13 @@ class FavoriteButton extends Component
 
     public function toggleFavorite()
     {
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             return redirect()->route('login');
         }
 
         Auth::user()->toggleFavorite($this->pet);
 
-        $this->isFavorite = !$this->isFavorite;;
+        $this->isFavorite = ! $this->isFavorite;
 
         $this->emitUp('refresh');
     }

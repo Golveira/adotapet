@@ -1,5 +1,5 @@
 <?php
 
 return [
-    "updated" => "Email alterado com sucesso!",
+    'updated' => 'Email alterado com sucesso!',
 ];

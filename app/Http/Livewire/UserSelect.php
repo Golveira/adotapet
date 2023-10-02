@@ -3,19 +3,22 @@
 namespace App\Http\Livewire;
 
 use App\Models\User;
-use Livewire\Component;
 use Illuminate\Support\Collection;
+use Livewire\Component;
 
 class UserSelect extends Component
 {
     public Collection $users;
+
     public ?User $selectedUser;
+
     public string $search;
 
     public function updatedSearch($search)
     {
         if (strlen($search) < 2) {
             $this->users = collect();
+
             return;
         }
 

@@ -3,9 +3,9 @@
 namespace App\Http\Livewire;
 
 use App\Models\Pet;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class PetImages extends Component
 {

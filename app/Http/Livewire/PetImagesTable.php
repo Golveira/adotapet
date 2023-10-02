@@ -3,12 +3,17 @@
 namespace App\Http\Livewire;
 
 use App\Models\Pet;
-use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
-use PowerComponents\LivewirePowerGrid\Rules\{RuleActions};
+use Illuminate\Support\Carbon;
+use PowerComponents\LivewirePowerGrid\Button;
+use PowerComponents\LivewirePowerGrid\Column;
 use PowerComponents\LivewirePowerGrid\Filters\Filter;
+use PowerComponents\LivewirePowerGrid\Footer;
+use PowerComponents\LivewirePowerGrid\PowerGrid;
+use PowerComponents\LivewirePowerGrid\PowerGridColumns;
+use PowerComponents\LivewirePowerGrid\PowerGridComponent;
+use PowerComponents\LivewirePowerGrid\Rules\{RuleActions};
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
-use PowerComponents\LivewirePowerGrid\{Button, Column, Footer, Header, PowerGrid, PowerGridComponent, PowerGridColumns};
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 final class PetImagesTable extends PowerGridComponent
@@ -55,7 +60,6 @@ final class PetImagesTable extends PowerGridComponent
             ->where('model_type', Pet::class);
     }
 
-
     /*
     |--------------------------------------------------------------------------
     |  Relationship Search
@@ -90,7 +94,7 @@ final class PetImagesTable extends PowerGridComponent
         return PowerGrid::columns()
             ->addColumn('id')
             ->addColumn('image', function (Media $model) {
-                return '<img src="' . $model->getUrl() . '" class="w-10 h-10 rounded object-cover object-center " />';
+                return '<img src="'.$model->getUrl().'" class="w-10 h-10 rounded object-cover object-center " />';
             })
             ->addColumn('created_at')
             ->addColumn('created_at_formatted', fn (Media $model) => Carbon::parse($model->created_at)->format('d/m/Y'));
@@ -147,7 +151,6 @@ final class PetImagesTable extends PowerGridComponent
      *
      * @return array<int, Button>
      */
-
     public function actions(): array
     {
         return [

@@ -24,6 +24,6 @@ class PetPolicy
 
     public function adopt(User $user, Pet $pet): bool
     {
-        return !$pet->user->is($user);
+        return ! $pet->user->is($user);
     }
 }

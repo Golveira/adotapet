@@ -1,17 +1,21 @@
 <?php
 
-use App\Http\Controllers\Settings\AccountDeletionController;
-use App\Http\Controllers\Settings\EmailUpdateController;
-use App\Http\Livewire\Favorites;
-use App\Http\Livewire\PetImages;
-use App\Http\Controllers\PetController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\MediaController;
+use App\Http\Controllers\Admin\PetController as AdminPetController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Pet\MarkAsAdoptedController;
+use App\Http\Controllers\Pet\MarkAsAvailableController;
+use App\Http\Controllers\Pet\PetController;
+use App\Http\Controllers\Pet\PetImagesController;
+use App\Http\Controllers\Settings\PasswordController;
+use App\Http\Controllers\Settings\ProfileController as ProfileSettingsController;
+use App\Http\Controllers\Settings\SettingsController;
+use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\WelcomeController;
-use App\Http\Controllers\PetAvailabilityController;
-use App\Http\Controllers\Settings\ProfileUpdateController;
-use App\Http\Controllers\Settings\PasswordUpdateController;
+use App\Http\Livewire\Favorites;
 
-/*
+/*f
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -26,46 +30,28 @@ Route::get('/', WelcomeController::class)->name('welcome');
 
 Route::resource('pets', PetController::class);
 
-Route::middleware('auth')->group(function () {
-    Route::get('/favorites', Favorites::class)
-        ->name('favorites.index');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/favorites', Favorites::class)->name('favorites.index');
 
-    Route::get('/pets/{pet}/images', PetImages::class)
-        ->name('pets.images');
-
-    Route::post('/pets/{pet}/mark-as-available', [PetAvailabilityController::class, 'markAsAvailable'])
-        ->name('pets.mark-as-available');
-
-    Route::post('/pets/{pet}/mark-as-adopted', [PetAvailabilityController::class, 'markAsAdopted'])
-        ->name('pets.mark-as-adopted');
-
+    Route::get('/pets/{pet}/images', PetImagesController::class)->name('pets.images.index');
+    Route::post('/pets/{pet}/mark-as-available', MarkAsAvailableController::class)->name('pets.mark-as-available');
+    Route::post('/pets/{pet}/mark-as-adopted', MarkAsAdoptedController::class)->name('pets.mark-as-adopted');
 
     Route::prefix('settings')->name('settings.')->group(function () {
-        Route::redirect('/', '/settings/profile');
-
-        Route::get('/profile', [ProfileUpdateController::class, 'edit'])
-            ->name('profile.edit');
-
-        Route::put('/profile', [ProfileUpdateController::class, 'update'])
-            ->name('profile.update');
-
-        Route::get('/email', [EmailUpdateController::class, 'edit'])
-            ->name('email.edit');
-
-        Route::put('/email', [EmailUpdateController::class, 'update'])
-            ->name('email.update');
-
-        Route::get('/password', [PasswordUpdateController::class, 'edit'])
-            ->name('password.edit');
-
-        Route::put('password', [PasswordUpdateController::class, 'update'])
-            ->name('password.update');
-
-        Route::delete('/remove-account', [AccountDeletionController::class, 'destroy'])
-            ->name('account.destroy');
+        Route::get('/', SettingsController::class)->name('index');
+        Route::put('/profile', [ProfileSettingsController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileSettingsController::class, 'destroy'])->name('profile.destroy');
+        Route::put('/password', [PasswordController::class, 'update'])->name('password.update');
     });
+});
+
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'check_admin'])->group(function () {
+    Route::get('/', HomeController::class)->name('home');
+    Route::resource('users', UserController::class);
+    Route::resource('pets', AdminPetController::class);
+    Route::resource('media', MediaController::class, ['parameters' => ['media' => 'media']])->only(['destroy']);
 });
 
 Route::get('/profile/{username}', [ProfileController::class, 'show'])->name('profile.show');
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';
