@@ -6,8 +6,8 @@ use App\Models\Pet;
 use Illuminate\View\View;
 use App\Services\PetService;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StorePetRequest;
-use App\Http\Requests\Admin\UpdatePetRequest;
+use App\Http\Requests\StorePetRequest;
+use App\Http\Requests\UpdatePetRequest;
 use Illuminate\Http\RedirectResponse;
 
 class PetController extends Controller
