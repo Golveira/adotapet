@@ -69,28 +69,12 @@ class PetFactory extends Factory
     public function withMedia(): self
     {
         return $this->afterCreating(function ($pet) {
-            $images = [
-                'dog' => [
-                    'main' => 'assets/images/dog.jpg',
-                    'gallery' => [
-                        'assets/images/dog2.jpg',
-                        'assets/images/dog3.jpg',
-                    ],
-                ],
-                'cat' => [
-                    'main' => 'assets/images/cat.jpg',
-                    'gallery' => [
-                        'assets/images/cat2.jpg',
-                        'assets/images/cat3.jpg',
-                    ],
-                ],
-            ];
 
-            $pet->addMediaFromUrl(asset($images[$pet->specie]['main']))
+            $pet->addMediaFromUrl(asset("assets/images/" . $pet->specie . rand(1, 10) . ".jpg"))
                 ->toMediaCollection('pets');
 
-            foreach ($images[$pet->specie]['gallery'] as $image) {
-                $pet->addMediaFromUrl(asset($image))
+            for ($i = 0; $i < 4; $i++) {
+                $pet->addMediaFromUrl(asset("assets/images/" . $pet->specie . rand(1, 10) . ".jpg"))
                     ->toMediaCollection('pets-gallery');
             }
         });
