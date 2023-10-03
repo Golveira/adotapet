@@ -143,7 +143,7 @@ class PetTest extends TestCase
                 'temperaments' => $temperaments,
                 'sociabilities' => $sociabilities,
             ]))
-            ->assertRedirect("/profile/{$user->username}");
+            ->assertRedirect("/@{$user->username}");
 
         $pet = Pet::first();
 
@@ -183,7 +183,7 @@ class PetTest extends TestCase
                 'temperaments' => $temperaments,
                 'sociabilities' => $sociabilities,
             ]))
-            ->assertRedirect("/profile/{$user->username}");
+            ->assertRedirect("/@{$user->username}");
 
         $pet->refresh();
 
@@ -212,7 +212,7 @@ class PetTest extends TestCase
 
         $this->actingAs($user)
             ->delete("/pets/{$pet->id}")
-            ->assertRedirect("/profile/{$user->username}");
+            ->assertRedirect("/@{$user->username}");
 
         $this->assertDatabaseMissing('pets', $pet->toArray());
     }
