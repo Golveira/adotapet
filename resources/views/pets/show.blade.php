@@ -162,7 +162,8 @@
                         @else
                             @if (!$pet->is_adopted)
                                 <div class="flex">
-                                    <x-buttons.primary-button class="w-full text-center" href="#">
+                                    <x-buttons.primary-button class="w-full text-center" data-modal-target="popup-modal"
+                                        data-modal-toggle="popup-modal" href="#">
                                         {{ __('Adopt') }}
                                     </x-buttons.primary-button>
                                 </div>
@@ -262,4 +263,36 @@
             </div>
         </div>
     </section>
+
+    @push('modals')
+        <x-popup>
+            <x-slot name="title">
+                {{ __('Contact') }}
+            </x-slot>
+
+            <x-slot name="content">
+                @if ($pet->user->whatsapp)
+                    <div class="mb-1 flex">
+                        <span class="mr-3 text-blue-700">
+                            <x-icons.phone />
+                        </span>
+
+                        <x-links.dark-link class="text-sm" href="https://wa.me/{{ $pet->user->whatsapp }}">
+                            {{ $pet->user->whatsapp }}
+                        </x-links.dark-link>
+                    </div>
+                @endif
+
+                <div class="mb-1 flex">
+                    <span class="mr-2 text-blue-700">
+                        <x-icons.envelope />
+                    </span>
+
+                    <x-links.dark-link class="text-sm" href="mailto:{{ $pet->user->email }}">
+                        {{ $pet->user->email }}
+                    </x-links.dark-link>
+                </div>
+            </x-slot>
+        </x-popup>
+    @endpush
 </x-app-layout>
