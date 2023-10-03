@@ -1,66 +1,59 @@
 @extends('admin.layouts.app')
 
 @section('content')
-    <main>
-        <div class="px-4 pt-6">
-            <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-6 w-full max-w-6xl">
-                <x-card class="flex items-center p-4">
-                    <div
-                        class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-100 lg:h-12 lg:w-12 dark:bg-primary-900">
-                        <x-icons.users />
-                    </div>
-
-                    <div class="flex-grow flex flex-col ml-4">
-                        <div class="flex items-center justify-between">
-                            <span class="text-gray-500 font-bold">
-                                {{ __('Users') }}
-                            </span>
-                        </div>
-
-                        <span class="text-xl font-bold">
-                            {{ $totalUsers }}
-                        </span>
-                    </div>
-                </x-card>
-
-                <x-card class="flex items-center p-4">
-                    <div
-                        class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-100 lg:h-12 lg:w-12 dark:bg-primary-900">
-                        <x-icons.paw />
-                    </div>
-
-                    <div class="flex-grow flex flex-col ml-4">
-                        <div class="flex items-center justify-between">
-                            <span class="text-gray-500 font-bold">
-                                Pets
-                            </span>
-                        </div>
-
-                        <span class="text-xl font-bold">
-                            {{ $totalPets }}
-                        </span>
-                    </div>
-                </x-card>
-
-                <x-card class="flex items-center p-4">
-                    <div
-                        class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-100 lg:h-12 lg:w-12 dark:bg-primary-900">
-                        <x-icons.file-check />
-                    </div>
-
-                    <div class="flex-grow flex flex-col ml-4">
-                        <div class="flex items-center justify-between">
-                            <span class="text-gray-500 font-bold">
-                                {{ __('Adoptions') }}
-                            </span>
-                        </div>
-
-                        <span class="text-xl font-bold">
-                            {{ $totalAdoptions }}
-                        </span>
-                    </div>
-                </x-card>
+    <div class="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <x-card class="flex items-center p-4">
+            <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-blue-700 lg:h-12 lg:w-12">
+                <x-icons.users class="text-white" />
             </div>
-        </div>
-    </main>
+
+            <div class="ml-4 flex flex-grow flex-col">
+                <div class="flex items-center justify-between">
+                    <span class="font-bold text-gray-500">
+                        {{ __('Users') }}
+                    </span>
+                </div>
+
+                <span class="text-xl font-bold">
+                    {{ $totalUsers }}
+                </span>
+            </div>
+        </x-card>
+
+        <x-card class="flex items-center p-4">
+            <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-blue-700 text-white lg:h-12 lg:w-12">
+                <x-icons.paw class="text-white" />
+            </div>
+
+            <div class="ml-4 flex flex-grow flex-col">
+                <div class="flex items-center justify-between">
+                    <span class="font-bold text-gray-500">
+                        Pets
+                    </span>
+                </div>
+
+                <span class="text-xl font-bold">
+                    {{ $totalPets }}
+                </span>
+            </div>
+        </x-card>
+
+        <x-card class="flex items-center p-4">
+            <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-blue-700 lg:h-12 lg:w-12">
+                <x-icons.file-check class="text-white" />
+            </div>
+
+            <div class="ml-4 flex flex-grow flex-col">
+                <div class="flex items-center justify-between">
+                    <span class="font-bold text-gray-500">
+                        {{ __('Adoptions') }}
+                    </span>
+                </div>
+
+                <span class="text-xl font-bold">
+                    {{ $totalAdoptions }}
+                </span>
+            </div>
+        </x-card>
+    </div>
 @endsection
