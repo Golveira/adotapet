@@ -40,7 +40,7 @@ class UserController extends Controller
         return view('admin.users.edit', compact('user'));
     }
 
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(UpdateUserRequest $request, User $user): RedirectResponse
     {
         $user->update($request->validated());
 
