@@ -16,30 +16,25 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     @stack('styles')
-
     @livewireStyles
 </head>
 
 <body class="font-sans antialiased">
     @include('sweetalert::alert')
-    @include('admin.layouts.header')
 
-    <div class="flex overflow-hidden bg-gray-50 pt-16 dark:bg-gray-900">
+    <div class="bg-gray-50 antialiased dark:bg-gray-900">
+        @include('admin.layouts.navbar')
+
         @include('admin.layouts.sidebar')
 
-        <div class="relative min-h-screen w-full overflow-y-auto bg-gray-50 dark:bg-gray-900 lg:ml-64"
-            id="main-content">
+        <main class="h-auto p-4 pt-20 md:ml-64">
             @yield('content')
-
-            @include('admin.layouts.footer')
-        </div>
+        </main>
     </div>
 
     @stack('modals')
     @stack('scripts')
-
     @livewireScripts
-    @livewire('livewire-ui-modal')
 </body>
 
 </html>
