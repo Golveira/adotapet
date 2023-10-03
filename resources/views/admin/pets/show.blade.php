@@ -28,9 +28,9 @@
                 <div>
                     <div class="mb-1 font-bold">{{ __('User') }}</div>
                     <div>
-                        <x-link :href="route('admin.users.show', $pet->user->id)">
+                        <x-links.primary-link :href="route('admin.users.show', $pet->user->id)">
                             {{ $pet->user->name }}
-                        </x-link>
+                        </x-links.primary-link>
                     </div>
                 </div>
 
