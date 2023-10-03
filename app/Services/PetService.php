@@ -22,7 +22,9 @@ class PetService
 
         $this->syncRelations($pet, $data);
 
-        $this->uploadPhoto($pet, $data['photo']);
+        if ($data['photo'] ?? false) {
+            $this->uploadPhoto($pet, $data['photo']);
+        }
     }
 
     private function syncRelations(Pet $pet, array $data): void
@@ -39,8 +41,6 @@ class PetService
 
     private function uploadPhoto(Pet $pet, UploadedFile $photo): void
     {
-        if ($photo) {
-            $pet->addMedia($photo)->toMediaCollection('pets');
-        }
+        $pet->addMedia($photo)->toMediaCollection('pets');
     }
 }
