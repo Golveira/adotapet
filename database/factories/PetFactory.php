@@ -72,11 +72,6 @@ class PetFactory extends Factory
 
             $pet->addMediaFromUrl(asset("assets/images/" . $pet->specie . rand(1, 10) . ".jpg"))
                 ->toMediaCollection('pets');
-
-            for ($i = 0; $i < 4; $i++) {
-                $pet->addMediaFromUrl(asset("assets/images/" . $pet->specie . rand(1, 10) . ".jpg"))
-                    ->toMediaCollection('pets-gallery');
-            }
         });
     }
 }
