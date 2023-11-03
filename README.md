@@ -2,13 +2,13 @@
 
 Plataforma para divulgação de animais para adoção.
 
-![adotapet-banner](https://github.com/Golveira/adotapet/assets/30783517/7f335f1c-cd5a-4311-857a-0cfc53004631)
+![homepage](https://github.com/Golveira/adotapet/assets/30783517/796741d6-4758-4180-b221-0a4e8fc684fd)
 
 ## Screenshots
 
-| Pets                              | Perfil                         | Dashboard                         |
+| Pets                              | Perfil                         | Admin                         |
 |-------------------------------------|-------------------------------------|---------------------------------------|
-| ![pets list](https://github.com/Golveira/adotapet/assets/30783517/2e879a1a-9442-497f-a2cb-dfd57f619558) | ![profile](https://github.com/Golveira/adotapet/assets/30783517/3eb38877-a590-4e9b-a8a3-0f95a0ada923) | ![dashboard](https://github.com/Golveira/adotapet/assets/30783517/6e4050c4-be52-4dd6-b708-0a5a50b0caf8) || ![](screenshots/04_description.png) | ![](screenshots/05_preferences.png) | ![](screenshots/06_subscriptions.png) |
+|![pet listing](https://github.com/Golveira/adotapet/assets/30783517/412073db-30ad-4334-ad00-6a028cf3b8dd)|![profile](https://github.com/Golveira/adotapet/assets/30783517/3eb38877-a590-4e9b-a8a3-0f95a0ada923)|![admin](https://github.com/Golveira/adotapet/assets/30783517/9d16d9c3-8cb1-4745-a6fc-bc76975a39ac)|
 
 ## Tecnologias
 
